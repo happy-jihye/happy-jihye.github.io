@@ -159,7 +159,7 @@ train_iterator, valid_iterator, test_iterator = data.BucketIterator.splits(
 - 보통 image는 2-dimension이지만, text는 1-dimension입니다. 하지만 [tutorial-3](https://happy-jihye.github.io/nlp/3_Faster_Sentiment_Analysis/)처럼 embedding하면, text를 2차원의 vector라고 생각할 수 있습니다. 
   - 아래의 그림에서는 4-words, 5-embedding_dim 이므로 [4x5]의 tensor처럼 생각할 수 있습니다.
 
-  ![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/Convolutional_Sentiment_Analysis1.png?raw=1){: width="60%", height="60%"}{: .center}
+![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/Convolutional_Sentiment_Analysis1.png?raw=1){: width="40%", height="40%"}{: .center}
 
 - filter는 [n x emb_dim]의 size를 가진 tensor이고, 이때 n은 연속된 단어의 수를 의미합니다. 
   - 예를 들어 bi-gram의 filter라면 size는 [2x5]가 될 것 입니다.
