@@ -1,0 +1,597 @@
+---
+title: "5_Multi_class_Sentiment_Analysis"
+search: true
+categories:
+ - Notebook
+tags:
+ - Need_modify
+layout: jupyter
+classes: wide
+---
+# 5 - Multi-class Sentiment Analysis
+
+- 이전까지의 튜토리얼에서는 positive(1)과 negative(0), 2개의 클래스만이 있는 dataset에 대해서 학습을 했습니다. 이 경우에는 모든 출력이 0과 1사이의 값으로 출력되었으며, 0.5이상에 대해서는 positive로, 0.5미만에 대해서는 negative로 학습을 하였습니다.
+- 이번 튜토리얼에서는 여러 개의 클래스를 가진 데이터 세트에 대해 분류하는 법을 학습할 예정입니다.(6개의 클래스를 가진 데이터셋으로 모델을 훈련)
+
+
+---
+> 2021/03/18 Happy-jihye
+> 
+> **Reference** : [pytorch-sentiment-analysis/5 - Multi-class Sentiment Analysis](https://github.com/bentrevett/pytorch-sentiment-analysis/blob/master/5%20-%20Multi-class%20Sentiment%20Analysis.ipynb)
+
+
+## 1. Preparing Data
+
+
+
+```python
+!apt install python3.7
+!pip install torchtext==0.6.0
+!python -m spacy download en
+```
+
+- Convolutional layer는 batch dimension을 사용하므로, **batch_first = True**로 설정하여 신경망에 입력되는 텐서의 첫번째 차원값이 batch_size가 되도록 지정해줍니다.
+
+
+```python
+import torch
+from torchtext import data
+
+TEXT = data.Field(tokenize = 'spacy',
+                  tokenizer_language = 'en')
+
+LABEL = data.LabelField()
+```
+
+### 1) [TREC Dataset](http://nlpprogress.com/english/text_classification.html)
+- torchtext.datasets의 [TREC](https://pytorch.org/text/_modules/torchtext/datasets/trec.html) 의 dataset은 질문 분류(question clasffication)용 데이터셋입니다.
+- **TEC-6**(6-클래스) 버전과 **TEC-50**(50-클래스) 버전이 있으며, 둘다 5,452개의 training examples과 500개의 test examples이 있습니다. 이번 노트북에서는 *fine_grained*를 *False*로 설정하여 6개의 클래스에 대해서만 질문 분류를 할 수 있도록 하였습니다.
+
+
+
+
+```python
+from torchtext import datasets
+import random
+import numpy as np
+
+SEED = 1234
+
+random.seed(SEED)
+np.random.seed(SEED)
+torch.manual_seed(SEED)
+torch.backends.cudnn.deterministic = True
+
+train_data, test_data = datasets.TREC.splits(TEXT, LABEL, fine_grained = False) #5452, 500
+train_data, valid_data = train_data.split(random_state = random.seed(SEED))
+```
+
+
+```python
+print(f'training examples 수 : {len(train_data)}')
+print(f'validations examples 수 : {len(valid_data)}')
+print(f'testing examples 수 : {len(test_data)}\n')
+
+print(vars(train_data[-1]))
+```
+
+{:.output_stream}
+
+```
+training examples 수 : 3816
+validations examples 수 : 1636
+testing examples 수 : 500
+
+{'text': ['What', 'is', 'a', 'Cartesian', 'Diver', '?'], 'label': 'DESC'}
+
+```
+
+### 2) Build Vocabulary and load the pre-trained word embeddings
+
+- **glove.6B.100** 의 학습된 임베딩 벡터를 사용합니다. 
+- 이번 예제에서 사용하는 dataset은 크기가 매우 작기 때문에(training data : 약 3800개) 이 dataset의 vocabulary역시 매우 작습니다. (~7500 unique tokens) 
+- 따라서 이전 예제들처럼 max_size를 지정하지 않아도 됩니다.
+
+
+```python
+TEXT.build_vocab(train_data, 
+                 vectors = "glove.6B.100d",
+                 unk_init = torch.Tensor.normal_)
+
+LABEL.build_vocab(train_data)
+```
+
+
+```python
+print(f"Unique tokens in TEXT vocabulary: {len(TEXT.vocab)}")
+print(f"Unique tokens in LABEL vocabulary: {len(LABEL.vocab)}")
+```
+
+{:.output_stream}
+
+```
+Unique tokens in TEXT vocabulary: 7503
+Unique tokens in LABEL vocabulary: 6
+
+```
+
+**Label**
+
+- no-fine-grained case의 경우에는 총 6개의 label로 학습이 됩니다.
+- dataset에는 6개의 유형의 question label이 있습니다.
+  - HUM for questions about humans
+  - ENTY for questions about entities
+  - DESC for questions asking you for a description
+  - NUM for questions where the answer is numerical
+  - LOC for questions where the answer is a location
+  - ABBR for questions asking about abbreviations
+
+
+```python
+print(LABEL.vocab.stoi)
+```
+
+{:.output_stream}
+
+```
+defaultdict(None, {'HUM': 0, 'ENTY': 1, 'DESC': 2, 'NUM': 3, 'LOC': 4, 'ABBR': 5})
+
+```
+
+### 3) Create the iterators
+
+
+```python
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+BATCH_SIZE = 64
+
+train_iterator, valid_iterator, test_iterator = data.BucketIterator.splits(
+    (train_data, valid_data, test_data),
+    batch_size = BATCH_SIZE,
+    device = device
+)
+```
+
+## 2. Build Model
+
+
+
+- [이전 튜토리얼(Convolutional Sentiment Analysis)](https://happy-jihye.github.io/nlp/4_Convolutional_Sentiment_Analysis)의 CNN model은 class의 개수가 여러 개인 경우에도 적용할 수 있습니다.
+- 이 경우에는 **output_dim**을 **1이 아닌 클래스의 개수(6개)**으로 설정해주면 됩니다.
+
+
+```python
+import torch.nn as nn
+import torch.nn.functional as F
+
+class CNN(nn.Module):
+  def __init__(self, vocab_size, embedding_dim,
+               n_filters, filter_sizes,
+               output_dim,
+               dropout, 
+               pad_idx          #<pad> token
+               ): 
+    
+    super().__init__()
+
+    self.embedding = nn.Embedding(vocab_size, embedding_dim, padding_idx = pad_idx)
+
+    self.convs = nn.ModuleList([
+                                nn.Conv2d(in_channels = 1,
+                                          out_channels = n_filters,
+                                          kernel_size = (fs, embedding_dim))
+                                for fs in filter_sizes
+    ])
+    
+    self.fc = nn.Linear(len(filter_sizes) * n_filters, output_dim)
+
+    self.dropout = nn.Dropout(dropout)
+
+  def forward(self, text):
+
+    # text = [sentence length, batch size]
+    ## 이번 예제에서는 batch_first를 true로 바꾼 후 학습하지 않았으므로 batch size가 두번째 인자입니다.
+
+    text = text.permute(1, 0)
+
+    # text = [batch size, sentence length]
+    ## RNN에서는 batch size의 입력을 두번째로 원하기 때문에 text가 [sentence length, batch size] 였다면,
+    ## CNN에서는 batch size를 먼저 입력받아야하기 때문에 batch_first를 True로 설정하여 이렇게 데이터를 구성해주었습니다.
+
+    embedded = self.embedding(text).unsqueeze(1) # 두번째 위치에 1인 차원을 추가
+
+    # embedded = [batch size, sentence length, embedding dim]
+    # unsquezzed_embedded = [batch size, 1, sentence length, embedding dim]
+
+    conved = [F.relu(conv(embedded).squeeze(3)) for conv in self.convs]
+
+    # conved_n = [batch size, n_filters, sentence length - filter_sizes[n] + 1]
+
+    pooled = [F.max_pool1d(conv, conv.shape[2]).squeeze(2) for conv in conved]
+
+    # pooled_n = [batch size, n_filters]
+
+    cat = self.dropout(torch.cat(pooled, dim = 1))
+
+    # cat = [batch_size, n_filters * len(filter_sizes)]
+
+    return self.fc(cat)
+```
+
+### Create an instance our CNN Class
+
+- Multi-class 이므로 **OUTPUT_DIM**의 크기를 label의 개수로 설정해줍니다. 이 경우에는 6이 됩니다.
+
+
+```python
+INPUT_DIM = len(TEXT.vocab)
+EMBEDDING_DIM = 100
+N_FILTERS = 100
+FILTER_SIZES = [2, 3, 4]
+OUTPUT_DIM = len(LABEL.vocab)
+DROPOUT = 0.5
+PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
+
+model = CNN(INPUT_DIM, EMBEDDING_DIM, N_FILTERS, FILTER_SIZES, OUTPUT_DIM, DROPOUT, PAD_IDX)
+```
+
+
+```python
+def count_parameters(model):
+    return sum(p.numel() for p in model.parameters() if p.requires_grad)
+
+print(f'The model has {count_parameters(model):,} trainable parameters')
+```
+
+{:.output_stream}
+
+```
+The model has 842,406 trainable parameters
+
+```
+
+- pre-trained embeddings을 load합니다.
+
+
+```python
+pretrained_embeddings = TEXT.vocab.vectors
+
+print(pretrained_embeddings.shape)
+model.embedding.weight.data.copy_(pretrained_embeddings)
+```
+
+{:.output_stream}
+
+```
+torch.Size([7503, 100])
+
+```
+
+
+
+
+{:.output_data_text}
+
+```
+tensor([[-0.1117, -0.4966,  0.1631,  ...,  1.2647, -0.2753, -0.1325],
+        [-0.8555, -0.7208,  1.3755,  ...,  0.0825, -1.1314,  0.3997],
+        [ 0.1638,  0.6046,  1.0789,  ..., -0.3140,  0.1844,  0.3624],
+        ...,
+        [-0.3110, -0.3398,  1.0308,  ...,  0.5317,  0.2836, -0.0640],
+        [ 0.0091,  0.2810,  0.7356,  ..., -0.7508,  0.8967, -0.7631],
+        [ 0.4306,  1.2011,  0.0873,  ...,  0.8817,  0.3722,  0.3458]])
+```
+
+
+
+- unknown token과 padding token은 embedding weight를 0으로 초기화합니다.
+
+
+```python
+# PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token] : 1
+UNK_IDX = TEXT.vocab.stoi[TEXT.unk_token] #0
+
+model.embedding.weight.data[UNK_IDX] = torch.zeros(EMBEDDING_DIM)
+model.embedding.weight.data[PAD_IDX] = torch.zeros(EMBEDDING_DIM)
+
+print(model.embedding.weight.data)
+```
+
+{:.output_stream}
+
+```
+tensor([[ 0.0000,  0.0000,  0.0000,  ...,  0.0000,  0.0000,  0.0000],
+        [ 0.0000,  0.0000,  0.0000,  ...,  0.0000,  0.0000,  0.0000],
+        [ 0.1638,  0.6046,  1.0789,  ..., -0.3140,  0.1844,  0.3624],
+        ...,
+        [-0.3110, -0.3398,  1.0308,  ...,  0.5317,  0.2836, -0.0640],
+        [ 0.0091,  0.2810,  0.7356,  ..., -0.7508,  0.8967, -0.7631],
+        [ 0.4306,  1.2011,  0.0873,  ...,  0.8817,  0.3722,  0.3458]])
+
+```
+
+## 3. Train the Model
+
+#### optimizer
+- **Adam** 를 이용해서 model을 update하였습니다.
+  - 이전 tutorial에서 사용했던 **SGD**는 동일한 학습속도로 parameter를 업데이트하기 때문에 학습속도를 선택하기 어렵지만, Adam은 각 매개변수에 대해 학습속도를 조정해주기 때문에 자주 학습되는 parameter에 낮은 learning rate를 update하고 자주 학습되지 않는 parameter에 높은 learning rate를 update할 수 있습니다.
+
+
+```python
+import torch.optim as optim
+
+optimizer =optim.Adam(model.parameters())
+```
+
+#### loss function
+- loss function 으로는 다중 분류를 위한 대표적인 손실함수 **cross entropy with logits**을 사용하였습니다.
+- 이전까지의 튜토리얼에서는 **BCEWithLogitsLoss**함수를 많이 사용했었는데, 이는 우리의 예제가 오직 2개의 클래스만을 분류하였기 때문입니다. BCEWithLogitsLoss는 보통 0과 1만 있는 binary class를 분류할 때 쓰이고, **CrossEntropyLoss**는 다중 클래스를 분류할 때 많이 사용합니다.
+- torch.nn.CrossEntropyLoss는 nn.LogSoftmax와 nn.NLLLoss의 연산의 조합입니다. 자세한 설명은 [이 링크](http://www.gisdeveloper.co.kr/?p=8668)를 참고하시면 좋을 것 같습니다.
+
+
+```python
+criterion = nn.CrossEntropyLoss()
+```
+
+
+```python
+# GPU
+model = model.to(device)
+criterion = criterion.to(device)
+```
+
+### Accuracy function
+
+- class의 개수가 여러개이므로 정확도를 측정하는 함수 역시 binary_accuracy 함수와는 다릅니다.
+- **argmax**함수를 이용하여 batch의 각 요소에 대한 예측의 최댓값의 index를 가져온 후에 이를 실제 label과 비교하여 정확도를 계산하였습니다.
+- 예를 들어 각 class에 대한 라벨링이 ['HUM' = 0, 'ENTY' = 1, 'DESC' = 2, 'NUM' = 3, 'LOC' = 4, 'ABBR' = 5]와 같이 되어있을 때, output값이 [5.1, 0.3, 0.1, 2.1, 0.2, 0.6]라면 우리의 model은 'HUM'이라고 예측할 것입니다.
+
+
+```python
+
+def categorical_accuracy(preds, y):
+
+    top_pred = preds.argmax(1, keepdim = True)
+    correct = top_pred.eq(y.view_as(top_pred)).sum()
+    acc = correct.float() / y.shape[0]
+    return acc
+```
+
+### 1) Train
+
+
+```python
+def train(model, iterator, optimizer, criterion):
+
+  epoch_loss = 0
+  epoch_acc = 0
+
+  model.train()
+
+  for batch in iterator:
+
+    # 모든 batch마다 gradient를 0으로 초기화합니다.
+    optimizer.zero_grad()
+
+    # batch of sentences인 batch.text를 model에 입력합니다.
+    predictions = model(batch.text)
+
+    # prediction결과와 batch.label을 비교하여 loss값 계산합니다.
+    loss = criterion(predictions, batch.label)
+
+    # 정확도를 계산합니다.
+    acc = categorical_accuracy(predictions, batch.label)
+
+    # backward()를 사용하여 역전파 수행합니다.
+    loss.backward()
+
+    # 최적화 알고리즘을 사용하여 parameter를 update합니다.
+    optimizer.step()
+
+    epoch_loss += loss.item()
+    epoch_acc += acc.item()
+
+  return epoch_loss / len(iterator), epoch_acc / len(iterator)
+```
+
+### 2) Evaluate
+
+
+```python
+def evaluate(model, iterator, criterion):
+  epoch_loss = 0
+  epoch_acc = 0
+
+  # "evaluation mode" : dropout이나 batch nomalizaation을 끔
+  model.eval()
+
+  # pytorch에서 gradient가 계산되지 않도록 해서 memory를 적게 쓰고 computation 속도를 높임
+  with torch.no_grad():
+    
+    for batch in iterator :
+
+      predictions = model(batch.text).squeeze(1)
+      
+      loss = criterion(predictions, batch.label)
+      acc = categorical_accuracy(predictions, batch.label)
+
+      epoch_loss += loss.item()
+      epoch_acc += acc.item()
+
+  return epoch_loss / len(iterator), epoch_acc / len(iterator)
+```
+
+- epoch 시간을 계산하기 위한 함수
+
+
+```python
+import time
+
+def epoch_time(start_time, end_time):
+  elapsed_time = end_time - start_time
+  elapsed_mins = int(elapsed_time / 60)
+  elapsed_secs = int(elapsed_time - (elapsed_mins * 60))
+  return elapsed_mins, elapsed_secs
+```
+
+### Train the model through multiple epochs
+
+- 데이터 사이즈가 크지 않으므로 학습속도가 빠릅니다.
+- 정확도도 약 85%정도가 나오는 것으로 보아 이 모델이 괜찮은 성능을 내고 있음을 확인할 수 있습니다. 
+
+
+```python
+
+N_EPOCHS = 5
+
+best_valid_loss = float('inf')
+
+for epoch in range(N_EPOCHS):
+
+    start_time = time.time()
+    
+    train_loss, train_acc = train(model, train_iterator, optimizer, criterion)
+    valid_loss, valid_acc = evaluate(model, valid_iterator, criterion)
+    
+    end_time = time.time()
+
+    epoch_mins, epoch_secs = epoch_time(start_time, end_time)
+    
+    if valid_loss < best_valid_loss:
+        best_valid_loss = valid_loss
+        torch.save(model.state_dict(), 'tut5-model.pt')
+    
+    print(f'Epoch: {epoch+1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
+    print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc*100:.2f}%')
+    print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc*100:.2f}%')
+```
+
+{:.output_stream}
+
+```
+Epoch: 01 | Epoch Time: 0m 0s
+	Train Loss: 0.294 | Train Acc: 91.03%
+	 Val. Loss: 0.470 |  Val. Acc: 84.02%
+Epoch: 02 | Epoch Time: 0m 0s
+	Train Loss: 0.211 | Train Acc: 94.76%
+	 Val. Loss: 0.457 |  Val. Acc: 83.25%
+Epoch: 03 | Epoch Time: 0m 0s
+	Train Loss: 0.173 | Train Acc: 95.55%
+	 Val. Loss: 0.438 |  Val. Acc: 84.38%
+Epoch: 04 | Epoch Time: 0m 0s
+	Train Loss: 0.137 | Train Acc: 96.57%
+	 Val. Loss: 0.431 |  Val. Acc: 85.69%
+Epoch: 05 | Epoch Time: 0m 0s
+	Train Loss: 0.100 | Train Acc: 97.79%
+	 Val. Loss: 0.428 |  Val. Acc: 85.33%
+
+```
+
+
+```python
+model.load_state_dict(torch.load('tut5-model.pt'))
+
+test_loss, test_acc = evaluate(model, test_iterator, criterion)
+
+print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%')
+
+```
+
+{:.output_stream}
+
+```
+Test Loss: 0.337 | Test Acc: 87.53%
+
+```
+
+## Test
+
+
+```python
+import torch
+model.load_state_dict(torch.load('tut5-model.pt'))
+```
+
+
+
+
+{:.output_data_text}
+
+```
+<All keys matched successfully>
+```
+
+
+
+- 주어진 질문의 클래스를 예측하는 test sample을 만들었습니다.
+
+
+```python
+import spacy
+nlp = spacy.load('en_core_web_sm')
+
+def predict_class(model, sentence, min_len = 4):
+    model.eval()
+    tokenized = [tok.text for tok in nlp.tokenizer(sentence)]
+    if len(tokenized) < min_len:
+        tokenized += ['<pad>'] * (min_len - len(tokenized))
+    indexed = [TEXT.vocab.stoi[t] for t in tokenized]
+    tensor = torch.LongTensor(indexed).to(device)
+    tensor = tensor.unsqueeze(1)
+    preds = model(tensor)
+    max_preds = preds.argmax(dim = 1)
+    return max_preds.item()
+```
+
+
+```python
+pred_class = predict_class(model, "Who is Keyser Söze?")
+print(f'Predicted class is: {pred_class} = {LABEL.vocab.itos[pred_class]}')
+```
+
+{:.output_stream}
+
+```
+Predicted class is: 0 = HUM
+
+```
+
+
+```python
+pred_class = predict_class(model, "How many minutes are in six hundred and eighteen hours?")
+print(f'Predicted class is: {pred_class} = {LABEL.vocab.itos[pred_class]}')
+```
+
+{:.output_stream}
+
+```
+Predicted class is: 3 = NUM
+
+```
+
+
+```python
+pred_class = predict_class(model, "What continent is Bulgaria in?")
+print(f'Predicted class is: {pred_class} = {LABEL.vocab.itos[pred_class]}')
+```
+
+{:.output_stream}
+
+```
+Predicted class is: 4 = LOC
+
+```
+
+
+```python
+pred_class = predict_class(model, "What does WYSIWYG stand for?")
+print(f'Predicted class is: {pred_class} = {LABEL.vocab.itos[pred_class]}')
+```
+
+{:.output_stream}
+
+```
+Predicted class is: 5 = ABBR
+
+```
