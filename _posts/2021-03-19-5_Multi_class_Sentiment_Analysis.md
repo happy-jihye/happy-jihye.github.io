@@ -23,8 +23,9 @@ toc_sticky: true
 
 **5 - Multi-class Sentiment Analysis**
 
-- 이전까지의 튜토리얼에서는 positive(1)과 negative(0), 2개의 클래스만이 있는 dataset에 대해서 학습을 했습니다. 이 경우에는 모든 출력이 0과 1사이의 값으로 출력되었으며, 0.5이상에 대해서는 positive로, 0.5미만에 대해서는 negative로 학습을 하였습니다.
-- 이번 튜토리얼에서는 여러 개의 클래스를 가진 데이터 세트에 대해 분류하는 법을 학습할 예정입니다.(6개의 클래스를 가진 데이터셋으로 모델을 훈련)
+- 이전까지의 튜토리얼에서는 positive(1)과 negative(0), 2개의 클래스만이 있는 dataset에 대해서 학습을 했습니다. 이 경우에는 모든 출력이 0과 1사이의 값으로 출력되었으며, 0.5이상에 대해서는 positive로, 0.5미만에 대해서는 negative로 분류했습니다.
+- 이번 튜토리얼에서는 여러 개의 클래스를 가진 데이터 세트에 대해 분류하는 법을 학습할 예정입니다.
+  (6개의 클래스를 가진 데이터셋으로 모델을 훈련)
 
 
 ---
@@ -42,10 +43,6 @@ toc_sticky: true
 !pip install torchtext==0.6.0
 !python -m spacy download en
 ```
-
-- Convolutional layer는 batch dimension을 사용하므로, **batch_first = True**로 설정하여 신경망에 입력되는 텐서의 첫번째 차원값이 batch_size가 되도록 지정해줍니다.
-
-
 ```python
 import torch
 from torchtext import data
@@ -170,9 +167,7 @@ train_iterator, valid_iterator, test_iterator = data.BucketIterator.splits(
 
 
 
-- [이전 튜토리얼(Convolutional Sentiment Analysis)](https://happy-jihye.github.io/nlp/4_Convolutional_Sentiment_Analysis)의 CNN model은 class의 개수가 여러 개인 경우에도 적용할 수 있습니다.
-- 이 경우에는 **output_dim**을 **1이 아닌 클래스의 개수(6개)**으로 설정해주면 됩니다.
-
+- [이전 튜토리얼(Convolutional Sentiment Analysis)](https://happy-jihye.github.io/nlp/4_Convolutional_Sentiment_Analysis)의 CNN model을 활용하여 다중 클래스를 분류하였습니다.
 
 ```python
 import torch.nn as nn
@@ -357,7 +352,7 @@ criterion = criterion.to(device)
 ### Accuracy function
 
 - class의 개수가 여러개이므로 정확도를 측정하는 함수 역시 binary_accuracy 함수와는 다릅니다.
-- **argmax**함수를 이용하여 batch의 각 요소에 대한 예측의 최댓값의 index를 가져온 후에 이를 실제 label과 비교하여 정확도를 계산하였습니다.
+- **argmax**함수를 이용하여 batch의 각 요소에 대한 prediction 최댓값의 index를 가져온 후에 이를 실제 label과 비교하여 정확도를 계산하였습니다.
 - 예를 들어 각 class에 대한 라벨링이 ['HUM' = 0, 'ENTY' = 1, 'DESC' = 2, 'NUM' = 3, 'LOC' = 4, 'ABBR' = 5]와 같이 되어있을 때, output값이 [5.1, 0.3, 0.1, 2.1, 0.2, 0.6]라면 우리의 model은 'HUM'이라고 예측할 것입니다.
 
 
