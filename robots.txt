@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://happy-jihye.github.io/sitemap.xml
