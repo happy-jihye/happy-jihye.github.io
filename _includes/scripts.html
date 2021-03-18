@@ -19,6 +19,13 @@
   {%- endcase -%}
 {% endif %}
 
+
+
+{% if site.search == true or page.layout == "jupyter" %}
+  {% include jupyter-style.html %}
+{% endif %}
+
+
 {% include analytics.html %}
 {% include /comments-providers/scripts.html %}
 
