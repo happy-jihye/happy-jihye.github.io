@@ -46,7 +46,7 @@ toc_sticky: true
 
 - 위의 방식을 사용함으로써 정확도를 ~84% 까지 향상시킬 수 있습니다.
 
-s
+
 ## 1. Preparing Data
 
 
@@ -54,42 +54,27 @@ s
 - **[spaCy](https://spacy.io/)** : nlp를 쉽게 할 수 있도록 도와주는 python package로, tokenizaing, parsing, pos tagging 등을 지원합니다.
 - **[Field](https://pytorch.org/text/_modules/torchtext/data/field.html)** 
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 !apt install python3.7
 ```
 
-</div>
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 !pip install -U torchtext==0.6.0
 ```
 
-</div>
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 %%capture
 !python -m spacy download en
 ```
 
-</div>
+
 
 ### [Packed padded sequences](https://simonjisu.github.io/nlp/2018/07/05/packedsequence.html)
 - NLP에서는 매 batch마다 고정된 문장의 길이로 만들어주기 위해서 $<pad>$를 넣어주는데, 이 때문에 연산량이 늘어납니다.
@@ -97,11 +82,6 @@ In&nbsp;[None]:
 ![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/Updated_Sentiment_Analysis1.gif?raw=1)
 - 기존의 RNN이라면 (batch_size X sequence_length X hidden_layer)만큼 연산을 해야하지만, packed padded sequences의 방법을 사용하면 (token_length X hidden_layer)만큼만 계산해주면 됩니다. 
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 import torch
@@ -113,7 +93,7 @@ TEXT = data.Field(tokenize = 'spacy',
 LABEL = data.LabelField(dtype = torch.float) # pos -> 1 / neg -> 0
 ```
 
-</div>
+
 
 #### 2) IMDb Dataset
 - 5만개의 영화 리뷰로 구성된 dataset
@@ -121,11 +101,6 @@ LABEL = data.LabelField(dtype = torch.float) # pos -> 1 / neg -> 0
 - torchtext.datasets의 [IMDB](https://pytorch.org/text/stable/datasets.html#imdb) 의 dataset에서 train_data, valid_data, test_data를 나눠주었습니다.
 
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 from torchtext import datasets
@@ -133,13 +108,8 @@ from torchtext import datasets
 train_data, test_data = datasets.IMDB.splits(TEXT, LABEL)
 ```
 
-</div>
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 import random
@@ -152,13 +122,8 @@ torch.backends.cudnn.deterministic = True
 train_data, valid_data = train_data.split(random_state = random.seed(SEED))
 ```
 
-</div>
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 print(f'training examples 수 : {len(train_data)}')
@@ -166,7 +131,7 @@ print(f'validations examples 수 : {len(valid_data)}')
 print(f'testing examples 수 : {len(test_data)}')
 ```
 
-</div>
+
 
 {:.output_stream}
 
@@ -189,11 +154,6 @@ testing examples 수 : 25000
   - **"glove.6B.100d"** vectors : "glove"는 vector를 계산하는데 사용되는 알고리즘이며, 6B는 이 vector가 60억 token에 대해 훈련되었음알 나타냅니다. 또한, 100d는 이 embedding vector가 100차원임을 나타냅니다.
 - torchtext가 vocabulary에 있는 단어들은 initialization을 하지만, pre-trained embeddings에 대해서는 0으로 초기화를 안하므로 ***unk_init***을 *torch.Tensor.normal_*로 설정하여 random으로 초기화를 합니다. 이렇게 하면 Gaussian distribution을 통해 해당 단어가 초기화됩니다.
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 MAX_VOCAB_SIZE = 25_000
@@ -205,23 +165,18 @@ TEXT.build_vocab(train_data,
 LABEL.build_vocab(train_data)
 ```
 
-</div>
+
 
 - vocab size가 25,000개가 아닌 25,002개인 이유는 $<unk>$ token과 $<pad>$ token이 추가되었기 때문입니다.
 - $<pad>$ token : 문장의 길이를 맞추기 위해 있는 token
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 print(f"Unique tokens in TEXT vocabulary: {len(TEXT.vocab)}")
 print(f"Unique tokens in LABEL vocabulary: {len(LABEL.vocab)}")
 ```
 
-</div>
+
 
 {:.output_stream}
 
@@ -234,11 +189,6 @@ Unique tokens in LABEL vocabulary: 2
 - BucketIterator를 사용하여 interators를 만듭니다.
 - 이때, packed padded sequences의 방식을 사용하려면 sequence length를 바탕으로 batch내의 문장들을 정렬해야하므로 ***sort_within_batch***를 *True*로 설정합니다.
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 import torch
@@ -255,16 +205,11 @@ train_iterator, valid_iterator, test_iterator = data.BucketIterator.splits(
 )
 ```
 
-</div>
+
 
 - **packed padding sentence**를 한 결과,
   batch.text의 첫번째 요소는 sentence(a numericalized tensor that has been padded)가 되고, 두번째 요소는 실제 문장 길이가 됩니다.
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 # iterator 출력
@@ -279,7 +224,7 @@ for batch in train_iterator:
   break
 ```
 
-</div>
+
 
 {:.output_stream}
 
@@ -332,11 +277,6 @@ $$(h_t, c_t) = \text{LSTM}(x_t, h_t, c_t)$$
 ### **Implementation Details**
 - $<pad>$ token은 문장의 감정과는 무관하므로 padding token에 대해서는 embedding을 학습시키지 않습니다. 따라서 이를 위해 nn.Embedding에 **padding_idx**를 전달하였고, 이로써 pad token은 계속해서 embedding이 초기화된 상태를 유지할 수 있습니다.
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 import torch.nn as nn
@@ -392,18 +332,13 @@ class RNN(nn.Module):
     return self.fc(hidden)
 ```
 
-</div>
+
 
 - **Input dim** : one-hot vector의 dimension과 같음(vocabulary size)
 - **Embedding dim** : 보통 50-250 dimensions
 - **Hidden dim** :보통 100-500 dim
 - **Output dim** : class의 수, 위 예제에서는 0아니면 1이므로 1-dim
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 INPUT_DIM = len(TEXT.vocab) #25,002
@@ -425,13 +360,8 @@ model = RNN(INPUT_DIM,
             PAD_IDX)
 ```
 
-</div>
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 def count_parameters(model):
@@ -440,7 +370,7 @@ def count_parameters(model):
 print(f'The model has {count_parameters(model):,} trainable parameters')
 ```
 
-</div>
+
 
 {:.output_stream}
 
@@ -449,11 +379,6 @@ The model has 4,810,857 trainable parameters
 
 ```
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 pretrained_embeddings = TEXT.vocab.vectors
@@ -461,7 +386,7 @@ pretrained_embeddings = TEXT.vocab.vectors
 print(pretrained_embeddings.shape)
 ```
 
-</div>
+
 
 {:.output_stream}
 
@@ -470,17 +395,12 @@ torch.Size([25002, 100])
 
 ```
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 model.embedding.weight.data.copy_(pretrained_embeddings)
 ```
 
-</div>
+
 
 
 
@@ -501,11 +421,6 @@ tensor([[-0.1117, -0.4966,  0.1631,  ...,  1.2647, -0.2753, -0.1325],
 
 - unknown token과 padding token은 embedding weight를 0으로 초기화
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 # PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token] : 1
@@ -517,7 +432,7 @@ model.embedding.weight.data[PAD_IDX] = torch.zeros(EMBEDDING_DIM)
 print(model.embedding.weight.data)
 ```
 
-</div>
+
 
 {:.output_stream}
 
@@ -538,11 +453,6 @@ tensor([[ 0.0000,  0.0000,  0.0000,  ...,  0.0000,  0.0000,  0.0000],
 - **Adam** 를 이용해서 model을 update하였습니다.
   - 이전 tutorial에서 사용했던 **SGD**는 동일한 학습속도로 parameter를 업데이트하기 때문에 학습속도를 선택하기 어렵지만, Adam은 각 매개변수에 대해 학습속도를 조정해주기 때문에 자주 학습되는 parameter에 낮은 learning rate를 update하고 자주 학습되지 않는 parameter에 높은 learning rate를 update할 수 있습니다.
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 import torch.optim as optim
@@ -550,30 +460,20 @@ import torch.optim as optim
 optimizer =optim.Adam(model.parameters())
 ```
 
-</div>
+
 
 #### loss function
 - loss function 으로는 **binary cross entropy with logits**을 사용하였습니다.
 - 0아니면 1의 label을 예측해야하므로 **sigmoid**나 **logit** function을 사용하였습니다.
 - [BCEWithLogitsLoss](https://pytorch.org/docs/stable/generated/torch.nn.BCEWithLogitsLoss.html)는 sigmoid와 the binary cross entropy steps를 모두 수행합니다.
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 criterion = nn.BCEWithLogitsLoss()
 ```
 
-</div>
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 # GPU
@@ -581,17 +481,12 @@ model = model.to(device)
 criterion = criterion.to(device)
 ```
 
-</div>
+
 
 **accuracy function**
 - sigmoid layer를 지나면 0과 1사이의 값이 나오는데, 우리가 필요한 값은 0,1의 label이므로 [nn.round](https://pytorch.org/docs/stable/generated/torch.round.html)를 이용하여 반올림하였습니다.
 - prediction 값과 label 값이 같은 것들이 얼마나 있는지를 계산하여 정확도를 측정하였습니다.
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 def binary_accuracy(preds, y):
@@ -604,15 +499,10 @@ def binary_accuracy(preds, y):
   return acc
 ```
 
-</div>
+
 
 ### 1) Train
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 def train(model, iterator, optimizer, criterion):
@@ -652,15 +542,10 @@ def train(model, iterator, optimizer, criterion):
   return epoch_loss / len(iterator), epoch_acc / len(iterator)
 ```
 
-</div>
+
 
 ### 2) Evaluate
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 def evaluate(model, iterator, criterion):
@@ -688,15 +573,10 @@ def evaluate(model, iterator, criterion):
   return epoch_loss / len(iterator), epoch_acc / len(iterator)
 ```
 
-</div>
+
 
 - epoch 시간을 계산하기 위한 함수
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 import time
@@ -708,15 +588,10 @@ def epoch_time(start_time, end_time):
   return elapsed_mins, elapsed_secs
 ```
 
-</div>
+
 
 ### Train the model through multiple epochs
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 N_EPOCHS = 5
@@ -743,7 +618,7 @@ for epoch in range(N_EPOCHS):
     print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc*100:.2f}%')
 ```
 
-</div>
+
 
 {:.output_stream}
 
@@ -766,11 +641,6 @@ Epoch: 05 | Epoch Time: 0m 39s
 
 ```
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 model.load_state_dict(torch.load('tut2-model1.pt'))
@@ -781,7 +651,7 @@ print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%')
 
 ```
 
-</div>
+
 
 {:.output_stream}
 
@@ -792,18 +662,13 @@ Test Loss: 0.343 | Test Acc: 87.03%
 
 # Test
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 import torch
 model.load_state_dict(torch.load('tut2-model1.pt'))
 ```
 
-</div>
+
 
 
 
@@ -816,11 +681,6 @@ model.load_state_dict(torch.load('tut2-model1.pt'))
 
 
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 import spacy
@@ -848,20 +708,15 @@ def predict_test_sentiment(model, tokenized):
     return prediction.item()
 ```
 
-</div>
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 print(vars(test_data.examples[0])['text'])
 predict_test_sentiment(model, vars(test_data.examples[0])['text'])
 ```
 
-</div>
+
 
 {:.output_stream}
 
@@ -881,17 +736,12 @@ predict_test_sentiment(model, vars(test_data.examples[0])['text'])
 
 
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 predict_sentiment(model, "This film is terrible")
 ```
 
-</div>
+
 
 
 
@@ -904,17 +754,12 @@ predict_sentiment(model, "This film is terrible")
 
 
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 predict_sentiment(model, "This film is great")
 ```
 
-</div>
+
 
 
 
@@ -927,17 +772,12 @@ predict_sentiment(model, "This film is great")
 
 
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 predict_sentiment(model, "This movie is fantastic")
 ```
 
-</div>
+
 
 
 
@@ -983,11 +823,6 @@ predict_sentiment(model, "This movie is fantastic")
 
   
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 # [Test1] single layer, Dropout = 0, Bidirectional X
@@ -1055,7 +890,7 @@ test_loss, test_acc = evaluate(model, test_iterator, criterion)
 print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%')
 ```
 
-</div>
+
 
 {:.output_stream}
 
@@ -1079,11 +914,6 @@ Test Loss: 0.391 | Test Acc: 84.78%
 
 ```
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 # [Test2] single layer, Dropout = 0.5, Bidirectional X
@@ -1151,7 +981,7 @@ test_loss, test_acc = evaluate(model, test_iterator, criterion)
 print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%')
 ```
 
-</div>
+
 
 {:.output_stream}
 
@@ -1183,11 +1013,6 @@ Test Loss: 0.300 | Test Acc: 87.59%
 
 ```
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 # [Test3] single layer, Dropout = 0.2, Bidirectional RNN model
@@ -1252,7 +1077,7 @@ test_loss, test_acc = evaluate(model, test_iterator, criterion)
 print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%')
 ```
 
-</div>
+
 
 {:.output_stream}
 
@@ -1284,11 +1109,6 @@ Test Loss: 0.300 | Test Acc: 88.49%
 
 ```
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
-
-<div class="input_area" markdown="1">
 
 ```
 # [Test4] 3 multi-layer, Dropout = 0.2, Bidirectional X
@@ -1353,7 +1173,7 @@ test_loss, test_acc = evaluate(model, test_iterator, criterion)
 print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%')
 ```
 
-</div>
+
 
 {:.output_stream}
 

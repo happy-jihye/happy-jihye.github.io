@@ -42,11 +42,7 @@ toc_sticky: true
 ## 1. Preparing Data
 
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 !apt install python3.7
@@ -54,7 +50,7 @@ In&nbsp;[None]:
 !python -m spacy download en
 ```
 
-</div>
+
 
 ### 1) FastText
 - FastText 논문의 핵심 idea 중 하나는 input 문장의 n-gram을 계산하여 문장 끝에 추가하는 것입니다. bi-gram, tri-gram 등 다양한 n-gram이 있지만, 이 tutorial에서는 bi-gram을 사용하였습니다.
@@ -63,11 +59,7 @@ In&nbsp;[None]:
 
 - 아래의 **generate_bigrams** 함수에서는 이미 토큰화된 문장에서 bi-gram을 한 내역들을 tokenized list 끝에 추가해주었습니다.
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 def generate_bigrams(x):
@@ -77,19 +69,15 @@ def generate_bigrams(x):
   return x
 ```
 
-</div>
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
+
 
 ```
 generate_bigrams(['This', 'film', 'is', 'terrible'])
 ```
 
-</div>
+
 
 
 
@@ -105,11 +93,7 @@ generate_bigrams(['This', 'film', 'is', 'terrible'])
 - TorchText Field에는 **preprocessing argument**가 있습니다. 이 인자에 함수를 전달하면 token화된 문장들이 indexing 되기 전에 적용됩니다.
 - 이번 tutorial에서는 RNN을 사용하지 않으므로 include_closed 를 True로 설정할 필요가 없습니다.
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 import torch
@@ -122,7 +106,7 @@ TEXT = data.Field(tokenize = 'spacy',
 LABEL = data.LabelField(dtype = torch.float) # pos -> 1 / neg -> 0
 ```
 
-</div>
+
 
 #### 2) IMDb Dataset
 - 5만개의 영화 리뷰로 구성된 dataset
@@ -130,11 +114,7 @@ LABEL = data.LabelField(dtype = torch.float) # pos -> 1 / neg -> 0
 - torchtext.datasets의 [IMDB](https://pytorch.org/text/stable/datasets.html#imdb) 의 dataset에서 train_data, valid_data, test_data를 나눠주었습니다.
 
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 from torchtext import datasets
@@ -149,13 +129,9 @@ train_data, test_data = datasets.IMDB.splits(TEXT, LABEL)
 train_data, valid_data = train_data.split(random_state = random.seed(SEED))
 ```
 
-</div>
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
+
 
 ```
 print(f'training examples 수 : {len(train_data)}')
@@ -163,7 +139,7 @@ print(f'validations examples 수 : {len(valid_data)}')
 print(f'testing examples 수 : {len(test_data)}')
 ```
 
-</div>
+
 
 {:.output_stream}
 
@@ -176,11 +152,7 @@ testing examples 수 : 25000
 
 #### 3) Build Vocabulary and load the pre-trained word embeddings
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 MAX_VOCAB_SIZE = 25_000
@@ -193,7 +165,7 @@ TEXT.build_vocab(train_data,
 LABEL.build_vocab(train_data)
 ```
 
-</div>
+
 
 {:.output_stream}
 
@@ -202,18 +174,14 @@ LABEL.build_vocab(train_data)
 100%|█████████▉| 399107/400000 [00:15<00:00, 27491.10it/s]
 ```
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 print(f"Unique tokens in TEXT vocabulary: {len(TEXT.vocab)}")
 print(f"Unique tokens in LABEL vocabulary: {len(LABEL.vocab)}")
 ```
 
-</div>
+
 
 {:.output_stream}
 
@@ -225,11 +193,7 @@ Unique tokens in LABEL vocabulary: 2
 
 ### 4) Create the iterators
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -242,7 +206,7 @@ train_iterator, valid_iterator, test_iterator = data.BucketIterator.splits(
     device = device)
 ```
 
-</div>
+
 
 ## 2. Build Model
 
@@ -264,11 +228,7 @@ train_iterator, valid_iterator, test_iterator = data.BucketIterator.splits(
 - filter를 오른쪽으로 한칸씩 이동시켜가면서 평균을 계산할 수 있습니다.
 - 위의 예제에서의 element가 [4x5]의 tensor였다면, 평균을 구하고 난 후에는 [1x5]의 tensor를 얻을 수 있습니다.
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 import torch.nn as nn
@@ -302,13 +262,9 @@ class FastText(nn.Module):
     return self.fc(pooled)
 ```
 
-</div>
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
+
 
 ```
 INPUT_DIM = len(TEXT.vocab)
@@ -319,13 +275,9 @@ PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
 model = FastText(INPUT_DIM, EMBEDDING_DIM, OUTPUT_DIM, PAD_IDX)
 ```
 
-</div>
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
+
 
 ```
 def count_parameters(model):
@@ -334,7 +286,7 @@ def count_parameters(model):
 print(f'The model has {count_parameters(model):,} trainable parameters')
 ```
 
-</div>
+
 
 {:.output_stream}
 
@@ -345,11 +297,7 @@ The model has 2,500,301 trainable parameters
 
 - tutorial2와 마찬가지로 미리 학습되어져있는 embedding vector를 사용하였습니다.
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 pretrained_embeddings = TEXT.vocab.vectors
@@ -358,7 +306,7 @@ print(pretrained_embeddings.shape)
 model.embedding.weight.data.copy_(pretrained_embeddings)
 ```
 
-</div>
+
 
 {:.output_stream}
 
@@ -386,11 +334,7 @@ tensor([[-0.1117, -0.4966,  0.1631,  ...,  1.2647, -0.2753, -0.1325],
 
 - unknown token과 padding token은 embedding weight를 0으로 초기화합니다.
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 # PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token] : 1
@@ -402,7 +346,7 @@ model.embedding.weight.data[PAD_IDX] = torch.zeros(EMBEDDING_DIM)
 print(model.embedding.weight.data)
 ```
 
-</div>
+
 
 {:.output_stream}
 
@@ -423,11 +367,7 @@ tensor([[ 0.0000,  0.0000,  0.0000,  ...,  0.0000,  0.0000,  0.0000],
 - **Adam** 를 이용해서 model을 update하였습니다.
   - 이전 tutorial에서 사용했던 **SGD**는 동일한 학습속도로 parameter를 업데이트하기 때문에 학습속도를 선택하기 어렵지만, Adam은 각 매개변수에 대해 학습속도를 조정해주기 때문에 자주 학습되는 parameter에 낮은 learning rate를 update하고 자주 학습되지 않는 parameter에 높은 learning rate를 update할 수 있습니다.
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 import torch.optim as optim
@@ -435,30 +375,22 @@ import torch.optim as optim
 optimizer =optim.Adam(model.parameters())
 ```
 
-</div>
+
 
 #### loss function
 - loss function 으로는 **binary cross entropy with logits**을 사용하였습니다.
 - 0아니면 1의 label을 예측해야하므로 **sigmoid**나 **logit** function을 사용하였습니다.
 - [BCEWithLogitsLoss](https://pytorch.org/docs/stable/generated/torch.nn.BCEWithLogitsLoss.html)는 sigmoid와 the binary cross entropy steps를 모두 수행합니다.
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 criterion = nn.BCEWithLogitsLoss()
 ```
 
-</div>
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
+
 
 ```
 # GPU
@@ -466,17 +398,13 @@ model = model.to(device)
 criterion = criterion.to(device)
 ```
 
-</div>
+
 
 **accuracy function**
 - sigmoid layer를 지나면 0과 1사이의 값이 나오는데, 우리가 필요한 값은 0,1의 label이므로 [nn.round](https://pytorch.org/docs/stable/generated/torch.round.html)를 이용하여 반올림하였습니다.
 - prediction 값과 label 값이 같은 것들이 얼마나 있는지를 계산하여 정확도를 측정하였습니다.
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 def binary_accuracy(preds, y):
@@ -489,15 +417,11 @@ def binary_accuracy(preds, y):
   return acc
 ```
 
-</div>
+
 
 ### 1) Train
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 def train(model, iterator, optimizer, criterion):
@@ -534,15 +458,11 @@ def train(model, iterator, optimizer, criterion):
   return epoch_loss / len(iterator), epoch_acc / len(iterator)
 ```
 
-</div>
+
 
 ### 2) Evaluate
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 def evaluate(model, iterator, criterion):
@@ -568,15 +488,11 @@ def evaluate(model, iterator, criterion):
   return epoch_loss / len(iterator), epoch_acc / len(iterator)
 ```
 
-</div>
+
 
 - epoch 시간을 계산하기 위한 함수
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 import time
@@ -588,18 +504,14 @@ def epoch_time(start_time, end_time):
   return elapsed_mins, elapsed_secs
 ```
 
-</div>
+
 
 ### Train the model through multiple epochs
 
 - training을 한 결과 학습시간이 매우 줄어든 것을 확인할 수 있습니다. 
 - 또한, 정확도를 통해 이번 모델이 이전 모델과 비슷한 성능을 내고 있음을 확인할 수 있습니다. 
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 N_EPOCHS = 5
@@ -626,7 +538,7 @@ for epoch in range(N_EPOCHS):
     print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc*100:.2f}%')
 ```
 
-</div>
+
 
 {:.output_stream}
 
@@ -649,11 +561,7 @@ Epoch: 05 | Epoch Time: 0m 5s
 
 ```
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 model.load_state_dict(torch.load('tut3-model.pt'))
@@ -664,7 +572,7 @@ print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%')
 
 ```
 
-</div>
+
 
 {:.output_stream}
 
@@ -675,18 +583,14 @@ Test Loss: 0.292 | Test Acc: 88.42%
 
 # Test
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 import torch
 model.load_state_dict(torch.load('tut3-model.pt'))
 ```
 
-</div>
+
 
 
 
@@ -699,11 +603,7 @@ model.load_state_dict(torch.load('tut3-model.pt'))
 
 
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 import spacy
@@ -719,19 +619,15 @@ def predict_sentiment(model, sentence):
     return prediction.item()
 ```
 
-</div>
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
+
 
 ```
 predict_sentiment(model, "This film is terrible")
 ```
 
-</div>
+
 
 
 
@@ -744,17 +640,13 @@ predict_sentiment(model, "This film is terrible")
 
 
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 predict_sentiment(model, "This film is great")
 ```
 
-</div>
+
 
 
 
@@ -767,17 +659,13 @@ predict_sentiment(model, "This film is great")
 
 
 
-<div class="prompt input_prompt">
-In&nbsp;[None]:
-</div>
 
-<div class="input_area" markdown="1">
 
 ```
 predict_sentiment(model, "This movie is fantastic")
 ```
 
-</div>
+
 
 
 

@@ -43,8 +43,6 @@ toc_sticky: true
 - **[spaCy](https://spacy.io/)** : nlp를 쉽게 할 수 있도록 도와주는 python package로, tokenizaing, parsing, pos tagging 등을 지원합니다.
 - **[Field](https://pytorch.org/text/_modules/torchtext/data/field.html)** 
 
-.png){: width="80%", height="80%"}{: .center}
-
 ```python
 !apt install python3.7
 ```
