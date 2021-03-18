@@ -15,7 +15,6 @@ toc: true
 toc_sticky: true 
 ---
 
-
 # Snu Remote Test Supervision (Ver.2)
 
 > #### 원격 시험 감독 - 감독관용 뷰어
@@ -34,17 +33,23 @@ toc_sticky: true
 <img src="https://user-images.githubusercontent.com/78718131/107191555-aa69ce00-6a2f-11eb-9b76-7271806affab.png" alt="Untitled" style="zoom:67%;" />
 
 #### (1) RTMP(Real Time Messaging Protocol) Live Streaming 
+
 #### (2) Review Test : HLS(HTTP Live Streaming) Player
+
 #### (3) Login, change password, create account ... 
 
 
 
 ## [1. Login](https://github.com/happy-jihye/Snu-Remote-Test-Supervision-RTMP-HLS-ver2/tree/master/FFmeBasicSample/Login)
 
+
+
 ### (1) Create Account
 
 - Login page에서 Create Account를 누르면 회원가입을 할 수 있는 창으로 이동합니다.
+
 - 회원가입 창에서는 학번, 이름, 이메일을 입력받습니다. 아래의 curl 명령어를 통해 회원가입 정보를 데이터베이스에 보냈습니다. 
+
 - 이후 승인이 되면 회원가입이 완료됩니다.
 
   ```cpp
@@ -60,11 +65,15 @@ toc_sticky: true
 - 비밀번호를 변경하고 나면, 로그인 페이지로 다시 이동합니다.
 
 > 다음의 curl commend를 입력하였을 때
+>
 > ```cpp
 > curl -X POST [http://XXX/login](http://XXX/login) -d [mail_address=John@snu.ac.kr](mailto:mail_address=John@snu.ac.kr) -d PW=temp_password
 > ```
+>
 > (1) 최초 로그인이라면, "Change Password!"라는 명령어가 반환되고
+>
 > (2) 입력된 정보가 데이터 베이스에 없다면 "email or password wrong"라는 명령어가 반환되며,
+>
 > (3) 로그인이 완료된다면 token이 반환됩니다. 이후 이 token을 통해 감독관은 실시간 스트리밍 영상을 보거나 과거 영상을 replay할 수 있습니다.
 
 
@@ -72,6 +81,7 @@ toc_sticky: true
 ### (3) Change Password
 
 - 아래의 curl commend를 통해 원하는 비밀번호로 비밀번호를 변경합니다.
+
   ```cpp
   curl - X POST [http://XXX/change_password](http://XXX/change_password) -d [mail_address=John@snu.ac.kr](mailto:mail_address=John@snu.ac.kr) -d PW=qwerty1234
   ```
@@ -95,6 +105,7 @@ toc_sticky: true
 >  (1) 시험 정보 등록
 >
 > - 강의명, 시험명 ex. midterm, 시험 날짜, 시험 시작 시간/끝나는 시간
+>
 >   ```cpp
 >   curl -X POST [http://XXX/add_exam_data](http://XXX/add_exam_data) -d lec=logicdesign -d test=midterm -d testdate=20210108 -d starttime=1400 -d endtime=1530 -d token=
 >   ```
@@ -102,6 +113,7 @@ toc_sticky: true
 > (2) 학생 정보 등록
 >
 > - 이름, 학번, 감독관 번호
+>
 >   ```cpp
 >   curl -X POST [http://XXX/add_student_data](http://XXX/add_student_data) -d num=2020-12345 -d name=jihye -d supervNum=1 -d lec=logicdesign -d test=midterm -d testdate=20210108 -d starttime=1400
 >   ```
@@ -110,6 +122,7 @@ toc_sticky: true
 
 
 - 아래의 curl command를 통해 서버에서 예정된 시험 list를 받아옵니다.
+
   ```cpp
   curl -X POST http://XXXX/superv_endpoint_pre -d token=
   ```
@@ -123,7 +136,9 @@ toc_sticky: true
 ![SE-1a92a9d3-7c42-4d06-8b6e-35df3c2aff7b](https://user-images.githubusercontent.com/78718131/107308275-b1461e80-6acb-11eb-9b41-6a49d9f88712.png)
 
 - 스케줄링된 시험을 누른 후 감독관 번호를 입력하면, 라이브 스트리밍을 볼 수 있습니다. 
+
 - 학생이 한명씩 입장될 때마다 뷰어에는 사람이 추가됩니다. 
+
 - ver2에서는 모바일에서 송출한 영상과 컴퓨터 웹캠에서 송출한 영상을 동시에 띄웠습니다. (위의 사진은 ver1의 사진)
 
 
@@ -145,6 +160,7 @@ toc_sticky: true
 > #### 3. Live_tab
 >
 > - 서버와의 통신 프로토콜을 통해 rtmp 주소를 받아오는 부분입니다. refresh button을 누르면 주소를 받을 수 있습니다.
+>
 >   ```cpp
 >   curl - X POST http://XXX/superv_endpoint -d tablename=logicdesign.midterm_20210108 -d supervNum=1 -d token=
 >   ```
@@ -156,8 +172,11 @@ toc_sticky: true
 > RTMP 프로토콜을 통해 라이브 영상을 재생하기 위해 unosquare의 ffmediaelement와 ruslan-B의 FFmpeg.AutoGen의 라이브러리를 참조하였습니다.
 >
 > - [unosquare/ffmediaelement](https://github.com/unosquare/ffmediaelement)
+>
 >   *unosquare의 라이브러리는 원격시험감독을 만들기 위해 일부 수정하였습니다. 제가 참조한 라이브러리는 위의 라이브러리와 100% 일치하지는 않습니다.*
+>
 > - [Ruslan-B/FFmpeg.AutoGen](https://github.com/Ruslan-B/FFmpeg.AutoGen)
+>
 > - 이외에도 webeye의 RTMP Player, openCV의 일부 코드등을 참고하였지만 직접적으로 참조를 하지는 않았습니다.
 
 
