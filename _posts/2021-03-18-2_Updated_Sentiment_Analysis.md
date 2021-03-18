@@ -46,7 +46,6 @@ toc_sticky: true
 
 - 위의 방식을 사용함으로써 정확도를 ~84% 까지 향상시킬 수 있습니다.
 
-
 ## 1. Preparing Data
 
 
@@ -55,26 +54,20 @@ toc_sticky: true
 - **[Field](https://pytorch.org/text/_modules/torchtext/data/field.html)** 
 
 
-```
+```python
 !apt install python3.7
 ```
 
 
-
-
-```
+```python
 !pip install -U torchtext==0.6.0
 ```
 
 
-
-
-```
+```python
 %%capture
 !python -m spacy download en
 ```
-
-
 
 ### [Packed padded sequences](https://simonjisu.github.io/nlp/2018/07/05/packedsequence.html)
 - NLP에서는 매 batch마다 고정된 문장의 길이로 만들어주기 위해서 $<pad>$를 넣어주는데, 이 때문에 연산량이 늘어납니다.
@@ -83,7 +76,7 @@ toc_sticky: true
 - 기존의 RNN이라면 (batch_size X sequence_length X hidden_layer)만큼 연산을 해야하지만, packed padded sequences의 방법을 사용하면 (token_length X hidden_layer)만큼만 계산해주면 됩니다. 
 
 
-```
+```python
 import torch
 from torchtext import data
 
@@ -93,8 +86,6 @@ TEXT = data.Field(tokenize = 'spacy',
 LABEL = data.LabelField(dtype = torch.float) # pos -> 1 / neg -> 0
 ```
 
-
-
 #### 2) IMDb Dataset
 - 5만개의 영화 리뷰로 구성된 dataset
 - IMDb dataset을 다운로드 받은 후, 이전에 정의한 Field(TEXT, LABEL)를 사용해서 데이터를 처리하였습니다.
@@ -102,16 +93,14 @@ LABEL = data.LabelField(dtype = torch.float) # pos -> 1 / neg -> 0
 
 
 
-```
+```python
 from torchtext import datasets
 
 train_data, test_data = datasets.IMDB.splits(TEXT, LABEL)
 ```
 
 
-
-
-```
+```python
 import random
 
 SEED = 1234
@@ -123,15 +112,11 @@ train_data, valid_data = train_data.split(random_state = random.seed(SEED))
 ```
 
 
-
-
-```
+```python
 print(f'training examples 수 : {len(train_data)}')
 print(f'validations examples 수 : {len(valid_data)}')
 print(f'testing examples 수 : {len(test_data)}')
 ```
-
-
 
 {:.output_stream}
 
@@ -144,7 +129,7 @@ testing examples 수 : 25000
 
 #### 3) Build Vocabulary
 - one-hot encoding 방식을 사용해서 단어들을 indexing 합니다.
-![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/Simple_RNN_model1.png?raw=1)
+![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/Simple_RNN_model1.png?raw=1){: width="80%", height="80%"}{: .center}
 
 - training dataset에 있는 단어들은 10만개가 넘는데, 이 모든 단어들에 대해 indexing을 하면 one-hot vector의 dimension이 10만개가 되므로 연산하기 좋지 않습니다.
   - 따라서 어휘의 수를 MAX_VOCAB_SIZE로 제한하였고,이 예제에서는 **25,000 words**를 사용하였습니다.
@@ -155,7 +140,7 @@ testing examples 수 : 25000
 - torchtext가 vocabulary에 있는 단어들은 initialization을 하지만, pre-trained embeddings에 대해서는 0으로 초기화를 안하므로 ***unk_init***을 *torch.Tensor.normal_*로 설정하여 random으로 초기화를 합니다. 이렇게 하면 Gaussian distribution을 통해 해당 단어가 초기화됩니다.
 
 
-```
+```python
 MAX_VOCAB_SIZE = 25_000
 
 TEXT.build_vocab(train_data, 
@@ -165,18 +150,14 @@ TEXT.build_vocab(train_data,
 LABEL.build_vocab(train_data)
 ```
 
-
-
 - vocab size가 25,000개가 아닌 25,002개인 이유는 $<unk>$ token과 $<pad>$ token이 추가되었기 때문입니다.
 - $<pad>$ token : 문장의 길이를 맞추기 위해 있는 token
 
 
-```
+```python
 print(f"Unique tokens in TEXT vocabulary: {len(TEXT.vocab)}")
 print(f"Unique tokens in LABEL vocabulary: {len(LABEL.vocab)}")
 ```
-
-
 
 {:.output_stream}
 
@@ -190,7 +171,7 @@ Unique tokens in LABEL vocabulary: 2
 - 이때, packed padded sequences의 방식을 사용하려면 sequence length를 바탕으로 batch내의 문장들을 정렬해야하므로 ***sort_within_batch***를 *True*로 설정합니다.
 
 
-```
+```python
 import torch
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -205,13 +186,11 @@ train_iterator, valid_iterator, test_iterator = data.BucketIterator.splits(
 )
 ```
 
-
-
 - **packed padding sentence**를 한 결과,
   batch.text의 첫번째 요소는 sentence(a numericalized tensor that has been padded)가 되고, 두번째 요소는 실제 문장 길이가 됩니다.
 
 
-```
+```python
 # iterator 출력
 for batch in train_iterator:
   print(batch.text[0].shape)
@@ -223,8 +202,6 @@ for batch in train_iterator:
   # 첫 번째 batch만 출력
   break
 ```
-
-
 
 {:.output_stream}
 
@@ -255,30 +232,30 @@ torch.Size([64])
 - Standard RNNs에서는 vanishing gradient problem으로 인해 학습이 잘 안되는 경우가 많기 때문에 대부분의 경우에서 LSTM을 사용한 RNN architecture가 Standard RNNs보다 성능이 좋습니다.
 - LSTM은 기억하고 잊는 부분을 수학적으로 구현한 모델로, 과거의 정보들을 보다 더 잘 기억하도록 하여 "long-term dependencies"를 해결하였습니다.  ([설명](http://colah.github.io/posts/2015-08-Understanding-LSTMs/))
 $$(h_t, c_t) = \text{LSTM}(x_t, h_t, c_t)$$
-![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/Updated_Sentiment_Analysis2.png?raw=1)
+![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/Updated_Sentiment_Analysis2.png?raw=1){: width="80%", height="80%"}{: .center}
 
 ### **Bidirectional RNN**
 - 기존의 RNN이 과거의 상태를 "memory"에 저장하여 시계열 데이터의 학습을 용이하게 하였다면, **BRNNs**는 과거의 상태뿐만 아니라 미래의 상태까지 고려하도록 확장된 모델입니다.
 - time step $t$ 에서, **forward RNN**은 $x_t$의 단어까지 처리를 하고, **backward RNN**은 $x_{T-t+1}$의 단어까지 처리를 합니다.
 - 최종 결과값 : $\hat{y}=f(h_T^\rightarrow, h_T^\leftarrow)$
-![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/Updated_Sentiment_Analysis3.png?raw=1)
+![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/Updated_Sentiment_Analysis3.png?raw=1){: width="80%", height="80%"}{: .center}
 
 ### **Multi-layer RNN**
 - **Multi-layer RNN**은 기존의 RNN을 여러 layer로 쌓은 모델입니다.
-![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/Updated_Sentiment_Analysis4.png?raw=1)
+![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/Updated_Sentiment_Analysis4.png?raw=1){: width="80%", height="80%"}{: .center}
 
 ### **Regularization**
 - **Overfitting**은 학습 데이터를 과하게 잘 학습시키는 것입니다. 아래의 그림을 보면 (a)는 지나치게 단순하게 학습을 하여 예측을 잘 못하게 되는 underfitting의 경우이고, (c)는 지나치게 학습을 시켜 예측을 잘 못하게 되는 경우입니다.만약, (b)가 아닌 (c)처럼 학습을 시키게 된다면 새로운 sample이 주어졌을 때 엉터리 결과가 나올 수 있게 됩니다.
-![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/Updated_Sentiment_Analysis5.png?raw=1)
+![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/Updated_Sentiment_Analysis5.png?raw=1){: width="80%", height="80%"}{: .center}
 
 - **[Dropout](https://blog.naver.com/laonple/220542170499)** : layer를 foward pass로 학습을 하는 동안 random하게 뉴런을 0으로 설정하는 방식입니다. dropout은 neural network가 깊어질 경우 overfitting의 문제를 해결하기 위해 제시된 방식이며, 아래의 그림에서 (a)처럼 모든 layer에 대해 학습을 수행하는 것이 아니라 (b)처럼 일부 신경망에 대해서만 학습을 수행하게 됩니다. (이 [논문](https://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf) 참고)
-![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/Updated_Sentiment_Analysis6.png?raw=1)
+![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/Updated_Sentiment_Analysis6.png?raw=1){: width="80%", height="80%"}{: .center}
 
 ### **Implementation Details**
 - $<pad>$ token은 문장의 감정과는 무관하므로 padding token에 대해서는 embedding을 학습시키지 않습니다. 따라서 이를 위해 nn.Embedding에 **padding_idx**를 전달하였고, 이로써 pad token은 계속해서 embedding이 초기화된 상태를 유지할 수 있습니다.
 
 
-```
+```python
 import torch.nn as nn
 
 class RNN(nn.Module):
@@ -332,15 +309,13 @@ class RNN(nn.Module):
     return self.fc(hidden)
 ```
 
-
-
 - **Input dim** : one-hot vector의 dimension과 같음(vocabulary size)
 - **Embedding dim** : 보통 50-250 dimensions
 - **Hidden dim** :보통 100-500 dim
 - **Output dim** : class의 수, 위 예제에서는 0아니면 1이므로 1-dim
 
 
-```
+```python
 INPUT_DIM = len(TEXT.vocab) #25,002
 EMBEDDING_DIM = 100
 HIDDEN_DIM = 256
@@ -361,16 +336,12 @@ model = RNN(INPUT_DIM,
 ```
 
 
-
-
-```
+```python
 def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
 
 print(f'The model has {count_parameters(model):,} trainable parameters')
 ```
-
-
 
 {:.output_stream}
 
@@ -380,13 +351,11 @@ The model has 4,810,857 trainable parameters
 ```
 
 
-```
+```python
 pretrained_embeddings = TEXT.vocab.vectors
 
 print(pretrained_embeddings.shape)
 ```
-
-
 
 {:.output_stream}
 
@@ -396,11 +365,9 @@ torch.Size([25002, 100])
 ```
 
 
-```
+```python
 model.embedding.weight.data.copy_(pretrained_embeddings)
 ```
-
-
 
 
 
@@ -422,7 +389,7 @@ tensor([[-0.1117, -0.4966,  0.1631,  ...,  1.2647, -0.2753, -0.1325],
 - unknown token과 padding token은 embedding weight를 0으로 초기화
 
 
-```
+```python
 # PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token] : 1
 UNK_IDX = TEXT.vocab.stoi[TEXT.unk_token] #0
 
@@ -431,8 +398,6 @@ model.embedding.weight.data[PAD_IDX] = torch.zeros(EMBEDDING_DIM)
 
 print(model.embedding.weight.data)
 ```
-
-
 
 {:.output_stream}
 
@@ -454,13 +419,11 @@ tensor([[ 0.0000,  0.0000,  0.0000,  ...,  0.0000,  0.0000,  0.0000],
   - 이전 tutorial에서 사용했던 **SGD**는 동일한 학습속도로 parameter를 업데이트하기 때문에 학습속도를 선택하기 어렵지만, Adam은 각 매개변수에 대해 학습속도를 조정해주기 때문에 자주 학습되는 parameter에 낮은 learning rate를 update하고 자주 학습되지 않는 parameter에 높은 learning rate를 update할 수 있습니다.
 
 
-```
+```python
 import torch.optim as optim
 
 optimizer =optim.Adam(model.parameters())
 ```
-
-
 
 #### loss function
 - loss function 으로는 **binary cross entropy with logits**을 사용하였습니다.
@@ -468,27 +431,23 @@ optimizer =optim.Adam(model.parameters())
 - [BCEWithLogitsLoss](https://pytorch.org/docs/stable/generated/torch.nn.BCEWithLogitsLoss.html)는 sigmoid와 the binary cross entropy steps를 모두 수행합니다.
 
 
-```
+```python
 criterion = nn.BCEWithLogitsLoss()
 ```
 
 
-
-
-```
+```python
 # GPU
 model = model.to(device)
 criterion = criterion.to(device)
 ```
-
-
 
 **accuracy function**
 - sigmoid layer를 지나면 0과 1사이의 값이 나오는데, 우리가 필요한 값은 0,1의 label이므로 [nn.round](https://pytorch.org/docs/stable/generated/torch.round.html)를 이용하여 반올림하였습니다.
 - prediction 값과 label 값이 같은 것들이 얼마나 있는지를 계산하여 정확도를 측정하였습니다.
 
 
-```
+```python
 def binary_accuracy(preds, y):
 
   rounded_preds = torch.round(torch.sigmoid(preds))
@@ -499,12 +458,10 @@ def binary_accuracy(preds, y):
   return acc
 ```
 
-
-
 ### 1) Train
 
 
-```
+```python
 def train(model, iterator, optimizer, criterion):
 
   epoch_loss = 0
@@ -542,12 +499,10 @@ def train(model, iterator, optimizer, criterion):
   return epoch_loss / len(iterator), epoch_acc / len(iterator)
 ```
 
-
-
 ### 2) Evaluate
 
 
-```
+```python
 def evaluate(model, iterator, criterion):
   epoch_loss = 0
   epoch_acc = 0
@@ -573,12 +528,10 @@ def evaluate(model, iterator, criterion):
   return epoch_loss / len(iterator), epoch_acc / len(iterator)
 ```
 
-
-
 - epoch 시간을 계산하기 위한 함수
 
 
-```
+```python
 import time
 
 def epoch_time(start_time, end_time):
@@ -588,12 +541,10 @@ def epoch_time(start_time, end_time):
   return elapsed_mins, elapsed_secs
 ```
 
-
-
 ### Train the model through multiple epochs
 
 
-```
+```python
 N_EPOCHS = 5
 
 best_valid_loss = float('inf')
@@ -618,8 +569,6 @@ for epoch in range(N_EPOCHS):
     print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc*100:.2f}%')
 ```
 
-
-
 {:.output_stream}
 
 ```
@@ -642,7 +591,7 @@ Epoch: 05 | Epoch Time: 0m 39s
 ```
 
 
-```
+```python
 model.load_state_dict(torch.load('tut2-model1.pt'))
 
 test_loss, test_acc = evaluate(model, test_iterator, criterion)
@@ -650,8 +599,6 @@ test_loss, test_acc = evaluate(model, test_iterator, criterion)
 print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%')
 
 ```
-
-
 
 {:.output_stream}
 
@@ -663,12 +610,10 @@ Test Loss: 0.343 | Test Acc: 87.03%
 # Test
 
 
-```
+```python
 import torch
 model.load_state_dict(torch.load('tut2-model1.pt'))
 ```
-
-
 
 
 
@@ -682,7 +627,7 @@ model.load_state_dict(torch.load('tut2-model1.pt'))
 
 
 
-```
+```python
 import spacy
 nlp = spacy.load('en')
 
@@ -709,14 +654,10 @@ def predict_test_sentiment(model, tokenized):
 ```
 
 
-
-
-```
+```python
 print(vars(test_data.examples[0])['text'])
 predict_test_sentiment(model, vars(test_data.examples[0])['text'])
 ```
-
-
 
 {:.output_stream}
 
@@ -737,11 +678,9 @@ predict_test_sentiment(model, vars(test_data.examples[0])['text'])
 
 
 
-```
+```python
 predict_sentiment(model, "This film is terrible")
 ```
-
-
 
 
 
@@ -755,11 +694,9 @@ predict_sentiment(model, "This film is terrible")
 
 
 
-```
+```python
 predict_sentiment(model, "This film is great")
 ```
-
-
 
 
 
@@ -773,11 +710,9 @@ predict_sentiment(model, "This film is great")
 
 
 
-```
+```python
 predict_sentiment(model, "This movie is fantastic")
 ```
-
-
 
 
 
@@ -824,7 +759,7 @@ predict_sentiment(model, "This movie is fantastic")
   
 
 
-```
+```python
 # [Test1] single layer, Dropout = 0, Bidirectional X
 
 INPUT_DIM = len(TEXT.vocab) #25,002
@@ -890,8 +825,6 @@ test_loss, test_acc = evaluate(model, test_iterator, criterion)
 print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%')
 ```
 
-
-
 {:.output_stream}
 
 ```
@@ -915,7 +848,7 @@ Test Loss: 0.391 | Test Acc: 84.78%
 ```
 
 
-```
+```python
 # [Test2] single layer, Dropout = 0.5, Bidirectional X
 
 INPUT_DIM = len(TEXT.vocab) #25,002
@@ -981,8 +914,6 @@ test_loss, test_acc = evaluate(model, test_iterator, criterion)
 print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%')
 ```
 
-
-
 {:.output_stream}
 
 ```
@@ -1014,7 +945,7 @@ Test Loss: 0.300 | Test Acc: 87.59%
 ```
 
 
-```
+```python
 # [Test3] single layer, Dropout = 0.2, Bidirectional RNN model
 
 INPUT_DIM = len(TEXT.vocab) #25,002
@@ -1077,8 +1008,6 @@ test_loss, test_acc = evaluate(model, test_iterator, criterion)
 print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%')
 ```
 
-
-
 {:.output_stream}
 
 ```
@@ -1110,7 +1039,7 @@ Test Loss: 0.300 | Test Acc: 88.49%
 ```
 
 
-```
+```python
 # [Test4] 3 multi-layer, Dropout = 0.2, Bidirectional X
 
 INPUT_DIM = len(TEXT.vocab) #25,002
@@ -1172,8 +1101,6 @@ test_loss, test_acc = evaluate(model, test_iterator, criterion)
 
 print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%')
 ```
-
-
 
 {:.output_stream}
 

@@ -14,6 +14,13 @@ classes: wide
 {%- endblock header -%}
 
 
+{% block input %}
+```python
+{{ cell.source }}
+```
+{% endblock input %}
+
+
 {% block stream %}
 {:.output_stream}
 
@@ -21,6 +28,8 @@ classes: wide
 {{ output.text }}
 ```
 {% endblock stream %}
+
+
 
 {% block data_text %}
 {:.output_data_text}
@@ -30,12 +39,16 @@ classes: wide
 ```
 {% endblock data_text %}
 
+
+
 {% block traceback_line  %}
 {:.output_traceback_line}
 
 `{{ line | strip_ansi }}`
 
 {% endblock traceback_line  %}
+
+
 
 {% block data_html %}
 <div markdown="0">
