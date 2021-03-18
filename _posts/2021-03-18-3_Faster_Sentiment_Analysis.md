@@ -32,7 +32,7 @@ toc_sticky: true
 
 
 - Pytorch / TorchText
-- RNN network를 사용한 Sentiment Analysis 예제 ([Github](https://github.com/happy-jihye/Natural-Language-Processing), [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/happy-jihye/Natural-Language-Processing/blob/main/3_Faster_Sentiment_Analysis.ipynb)
+- RNN network를 사용한 Sentiment Analysis 예제 ([Github](https://github.com/happy-jihye/Natural-Language-Processing), [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/happy-jihye/Natural-Language-Processing/blob/main/3_Faster_Sentiment_Analysis.ipynb))
 - 기존의 tutorial 2에서는 정확도를 높이기 위한 다양한 model들을 제시했다면, 이번 tutorial에서는 computation 속도를 향상시킬 수 있는 [Bag of Tricks for Efficient Text Classification](https://arxiv.org/abs/1607.01759) 논문의 **FastText model**을 학습할 예정입니다.
 - RNN이 아닌 2개의 layer(embedding layer와 linear layer)로 구현된 모델로, 2보다 더 간단하지만 속도는 빠르고 성능 또한 괜찮은 모델입니다.
 - tutorial1, 2 마찬가지로 IMDB dataset을 이용하였습니다.
