@@ -1,14 +1,31 @@
 ---
-title: "4_Convolutional_Sentiment_Analysis"
-search: true
-categories:
- - Notebook
-tags:
- - Need_modify
+date: 2021-03-16
+title: "[nlp] 4. Convolutional neural network을 이용한 문장 분류 모델 (감정 분석)"
+
+excerpt: "컴퓨터 비전 분야에서 자주 사용되는 네트워크인 Convolutional neural network(CNN)를 감정 분석 모델에 적용하였습니다. "
+
+categories: 
+  - nlp
+tags: 
+  - deeplearning
+  - ai
+  - nlp
+  - pytorch
+  - CNN
+  - vision
 layout: jupyter
-classes: wide
+search: true
+
+# 목차
+toc: true  
+toc_sticky: true 
 ---
-# 4 - Convolutional Sentiment Analysis
+
+**4 - Convolutional Sentiment Analysis**
+
+> 2021/03/18 Happy-jihye
+> 
+> **Reference** : [pytorch-sentiment-analysis/4 - Convolutional Sentiment Analysis](https://github.com/bentrevett/pytorch-sentiment-analysis/blob/master/4%20-%20Convolutional%20Sentiment%20Analysis.ipynb)
 
 - Pytorch / TorchText
 - 이번 tutorial에서는 컴퓨터 비전 분야에서 자주 사용되는 네트워크인 **Convolutional neural network(CNN)**를 사용하여 감정 분석을 할 예정입니다. 
@@ -25,10 +42,6 @@ classes: wide
 - CNN에서 3x3 filter를 사용하여 이미지의 일부분에 대한 특징을 저장할 수 있는 것 처럼, 1x2 filter를 연속된 2개의 단어에 적용시킬 수 있습니다. 
 - tutorial3에서는 bi-gram을 사용한 FastText 모델에 대해 알아봤다면, **tutorial4**에서는 CNN model의 filter를 사용한 bi-grams(1x2 filter), tri-grams(1x3 filter), n-grams(1xn filter)에 대해 알아볼 예정입니다.
 
----
-> 2021/03/18 Happy-jihye
-> 
-> **Reference** : [pytorch-sentiment-analysis/4 - Convolutional Sentiment Analysis](https://github.com/bentrevett/pytorch-sentiment-analysis/blob/master/4%20-%20Convolutional%20Sentiment%20Analysis.ipynb)
 
 
 ## 1. Preparing Data

@@ -1,11 +1,8 @@
 ---
 date: 2021-03-16
-title: "[nlp] 3. pytorch를 이용한 감정 분석 모델(Speed-Ver)"
+title: "[nlp] 3. FastText model을 이용한 감정 분석 모델(Speed-Ver/pytorch)"
 
-excerpt: "1에서 구현한 workflow를 변형하여 정확도를 높인 모델입니다.
-1과 마찬가지로 IMDB dataset을 이용하였습니다.
-computation 속도를 높이기 위해 Packed padded Sequence의 방식을 사용하였고, pre-trained word embeddings과 다양한 RNN model을 사용하여 performance를 향상시켰습니다.
-이 model에서는 LSTM, bidirectional-RNN, multi-layer RNN 등을 공부할 수 있습니다."
+excerpt: "Bag of Tricks for Efficient Text Classification 논문의 FastText 모델을 이용하여 감정 분석을 하였습니다."
 
 categories: 
   - nlp
