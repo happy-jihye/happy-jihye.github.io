@@ -20,41 +20,50 @@ toc_sticky: true
 >
 > (Jihye-Back)
 
-- You can download exe file. ([snu test director - link](https://drive.google.com/open?id=162xHLRyLbKLKKhLRr95UWrWoWnFIulFJ&authuser=100jihye%40snu.ac.kr&usp=drive_fs))
+- [이 링크](https://drive.google.com/open?id=162xHLRyLbKLKKhLRr95UWrWoWnFIulFJ&authuser=100jihye%40snu.ac.kr&usp=drive_fs)를 통해 실행파일을 다운받으실 수 있습니다.
 - [version 1](https://github.com/happy-jihye/Snu-Remote-Test-Supervision-RTMP-HLS-ver1)
-- [IOS mobile client](https://github.com/happy-jihye/ios-rtmp-client)
-- [RestAPI](https://github.com/younghoSNU/restapi)
+- [IOS mobile client](https://github.com/happy-jihye/ios-rtmp-client) : 실시간 영상을 아이폰으로 송출해주는 어플리케이션을 개발하였습니다. 
+- [RestAPI](https://github.com/younghoSNU/restapi) : AWS를 이용하여 구현한 [Rest API](https://www.google.com/search?q=rest+api+%EB%9E%80&oq=rest+ap&aqs=chrome.1.0i433j0i131i433j0i20i263j69i57j0l3j69i60.3320j0j4&sourceid=chrome&ie=UTF-8)입니다.
 
----
+
 
 ## ⭐ 주요 과제 및 흐름도
 
+- 원격시험 감독의 흐름도는 다음과 같습니다.
+
 <img src="https://user-images.githubusercontent.com/78718131/107191555-aa69ce00-6a2f-11eb-9b76-7271806affab.png" alt="Untitled" style="zoom:67%;" />
 
-#### (1) RTMP(Real Time Messaging Protocol) Live Streaming 
+- 원격시험감독 프로그램은
+(1) 학생이노트북이나 스마트폰을 이용하여 실시간 영상을 송출하는 **학생 클라이언트** (RTMP protocol)
+(2) 시험에 관한 데이터들(학생 및 감독관 정보, 시험 정보 등등)을 데이터 베이스에 저장하고, 클라이언트와의 소통을 돕는 **서버**
+(3) 학생이 송출한 영상을 AWS에 저장하는 **클라우드**
+(4) 학생의 시험 영상을 볼 수 있는 **감독관용 뷰어**
+로 구성됩니다.
 
-#### (2) Review Test : HLS(HTTP Live Streaming) Player
 
-#### (3) Login, change password, create account ... 
+## 감독관용 뷰어 
+
+- 감독관 용 뷰어는 크게 다음과 같은 기능을 수행합니다.
+
+**(1) RTMP(Real Time Messaging Protocol) Live Streaming**
+**(2) Review Test : HLS(HTTP Live Streaming) Player**
+**(3) Login, change password, create account, etc**
 
 
 
 ## [1. Login](https://github.com/happy-jihye/Snu-Remote-Test-Supervision-RTMP-HLS-ver2/tree/master/FFmeBasicSample/Login)
 
-
+회원 가입 및 로그인을 하는 부분입니다. 회원가입을 하면 임시 비밀번호가 발급되므로 이를 변경하는 기능 역시 구현해놓았습니다.
 
 ### (1) Create Account
 
 - Login page에서 Create Account를 누르면 회원가입을 할 수 있는 창으로 이동합니다.
-
 - 회원가입 창에서는 학번, 이름, 이메일을 입력받습니다. 아래의 curl 명령어를 통해 회원가입 정보를 데이터베이스에 보냈습니다. 
-
 - 이후 승인이 되면 회원가입이 완료됩니다.
 
   ```cpp
   curl -X POST [http://XXX/sign_up](http://XXX/sign_up) -d ID=2020-54321 -d name=John -d [mail_address=John@snu.ac.kr](mailto:mail_address=John@snu.ac.kr)
   ```
-
 
 
 ### (2) Login Page
@@ -88,7 +97,6 @@ toc_sticky: true
   
 
 
-
 ## [2. Main Page](https://github.com/happy-jihye/Snu-Remote-Test-Supervision-RTMP-HLS-ver2/tree/master/FFmeBasicSample/Main%20page)
 
 - Main Page에서는 시험을 스케줄링을 할 수 있습니다.
@@ -99,7 +107,7 @@ toc_sticky: true
 
 ### (1) Scheduling Test
 
-- Scheduling test 에서는 시험정보와 학생 정보를 입력받습니다.
+- Scheduling test 에서는 시험정보와 학생 정보를 등록할 수 있습니다.
 
 >  (1) 시험 정보 등록
 >
@@ -118,15 +126,14 @@ toc_sticky: true
 >   ```
 
 
+- 시험 정보들을 등록하고 나면, main page에 예정된 시험 목록들이 시간순서대로 list up 됩니다.
+  <img src="https://user-images.githubusercontent.com/78718131/107193390-26651580-6a32-11eb-9bf6-23957d0fd3f2.png" alt="Untitled 4" style="zoom: 67%;" />
 
-
-- 아래의 curl command를 통해 서버에서 예정된 시험 list를 받아옵니다.
+- 시험 list들은 아래의 curl command를 통해 서버에서 받아왔습니다.
 
   ```cpp
   curl -X POST http://XXXX/superv_endpoint_pre -d token=
   ```
-
-- 예정된 시험 목록을 받아오면 다음과 같이 list up 합니다.<img src="https://user-images.githubusercontent.com/78718131/107193390-26651580-6a32-11eb-9bf6-23957d0fd3f2.png" alt="Untitled 4" style="zoom: 67%;" />
 
 
 
@@ -138,24 +145,21 @@ toc_sticky: true
 
 - 학생이 한명씩 입장될 때마다 뷰어에는 사람이 추가됩니다. 
 
-- ver2에서는 모바일에서 송출한 영상과 컴퓨터 웹캠에서 송출한 영상을 동시에 띄웠습니다. (위의 사진은 ver1의 사진)
+- ver2에서는 모바일에서 송출한 영상과 컴퓨터 웹캠에서 송출한 영상을 동시에 띄웠습니다. *(위의 사진은 ver1의 사진)*
 
 
 
 > 또한, Live Streaming은 총 세가지의 CS파일을 통해 구현하였습니다.
->
 > #### 1. Live_player
 >
 > - Live player는 rtmp 프로토콜을 통해 받아온 주소를 재생하는 player입니다. 
 > - 실시간으로 스트리밍 되고 있는 영상을 띄우는 player이므로 play, pause등의 기능은 구현하지 않았고, mute기능만을 추가하였습니다.
 > - sound 버튼을 누르면 음소거가 해제되고, 버튼을 다시 누르면 음소거가 됩니다.
->
 > #### 2. Live_viewr
 >
 > - Viewer는 여러개의 RTMP 주소를 받으면, Live player를 통해 여러개의 영상을 띄우는 부분입니다. 
 > - 현재는 모바일과 웹캠이 모두 송출되는 중일 때만, 뷰어에 보이도록 구현하였습니다.
 > - 또한, double click을 하면 화면이 확대될 수 있도록 보이지 않는 버튼을 만들었습니다.
->
 > #### 3. Live_tab
 >
 > - 서버와의 통신 프로토콜을 통해 rtmp 주소를 받아오는 부분입니다. refresh button을 누르면 주소를 받을 수 있습니다.
@@ -200,13 +204,12 @@ toc_sticky: true
       curl -X POST [http://XXX/get_test](http://XXX/get_test) -d num=2020-12345 -d lec=logicdesign =d token=
   ```
 
-- 초기에 play button을 누르면 재생이 시작됩니다. play, pause, stop은 기본적으로 사용할 수 있습니다.
+- play button을 누르면 재생이 시작됩니다. play, pause, stop은 기본적으로 사용할 수 있습니다.
 
 - Slider를 통해 volume과 영상의 speed를 조절할 수 있습니다. (배속재생 가능)
 
 - time slider를 통해 원하는 부분을 바로 재생할 수 있도록 구현하였습니다.
-
-  ⭐ 이 부분에 대한 설명은 code의 주석처리에 달아놓았습니다.
+  *⭐ 이 부분에 대한 설명은 code의 주석처리에 달아놓았습니다.*
 
 - home으로 이동하거나 어플리케이션을 중단하는 경우에는 hls가 종료되었다는 command를 서버에 보내주어야합니다. (감독관 만이 주소를 열고 닫을 수 있어야 영상의 주소가 노출되는 경우에도 다른 사람들이 볼 수 없도록 deactivate됨)
 
