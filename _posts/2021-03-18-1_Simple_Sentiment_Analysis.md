@@ -1,0 +1,716 @@
+---
+date: 2021-03-12
+title: "[nlp] 1. pytorch를 이용한 간단한 감정 분석 모델"
+
+excerpt: "Pytorch의 torchtext를 이용한 간단한 프로젝트입니다. torchtext의 인터넷 영화 데이터베이스(IMDb dataset)을 Recurrent Neural network(RNN)를 통해 학습시켜 영화의 review가 긍정적인 리뷰인지, 부정적인 리뷰인지를 판단합니다.
+이 튜토리얼에서는 load data, create train/test/validation splits, build a vocabulary, create data iterators, define a model and implement the train/evaluate/test loop 를 배울 수 있습니다.
+머신러닝 파이프라인을 간략하게나마 학습하기 위한 튜토리얼이므로 performance가 좋지 않습니다"
+
+categories: 
+  - nlp
+tags: 
+  - deeplearning
+  - ai
+  - nlp
+  - pytorch
+layout: jupyter
+classes: wide
+search: true
+# 목차
+toc: true  
+toc_sticky: true 
+---
+
+
+# 1 - [Simple Sentiment Analysis](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/1_Simple_Sentiment_Analysis.ipynb)
+
+
+> - 2021/03/12 Happy-jihye
+> - **Reference** : [pytorch-sentiment-analysis/1 - Simple Sentiment Analysis](https://github.com/bentrevett/pytorch-sentiment-analysis/blob/master/1%20-%20Simple%20Sentiment%20Analysis.ipynb)
+
+- Pytorch / TorchText
+- RNN network를 사용한 간단한 Sentiment Analysis 예제 ([Github](https://github.com/happy-jihye/Natural-Language-Processing), [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/happy-jihye/Natural-Language-Processing/blob/main/1_Simple_Sentiment_Analysis.ipynb))
+- torchtext의 인터넷 영화 데이터베이스(IMDb dataset)을 Recurrent Neural network(RNN)를 통해 학습시켜 영화의 review가 긍정적인 리뷰인지, 부정적인 리뷰인지를 판단합니다. 
+- 이 튜토리얼에서는 load data, create train/test/validation splits, build a vocabulary, create data iterators, define a model and implement the train/evaluate/test loop 를 배울 수 있습니다. 
+- 머신러닝 파이프라인을 간략하게나마 학습하기 위한 튜토리얼이므로 performance가 좋지 않습니다
+
+
+
+
+## 1. Preparing Data
+
+
+#### 1) Text/Label
+- **[spaCy](https://spacy.io/)** : nlp를 쉽게 할 수 있도록 도와주는 python package로, tokenizaing, parsing, pos tagging 등을 지원합니다.
+- **[Field](https://pytorch.org/text/_modules/torchtext/data/field.html)** 
+
+<div class="prompt input_prompt">
+In&nbsp;[None]:
+</div>
+
+<div class="input_area" markdown="1">
+
+```python
+!apt install python3.7
+```
+
+</div>
+
+<div class="prompt input_prompt">
+In&nbsp;[None]:
+</div>
+
+<div class="input_area" markdown="1">
+
+```python
+!pip install -U torchtext==0.6.0
+```
+
+</div>
+
+<div class="prompt input_prompt">
+In&nbsp;[None]:
+</div>
+
+<div class="input_area" markdown="1">
+
+```python
+%%capture
+!python -m spacy download en
+```
+
+</div>
+
+<div class="prompt input_prompt">
+In&nbsp;[None]:
+</div>
+
+<div class="input_area" markdown="1">
+
+```python
+import torch
+from torchtext import data
+
+TEXT = data.Field(tokenize = 'spacy',
+                  tokenizer_language = 'en')
+LABEL = data.LabelField(dtype = torch.float) # pos -> 1 / neg -> 0
+```
+
+</div>
+
+#### 2) IMDb Dataset
+- 5만개의 영화 리뷰로 구성된 dataset
+- IMDb dataset을 다운로드 받은 후, 이전에 정의한 Field(TEXT, LABEL)를 사용해서 데이터를 처리하였습니다.
+- torchtext.datasets의 [IMDB](https://pytorch.org/text/stable/datasets.html#imdb) 객체로 train data와 test data을 분할하였습니다.
+
+<div class="prompt input_prompt">
+In&nbsp;[None]:
+</div>
+
+<div class="input_area" markdown="1">
+
+```python
+from torchtext import datasets
+
+train_data, test_data = datasets.IMDB.splits(TEXT, LABEL)
+```
+
+</div>
+
+<div class="prompt input_prompt">
+In&nbsp;[None]:
+</div>
+
+<div class="input_area" markdown="1">
+
+```python
+print(f'training examples 수 : {len(train_data)}') #25,000
+print(f'testing examples 수 : {len(test_data)}') #25,000
+
+print(vars(train_data.examples[0]))
+```
+
+</div>
+
+- IMDb dataset은 train/test data만 있고, validation set이 없으므로 train dataset을 split해서 validation dataset을 만들어주었습니다.
+  - 이때, split 함수의 default split_ratio = 0.7 이므로 7:3의 비율로 각각의 데이터들이 나눠집니다. 
+
+<div class="prompt input_prompt">
+In&nbsp;[None]:
+</div>
+
+<div class="input_area" markdown="1">
+
+```python
+import random
+
+SEED = 1234
+
+torch.manual_seed(SEED)
+torch.backends.cudnn.deterministic = True
+
+train_data, valid_data = train_data.split(random_state = random.seed(SEED))
+```
+
+</div>
+
+<div class="prompt input_prompt">
+In&nbsp;[None]:
+</div>
+
+<div class="input_area" markdown="1">
+
+```python
+print(f'training examples 수 : {len(train_data)}')
+print(f'validations examples 수 : {len(valid_data)}')
+print(f'testing examples 수 : {len(test_data)}')
+```
+
+</div>
+
+{:.output_stream}
+
+```
+training examples 수 : 17500
+validations examples 수 : 7500
+testing examples 수 : 25000
+
+```
+
+#### 3) Build Vocabulary
+- one-hot encoding 방식을 사용해서 단어들을 indexing 합니다.
+![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/Simple_RNN_model1.png?raw=1)
+
+- training dataset에 있는 단어들은 10만개가 넘는데, 이 모든 단어들에 대해 indexing을 하면 one-hot vector의 dimension이 10만개가 되므로 연산하기 좋지 않습니다.
+  - 따라서 어휘의 수를 MAX_VOCAB_SIZE로 제한하였고,이 예제에서는 **25,000 words**를 사용하였습니다.
+  - "This film is great and I love it" 라는 문장에서 "love"라는 단어가 vocabulary에 없다면, "This film is great and I $<unk>$ it"로 문장을 학습시키게 됩니다.
+  
+
+<div class="prompt input_prompt">
+In&nbsp;[None]:
+</div>
+
+<div class="input_area" markdown="1">
+
+```python
+MAX_VOCAB_SIZE = 25_000
+
+TEXT.build_vocab(train_data, max_size = MAX_VOCAB_SIZE, min_freq = 5)
+LABEL.build_vocab(train_data)
+```
+
+</div>
+
+- vocab size가 25,000개가 아닌 25,002개인 이유는 $<unk>$ token과 $<pad>$ token이 추가되었기 때문입니다.
+- $<pad>$ token : 문장의 길이를 맞추기 위해 있는 token
+
+<div class="prompt input_prompt">
+In&nbsp;[None]:
+</div>
+
+<div class="input_area" markdown="1">
+
+```python
+print(f"Unique tokens in TEXT vocabulary: {len(TEXT.vocab)}")
+print(f"Unique tokens in LABEL vocabulary: {len(LABEL.vocab)}")
+```
+
+</div>
+
+{:.output_stream}
+
+```
+Unique tokens in TEXT vocabulary: 25002
+Unique tokens in LABEL vocabulary: 2
+
+```
+
+<div class="prompt input_prompt">
+In&nbsp;[None]:
+</div>
+
+<div class="input_area" markdown="1">
+
+```python
+print(f"가장 자주 나오는 단어들 20개 출력 :\n{TEXT.vocab.freqs.most_common(20)}\n")
+
+# itos(int to string)
+print(TEXT.vocab.itos[:5])
+
+# stoi(string to int)
+print(LABEL.vocab.stoi)
+```
+
+</div>
+
+{:.output_stream}
+
+```
+가장 자주 나오는 단어들 20개 출력 :
+[('the', 204412), (',', 192936), ('.', 166941), ('a', 110304), ('and', 109590), ('of', 101675), ('to', 94170), ('is', 76946), ('in', 61671), ('I', 54581), ('it', 53843), ('that', 49317), ('"', 44555), ("'s", 43644), ('this', 42548), ('-', 37200), ('/><br', 35695), ('was', 35052), ('as', 30433), ('with', 30218)]
+
+['<unk>', '<pad>', 'the', ',', '.']
+defaultdict(None, {'neg': 0, 'pos': 1})
+
+```
+
+#### 4) Iterator
+
+- GPU를 사용할 수 있다면 GPU 사용 (colab이라면 런타임 유형을 GPU로 설정하기)
+
+
+<div class="prompt input_prompt">
+In&nbsp;[None]:
+</div>
+
+<div class="input_area" markdown="1">
+
+```python
+print(torch.__version__)
+```
+
+</div>
+
+{:.output_stream}
+
+```
+1.8.0+cu101
+
+```
+
+<div class="prompt input_prompt">
+In&nbsp;[None]:
+</div>
+
+<div class="input_area" markdown="1">
+
+```python
+import torch
+
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+```
+
+</div>
+
+- BucketIterator를 사용하여 interators를 만들기
+
+<div class="prompt input_prompt">
+In&nbsp;[None]:
+</div>
+
+<div class="input_area" markdown="1">
+
+```python
+BATCH_SIZE = 64
+
+train_iterator, valid_iterator, test_iterator = data.BucketIterator.splits(
+    (train_data, valid_data, test_data),
+    batch_size = BATCH_SIZE,
+    device = device
+)
+```
+
+</div>
+
+<div class="prompt input_prompt">
+In&nbsp;[None]:
+</div>
+
+<div class="input_area" markdown="1">
+
+```python
+# iterator 출력
+for i, batch in enumerate(train_iterator):
+    text = batch.text
+    label = batch.label
+
+    print(f"첫 번째 배치의 text 크기: {text.shape}")
+    print(text[3])
+    print(text[3].shape)
+    print(f"첫 번째 배치의 label 크기: {label.shape}")
+    print(label)
+
+    # 첫 번째 batch만 출력
+    break
+```
+
+</div>
+
+{:.output_stream}
+
+```
+첫 번째 배치의 text 크기: torch.Size([1411, 64])
+tensor([   35,    11,  2570,   305,   458,   448,   658,     8, 10220,     3,
+          494,   127,   303,    83,   277,    22,   541,    80,   390,    80,
+         3599,   166,  1302,     4,    80,   178,    65,    24,     7,    16,
+          311,   465,   827,    83,    19,   168,   805,    16,   478,   409,
+            6,    10,     5,    16,   182,    22,     5,  1804,    15,    21,
+          490,     8,   832,    22,   264,    65,   137,   173,     7,  7289,
+          103,     5,    38,    23], device='cuda:0')
+torch.Size([64])
+첫 번째 배치의 label 크기: torch.Size([64])
+tensor([0., 1., 1., 1., 0., 0., 1., 0., 0., 1., 1., 1., 1., 1., 0., 1., 0., 0.,
+        1., 1., 1., 1., 1., 1., 0., 0., 0., 1., 1., 0., 0., 1., 0., 0., 1., 1.,
+        1., 0., 1., 0., 0., 0., 1., 0., 1., 0., 1., 1., 1., 0., 0., 0., 1., 0.,
+        1., 0., 1., 1., 0., 1., 0., 1., 1., 0.], device='cuda:0')
+
+```
+
+## 2. Build Model
+
+
+
+**Embedding layer**
+![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/Simple_RNN_model3.png?raw=1)
+- [Embedding layer](https://wikidocs.net/64779) : input을 dense vector(embedding vector)로 mapping 해주는 일종의 look-up table
+  - Embedding vector는 인공 신경망의 학습과정에서 가중치가 학습되는 것과 같은 방식으로 훈련됩니다. (역전파 과정에서 embedding vector값이 학습)
+  - 이 예제에서는 input sentence를 one-hot encoding하는 부분을 찾아보기 어려운데, 이는 pytorch의 성질 때문입니다. pytorch에서는 단어를 정수 index로 바꾸고 one-hot vector로 한번 더 바꾸고 나서 embedding layer의 입력으로 사용하는 것이 아니라, 단어를 정수 index로만 바꾼 채로 embedding layer에 입력합니다. 
+  - [Embedding](https://pytorch.org/docs/stable/generated/torch.nn.Embedding.html)
+
+
+
+
+**RNN Layer**
+- 이 model은 RNN layer를 사용합니다.
+- RNN은 문장($X=\{x_1, ..., x_T\}$) 속 단어들을 한번에 하나씩 계산하여 각 단어당 *hidden state*(h)를 구합니다.
+$$h_t = \text{RNN}(x_t, h_{t-1})$$
+- 이때 각 단어당 hidden state를 구하기 위해서는 이전 hidden state $h_{t-1}$와 단어의 정보를 가지고 있는 dense vector가 필요합니다.
+
+  ![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/Simple_RNN_model2.png?raw=1)
+
+- final hidden state인 $h_T$를 linear layer에 통과시킴으로써 prediction 결과를 얻을 수 있습니다. ($\hat{y} = f(h_T)$)
+
+- 이 예제에서는 부정적인 감정을 가지면 0을 예측하도록 RNN을 학습시켰습니다.
+  ![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/Simple_RNN_model4.png?raw=1)
+
+<div class="prompt input_prompt">
+In&nbsp;[None]:
+</div>
+
+<div class="input_area" markdown="1">
+
+```python
+import torch.nn as nn
+
+class RNN(nn.Module):
+  def __init__(self, input_dim, embedding_dim, hidden_dim, output_dim):
+    super().__init__()
+
+    self.embedding = nn.Embedding(input_dim, embedding_dim)
+    self.rnn = nn.RNN(embedding_dim, hidden_dim)
+    self.fc = nn.Linear(hidden_dim, output_dim)
+  
+  def forward(self, text):
+    
+    # text = [sentence length, batch size]
+
+    embedded = self.embedding(text)
+
+    # embedded = [sentence length, batch size, embedding dim]
+
+    output, hidden = self.rnn(embedded)
+
+    # output = [sentence length, batch size, hidden dim]
+    # hidden = [1, batch size, hidden dim]
+
+    return self.fc(hidden.squeeze(0))
+```
+
+</div>
+
+- **Input dim** : one-hot vector의 dimension과 같음(vocabulary size)
+- **Embedding dim** : 보통 50-250 dimensions
+- **Hidden dim** :보통 100-500 dim
+- **Output dim** : class의 수, 위 예제에서는 0아니면 1이므로 1-dim
+
+<div class="prompt input_prompt">
+In&nbsp;[None]:
+</div>
+
+<div class="input_area" markdown="1">
+
+```python
+INPUT_DIM = len(TEXT.vocab) #25,002
+EMBEDDING_DIM = 100
+HIDDEN_DIM = 256
+OUTPUT_DIM = 1
+
+model = RNN(INPUT_DIM, EMBEDDING_DIM, HIDDEN_DIM, OUTPUT_DIM)
+```
+
+</div>
+
+<div class="prompt input_prompt">
+In&nbsp;[None]:
+</div>
+
+<div class="input_area" markdown="1">
+
+```python
+def count_parameters(model):
+    return sum(p.numel() for p in model.parameters() if p.requires_grad)
+
+print(f'The model has {count_parameters(model):,} trainable parameters')
+```
+
+</div>
+
+{:.output_stream}
+
+```
+The model has 2,592,105 trainable parameters
+
+```
+
+## 3. Train the Model
+
+#### optimizer
+- **stochastic gradient descent (SGD)** 를 이용해서 model을 update하였습니다.
+
+<div class="prompt input_prompt">
+In&nbsp;[None]:
+</div>
+
+<div class="input_area" markdown="1">
+
+```python
+import torch.optim as optim
+
+optimizer =optim.SGD(model.parameters(), lr = 1e-3)
+```
+
+</div>
+
+#### loss function
+- loss function 으로는 **binary cross entropy with logits**을 사용하였습니다.
+- 0아니면 1의 label을 예측해야하므로 **sigmoid**나 **logit** function을 사용하였습니다.
+- [BCEWithLogitsLoss](https://pytorch.org/docs/stable/generated/torch.nn.BCEWithLogitsLoss.html)는 sigmoid와 the binary cross entropy steps를 모두 수행합니다.
+
+<div class="prompt input_prompt">
+In&nbsp;[None]:
+</div>
+
+<div class="input_area" markdown="1">
+
+```python
+criterion = nn.BCEWithLogitsLoss()
+```
+
+</div>
+
+<div class="prompt input_prompt">
+In&nbsp;[None]:
+</div>
+
+<div class="input_area" markdown="1">
+
+```python
+# GPU
+model = model.to(device)
+criterion = criterion.to(device)
+```
+
+</div>
+
+**accuracy function**
+- sigmoid layer를 지나면 0과 1사이의 값이 나오는데, 우리가 필요한 값은 0,1의 label이므로 [nn.round](https://pytorch.org/docs/stable/generated/torch.round.html)를 이용하여 반올림하였습니다.
+- prediction 값과 label 값이 같은 것들이 얼마나 있는지를 계산하여 정확도를 측정하였습니다.
+
+<div class="prompt input_prompt">
+In&nbsp;[None]:
+</div>
+
+<div class="input_area" markdown="1">
+
+```python
+def binary_accuracy(preds, y):
+
+  rounded_preds = torch.round(torch.sigmoid(preds))
+  # rounded_preds : [batch size]
+  # y : batch.label
+  correct = (rounded_preds == y).float()
+  acc = correct.sum() / len(correct)
+  return acc
+```
+
+</div>
+
+### 1) Train
+
+<div class="prompt input_prompt">
+In&nbsp;[None]:
+</div>
+
+<div class="input_area" markdown="1">
+
+```python
+def train(model, iterator, optimizer, criterion):
+
+  epoch_loss = 0
+  epoch_acc = 0
+
+  # model을 "training mode"로 -> dropout이나 batch normalization이 가능해짐
+  # 이 모델에서는 이를 사용하지는 않음
+  model.train()
+
+  for batch in iterator:
+
+    # 모든 batch마다 gradient를 0으로 초기화
+    optimizer.zero_grad()
+
+    # batch of sentences인 batch.text를 model에 입력 (저절로 forward가 됨)
+    # predictions의 크기가 [batch size, 1]이므로 squeeze해서 [batch size]로 size를 변경해줘야 함 
+    predictions = model(batch.text).squeeze(1)
+
+    # prediction결과와 batch.label을 비교하여 loss값 계산 
+    loss = criterion(predictions, batch.label)
+
+    # 정확도 계산
+    acc = binary_accuracy(predictions, batch.label)
+
+    # backward()를 사용하여 역전파 수행
+    loss.backward()
+
+    # 최적화 알고리즘을 사용하여 parameter를 update
+    optimizer.step()
+
+    epoch_loss += loss.item()
+    epoch_acc += acc.item()
+
+  return epoch_loss / len(iterator), epoch_acc / len(iterator)
+```
+
+</div>
+
+### 2) Evaluate
+
+<div class="prompt input_prompt">
+In&nbsp;[None]:
+</div>
+
+<div class="input_area" markdown="1">
+
+```python
+def evaluate(model, iterator, criterion):
+  epoch_loss = 0
+  epoch_acc = 0
+
+  # "evaluation mode" : dropout이나 batch nomalizaation을 끔
+  model.eval()
+
+  # pytorch에서 gradient가 계산되지 않도록 해서 memory를 적게 쓰고 computation 속도를 높임
+  with torch.no_grad():
+    
+    for batch in iterator :
+      predictions = model(batch.text).squeeze(1)
+      
+      loss = criterion(predictions, batch.label)
+      acc = binary_accuracy(predictions, batch.label)
+
+      epoch_loss += loss.item()
+      epoch_acc += acc.item()
+
+  return epoch_loss / len(iterator), epoch_acc / len(iterator)
+```
+
+</div>
+
+- epoch 시간을 계산하기 위한 함수
+
+<div class="prompt input_prompt">
+In&nbsp;[None]:
+</div>
+
+<div class="input_area" markdown="1">
+
+```python
+import time
+
+def epoch_time(start_time, end_time):
+  elapsed_time = end_time - start_time
+  elapsed_mins = int(elapsed_time / 60)
+  elapsed_secs = int(elapsed_time - (elapsed_mins * 60))
+  return elapsed_mins, elapsed_secs
+```
+
+</div>
+
+### Train the model through multiple epochs
+
+<div class="prompt input_prompt">
+In&nbsp;[None]:
+</div>
+
+<div class="input_area" markdown="1">
+
+```python
+N_EPOCHS = 5
+
+best_valid_loss = float('inf')
+
+for epoch in range(N_EPOCHS):
+
+    start_time = time.time()
+    
+    train_loss, train_acc = train(model, train_iterator, optimizer, criterion)
+    valid_loss, valid_acc = evaluate(model, valid_iterator, criterion)
+    
+    end_time = time.time()
+
+    epoch_mins, epoch_secs = epoch_time(start_time, end_time)
+    
+    if valid_loss < best_valid_loss:
+        best_valid_loss = valid_loss
+        torch.save(model.state_dict(), 'tut1-model.pt')
+    
+    print(f'Epoch: {epoch+1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
+    print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc*100:.2f}%')
+    print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc*100:.2f}%')
+```
+
+</div>
+
+{:.output_stream}
+
+```
+Epoch: 01 | Epoch Time: 0m 18s
+	Train Loss: 0.694 | Train Acc: 49.82%
+	 Val. Loss: 0.695 |  Val. Acc: 50.19%
+Epoch: 02 | Epoch Time: 0m 18s
+	Train Loss: 0.693 | Train Acc: 50.41%
+	 Val. Loss: 0.696 |  Val. Acc: 50.51%
+Epoch: 03 | Epoch Time: 0m 18s
+	Train Loss: 0.693 | Train Acc: 50.11%
+	 Val. Loss: 0.695 |  Val. Acc: 50.54%
+Epoch: 04 | Epoch Time: 0m 18s
+	Train Loss: 0.693 | Train Acc: 50.22%
+	 Val. Loss: 0.695 |  Val. Acc: 50.19%
+Epoch: 05 | Epoch Time: 0m 18s
+	Train Loss: 0.693 | Train Acc: 49.58%
+	 Val. Loss: 0.695 |  Val. Acc: 50.05%
+
+```
+
+<div class="prompt input_prompt">
+In&nbsp;[None]:
+</div>
+
+<div class="input_area" markdown="1">
+
+```python
+model.load_state_dict(torch.load('tut1-model.pt'))
+
+test_loss, test_acc = evaluate(model, test_iterator, criterion)
+
+print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%')
+
+```
+
+</div>
+
+{:.output_stream}
+
+```
+Test Loss: 0.710 | Test Acc: 46.36%
+
+```
