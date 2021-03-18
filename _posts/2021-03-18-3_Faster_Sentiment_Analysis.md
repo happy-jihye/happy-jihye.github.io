@@ -214,16 +214,16 @@ train_iterator, valid_iterator, test_iterator = data.BucketIterator.splits(
 
 - 이번 tutorial에서는 RNN-model을 사용하지 않고 embedding layer와 linear layer, 2개의 layer만을 사용하기 때문에 parameter가 적습니다.
 
-![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/Faster_Sentiment_Analysis1.png?raw=1)
+![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/Faster_Sentiment_Analysis1.png?raw=1){: width="80%", height="80%"}{: .center}
 
 - 위 그림에서 파란색에 해당하는 embedding layer에서 각 단어들을 embedding한 후, 분홍색 부분에서 모든 단어의 임베딩 값의 평균을 취합니다. 이후 계산한 평균값을 은색의 linear layer에 전달하면 됩니다.
 - 이때 평균은 avg_pool2d 함수를 이용하여 구할 수 있습니다. 문장들 자체는 1차원이지만, word embedding은 2차원의 그리드로 생각할 수 있으므로 avg_pool2d함수를 사용하여 단어의 평균값을 구할 수 있습니다.
 
-![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/Faster_Sentiment_Analysis2.png?raw=1)
+![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/Faster_Sentiment_Analysis2.png?raw=1){: width="80%", height="80%"}{: .center}
 
 - **avg_pool2d** 함수는 embedded.shape[1] size의 filter를 사용합니다.
 
-![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/Faster_Sentiment_Analysis3.png?raw=1)
+![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/Faster_Sentiment_Analysis3.png?raw=1){: width="80%", height="80%"}{: .center}
 
 - filter를 오른쪽으로 한칸씩 이동시켜가면서 평균을 계산할 수 있습니다.
 - 위의 예제에서의 element가 [4x5]의 tensor였다면, 평균을 구하고 난 후에는 [1x5]의 tensor를 얻을 수 있습니다.
