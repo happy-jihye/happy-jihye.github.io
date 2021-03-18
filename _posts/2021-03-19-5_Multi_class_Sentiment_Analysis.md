@@ -1,14 +1,27 @@
 ---
-title: "5_Multi_class_Sentiment_Analysis"
-search: true
-categories:
- - Notebook
-tags:
- - Need_modify
+date: 2021-03-18
+title: "[nlp] 5. Convolutional neural network을 이용한 다중 클래스 분류 모델(pytorch)"
+
+excerpt: "컴퓨터 비전 분야에서 자주 사용되는 네트워크인 Convolutional neural network(CNN)를 감정 분석 모델에 적용하였습니다. "
+
+categories: 
+  - nlp
+tags: 
+  - deeplearning
+  - ai
+  - nlp
+  - pytorch
+  - CNN
 layout: jupyter
-classes: wide
+search: true
+
+# 목차
+toc: true  
+toc_sticky: true 
 ---
-# 5 - Multi-class Sentiment Analysis
+
+
+**5 - Multi-class Sentiment Analysis**
 
 - 이전까지의 튜토리얼에서는 positive(1)과 negative(0), 2개의 클래스만이 있는 dataset에 대해서 학습을 했습니다. 이 경우에는 모든 출력이 0과 1사이의 값으로 출력되었으며, 0.5이상에 대해서는 positive로, 0.5미만에 대해서는 negative로 학습을 하였습니다.
 - 이번 튜토리얼에서는 여러 개의 클래스를 가진 데이터 세트에 대해 분류하는 법을 학습할 예정입니다.(6개의 클래스를 가진 데이터셋으로 모델을 훈련)

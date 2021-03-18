@@ -1,6 +1,6 @@
 ---
 date: 2021-03-13
-title: "[nlp] 2. 다양한 RNN architecture(LSTM, Bidirectional RNN, multilayer RNN 등)을 이용한 감정 분석 모델(Update-Ver)"
+title: "[nlp] 2. 다양한 RNN architecture(LSTM, Bidirectional RNN, multilayer RNN 등)을 이용한 감정 분석 모델"
 
 excerpt: "1에서 구현한 workflow를 변형하여 정확도를 높인 모델입니다.
 1과 마찬가지로 IMDB dataset을 이용하였습니다.

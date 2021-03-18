@@ -1,6 +1,6 @@
 ---
 date: 2021-03-16
-title: "[nlp] 3. FastText model을 이용한 감정 분석 모델(Speed-Ver/pytorch)"
+title: "[nlp] 3. FastText model을 이용한 감정 분석 모델(pytorch)"
 
 excerpt: "Bag of Tricks for Efficient Text Classification 논문의 FastText 모델을 이용하여 감정 분석을 하였습니다."
 
