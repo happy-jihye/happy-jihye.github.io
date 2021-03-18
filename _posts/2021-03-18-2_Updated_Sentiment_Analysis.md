@@ -15,7 +15,6 @@ tags:
   - nlp
   - pytorch
 layout: jupyter
-classes: wide
 search: true
 
 # 목차
@@ -47,7 +46,7 @@ toc_sticky: true
 
 - 위의 방식을 사용함으로써 정확도를 ~84% 까지 향상시킬 수 있습니다.
 
-
+s
 ## 1. Preparing Data
 
 

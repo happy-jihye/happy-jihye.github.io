@@ -15,8 +15,8 @@ tags:
   - nlp
   - pytorch
 layout: jupyter
-classes: wide
 search: true
+
 # 목차
 toc: true  
 toc_sticky: true 
