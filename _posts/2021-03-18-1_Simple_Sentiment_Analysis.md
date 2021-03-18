@@ -360,6 +360,7 @@ tensor([0., 1., 1., 1., 0., 0., 1., 0., 0., 1., 1., 1., 1., 1., 0., 1., 0., 0.,
 
 
 **Embedding layer**
+
 ![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/Simple_RNN_model3.png?raw=1)
 - [Embedding layer](https://wikidocs.net/64779) : input을 dense vector(embedding vector)로 mapping 해주는 일종의 look-up table
   - Embedding vector는 인공 신경망의 학습과정에서 가중치가 학습되는 것과 같은 방식으로 훈련됩니다. (역전파 과정에서 embedding vector값이 학습)
@@ -380,6 +381,7 @@ $$h_t = \text{RNN}(x_t, h_{t-1})$$
 - final hidden state인 $h_T$를 linear layer에 통과시킴으로써 prediction 결과를 얻을 수 있습니다. ($\hat{y} = f(h_T)$)
 
 - 이 예제에서는 부정적인 감정을 가지면 0을 예측하도록 RNN을 학습시켰습니다.
+
   ![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/Simple_RNN_model4.png?raw=1)
 
 <div class="prompt input_prompt">
