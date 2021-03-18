@@ -23,15 +23,18 @@ toc_sticky: true
 
 **5 - Multi-class Sentiment Analysis**
 
+> 2021/03/18 Happy-jihye
+> 
+> **Reference** : [pytorch-sentiment-analysis/5 - Multi-class Sentiment Analysis](https://github.com/bentrevett/pytorch-sentiment-analysis/blob/master/5%20-%20Multi-class%20Sentiment%20Analysis.ipynb)
+
+- ([Github](https://github.com/happy-jihye/Natural-Language-Processing), [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/happy-jihye/Natural-Language-Processing/blob/main/5_Multi_class_Sentiment_Analysis.ipynb))
 - 이전까지의 튜토리얼에서는 positive(1)과 negative(0), 2개의 클래스만이 있는 dataset에 대해서 학습을 했습니다. 이 경우에는 모든 출력이 0과 1사이의 값으로 출력되었으며, 0.5이상에 대해서는 positive로, 0.5미만에 대해서는 negative로 분류했습니다.
 - 이번 튜토리얼에서는 여러 개의 클래스를 가진 데이터 세트에 대해 분류하는 법을 학습할 예정입니다.
   (6개의 클래스를 가진 데이터셋으로 모델을 훈련)
 
 
 ---
-> 2021/03/18 Happy-jihye
-> 
-> **Reference** : [pytorch-sentiment-analysis/5 - Multi-class Sentiment Analysis](https://github.com/bentrevett/pytorch-sentiment-analysis/blob/master/5%20-%20Multi-class%20Sentiment%20Analysis.ipynb)
+
 
 
 ## 1. Preparing Data
