@@ -1,5 +1,5 @@
 ---
-date: 2021-03-16
+date: 2021-03-18
 title: "[nlp] 4. Convolutional neural network을 이용한 문장 분류 모델 (감정 분석)"
 
 excerpt: "컴퓨터 비전 분야에서 자주 사용되는 네트워크인 Convolutional neural network(CNN)를 감정 분석 모델에 적용하였습니다. "
