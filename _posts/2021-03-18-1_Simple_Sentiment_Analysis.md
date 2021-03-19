@@ -21,7 +21,7 @@ toc_sticky: true
 ---
 
 
-# 1 - [Simple Sentiment Analysis](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/1_Simple_Sentiment_Analysis.ipynb)
+**1 - [Simple Sentiment Analysis](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/1_Simple_Sentiment_Analysis.ipynb)**
 
 
 > - 2021/03/12 Happy-jihye

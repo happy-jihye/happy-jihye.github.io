@@ -14,7 +14,7 @@ toc: true
 toc_sticky: true 
 ---
 
-# Snu Remote Test Supervision (Ver.2)
+**Snu Remote Test Supervision (Ver.2)**
 
 > #### 원격 시험 감독 - 감독관용 뷰어
 >

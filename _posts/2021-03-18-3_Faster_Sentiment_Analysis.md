@@ -20,8 +20,7 @@ toc_sticky: true
 ---
 
 
-# 3 - [Faster Sentiment Analysis](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/3_Faster_Sentiment_Analysis.ipynb)
-
+**3 - [Faster Sentiment Analysis](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/3_Faster_Sentiment_Analysis.ipynb)**
 
 > 2021/03/16 Happy-jihye
 > 

@@ -22,8 +22,7 @@ toc: true
 toc_sticky: true 
 ---
 
-# 2 - [Updated Sentiment Analysis](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/2_Updated_Sentiment_Analysis.ipynb)
-
+**2 - [Updated Sentiment Analysis](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/2_Updated_Sentiment_Analysis.ipynb)**
 
 > 2021/03/13 Happy-jihye
 > 
