@@ -13,9 +13,9 @@ Pytorch를 활용하여 자연어 처리에 대해 공부한 글입니다.
 [GitHub](https://github.com/happy-jihye/Natural-Language-Processing)
 
 
-### Tutorials
+### Posts
 
-**감정 분석(Sentiment Analysis)**
+**감정 분석 모델(Sentiment Analysis)**
 
 - 1 - [RNN을 이용한 간단한 감정 분석 모델](https://happy-jihye.github.io/nlp/1_Simple_Sentiment_Analysis/) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/happy-jihye/Natural-Language-Processing/blob/main/1_Simple_Sentiment_Analysis.ipynb)
 
