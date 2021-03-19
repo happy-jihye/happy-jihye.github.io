@@ -71,7 +71,7 @@ use_math: true
 ```
 
 ### [Packed padded sequences](https://simonjisu.github.io/nlp/2018/07/05/packedsequence.html)
-- NLP에서는 매 batch마다 고정된 문장의 길이로 만들어주기 위해서 $<pad>$를 넣어주는데, 이 때문에 연산량이 늘어납니다.
+- NLP에서는 매 batch마다 고정된 문장의 길이로 만들어주기 위해서 `<pad>`를 넣어주는데, 이 때문에 연산량이 늘어납니다.
 - 따라서 hidden layer에서 매 time step마다 batch_sizes를 참고해서 계산을 하도록 하여 연산량을 줄입니다.
 ![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/Updated_Sentiment_Analysis1.gif?raw=1)
 - 기존의 RNN이라면 (batch_size X sequence_length X hidden_layer)만큼 연산을 해야하지만, packed padded sequences의 방법을 사용하면 (token_length X hidden_layer)만큼만 계산해주면 됩니다. 
@@ -134,7 +134,7 @@ testing examples 수 : 25000
 
 - training dataset에 있는 단어들은 10만개가 넘는데, 이 모든 단어들에 대해 indexing을 하면 one-hot vector의 dimension이 10만개가 되므로 연산하기 좋지 않습니다.
   - 따라서 어휘의 수를 MAX_VOCAB_SIZE로 제한하였고,이 예제에서는 **25,000 words**를 사용하였습니다.
-  - "This film is great and I love it" 라는 문장에서 "love"라는 단어가 vocabulary에 없다면, "This film is great and I $<unk>$ it"로 문장을 학습시키게 됩니다.
+  - "This film is great and I love it" 라는 문장에서 "love"라는 단어가 vocabulary에 없다면, "This film is great and I `<unk>` it"로 문장을 학습시키게 됩니다.
 - **[Pre-Trained Word Embedding](https://wikidocs.net/33793)** : training data가 적다면 직접 embedding vector를 훈련시켜 embedding vector를 만들어내도 되지만, 어렵다면 이미 학습되어져있는 embedding vector를 사용함으로써 성능을 향상시킬 수 있습니다.
   - GloVe, Word2Vec 등 다양한 embedding vector가 있지만, 이 예제에서는 "glove.6B.100d" vectors를 이용하였습니다.
   - **"glove.6B.100d"** vectors : "glove"는 vector를 계산하는데 사용되는 알고리즘이며, 6B는 이 vector가 60억 token에 대해 훈련되었음알 나타냅니다. 또한, 100d는 이 embedding vector가 100차원임을 나타냅니다.
@@ -151,8 +151,8 @@ TEXT.build_vocab(train_data,
 LABEL.build_vocab(train_data)
 ```
 
-- vocab size가 25,000개가 아닌 25,002개인 이유는 $<unk>$ token과 $<pad>$ token이 추가되었기 때문입니다.
-- $<pad>$ token : 문장의 길이를 맞추기 위해 있는 token
+- vocab size가 25,000개가 아닌 25,002개인 이유는 `<unk>` token과 `<pad>` token이 추가되었기 때문입니다.
+- `<pad>` token : 문장의 길이를 맞추기 위해 있는 token
 
 
 ```python
@@ -232,7 +232,9 @@ torch.Size([64])
 - Hidden layer가 많은 perceptron에서는 hidden layer를 많이 거칠수록 전달되는 오차가 크게 줄어들어 학습이 되지 않은 현상이 발생하는데, 이를 **[vanishing gradient problem](http://computing.or.kr/14804/vanishing-gradient-problem%EA%B8%B0%EC%9A%B8%EA%B8%B0-%EC%86%8C%EB%A9%B8-%EB%AC%B8%EC%A0%9C/)**라고 합니다.
 - Standard RNNs에서는 vanishing gradient problem으로 인해 학습이 잘 안되는 경우가 많기 때문에 대부분의 경우에서 LSTM을 사용한 RNN architecture가 Standard RNNs보다 성능이 좋습니다.
 - LSTM은 기억하고 잊는 부분을 수학적으로 구현한 모델로, 과거의 정보들을 보다 더 잘 기억하도록 하여 "long-term dependencies"를 해결하였습니다.  ([설명](http://colah.github.io/posts/2015-08-Understanding-LSTMs/))
-$$(h_t, c_t) = \text{LSTM}(x_t, h_t, c_t)$$
+
+$(h_t, c_t) = \text{LSTM}(x_t, h_t, c_t)$
+
 ![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/Updated_Sentiment_Analysis2.png?raw=1){: width="80%", height="80%"}{: .center}
 
 ### **Bidirectional RNN**
@@ -253,7 +255,7 @@ $$(h_t, c_t) = \text{LSTM}(x_t, h_t, c_t)$$
 ![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/Updated_Sentiment_Analysis6.png?raw=1){: width="80%", height="80%"}{: .center}
 
 ### **Implementation Details**
-- $<pad>$ token은 문장의 감정과는 무관하므로 padding token에 대해서는 embedding을 학습시키지 않습니다. 따라서 이를 위해 nn.Embedding에 **padding_idx**를 전달하였고, 이로써 pad token은 계속해서 embedding이 초기화된 상태를 유지할 수 있습니다.
+- `<pad>` token은 문장의 감정과는 무관하므로 padding token에 대해서는 embedding을 학습시키지 않습니다. 따라서 이를 위해 nn.Embedding에 **padding_idx**를 전달하였고, 이로써 pad token은 계속해서 embedding이 초기화된 상태를 유지할 수 있습니다.
 
 
 ```python
