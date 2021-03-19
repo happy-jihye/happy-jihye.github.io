@@ -16,7 +16,9 @@ search: true
 
 # 목차
 toc: true  
-toc_sticky: true 
+toc_sticky: true
+
+use_math: true
 ---
 
 

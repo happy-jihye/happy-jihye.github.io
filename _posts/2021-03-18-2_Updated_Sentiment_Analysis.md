@@ -20,6 +20,8 @@ search: true
 # 목차
 toc: true  
 toc_sticky: true 
+
+use_math: true
 ---
 
 **2 - [Updated Sentiment Analysis](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/2_Updated_Sentiment_Analysis.ipynb)**

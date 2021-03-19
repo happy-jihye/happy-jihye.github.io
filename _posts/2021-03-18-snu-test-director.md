@@ -12,6 +12,8 @@ tags:
 # 목차
 toc: true  
 toc_sticky: true 
+
+use_math: true
 ---
 
 **Snu Remote Test Supervision (Ver.2)**
