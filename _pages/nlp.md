@@ -11,8 +11,6 @@ layout: single
 Pytorch를 활용하여 자연어 처리에 대해 공부한 글입니다. 
 궁금한 점이 있다면 댓글을 남겨주세요 :)
 
-[GitHub](https://github.com/happy-jihye/Natural-Language-Processing)
-
 
 ### Posts 
 
