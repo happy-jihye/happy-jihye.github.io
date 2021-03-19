@@ -140,7 +140,7 @@ testing examples 수 : 25000
 
 - training dataset에 있는 단어들은 10만개가 넘는데, 이 모든 단어들에 대해 indexing을 하면 one-hot vector의 dimension이 10만개가 되므로 연산하기 좋지 않습니다.
   - 따라서 어휘의 수를 MAX_VOCAB_SIZE로 제한하였고,이 예제에서는 **25,000 words**를 사용하였습니다.
-  - "This film is great and I love it" 라는 문장에서 "love"라는 단어가 vocabulary에 없다면, "This film is great and I <unk> it"로 문장을 학습시키게 됩니다.
+  - "This film is great and I love it" 라는 문장에서 "love"라는 단어가 vocabulary에 없다면, "This film is great and I `<unk>` it"로 문장을 학습시키게 됩니다.
   
 
 
@@ -154,8 +154,8 @@ LABEL.build_vocab(train_data)
 
 
 
-- vocab size가 25,000개가 아닌 25,002개인 이유는 <unk> token과 <pad> token이 추가되었기 때문입니다.
-- <pad> token : 문장의 길이를 맞추기 위해 있는 token
+- vocab size가 25,000개가 아닌 25,002개인 이유는 `<unk>` token과 `<pad>` token이 추가되었기 때문입니다.
+- `<pad>` token : 문장의 길이를 맞추기 위해 있는 token
 
 
 
