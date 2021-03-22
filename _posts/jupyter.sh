@@ -4,6 +4,8 @@
 # https://chukycheese.github.io/translation/github/jupyter%20notebook/post-jupyter-notebooks-to-your-github-blog/
 # https://zzsza.github.io/development/2018/08/15/jupyter-notebook-in-jekyll/
 
+export PATH=~/anaconda3/bin:$PATH
+
 FILE_NAME=$1
 FILE_BASE=`basename $FILE_NAME .ipynb`
 
