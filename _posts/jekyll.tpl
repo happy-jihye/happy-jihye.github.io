@@ -3,13 +3,18 @@
 {%- block header -%}
 ---
 title: "{{resources['metadata']['name']}}"
-search: true
+
 categories:
  - Notebook
 tags:
  - Need_modify
 layout: jupyter
 classes: wide
+search: true
+
+# 목차
+toc: true  
+toc_sticky: true 
 ---
 {%- endblock header -%}
 
