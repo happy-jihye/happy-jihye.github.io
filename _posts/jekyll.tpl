@@ -10,7 +10,6 @@ categories:
 tags:
  - Need_modify
 layout: jupyter
-classes: wide
 search: true
 
 # 목차
