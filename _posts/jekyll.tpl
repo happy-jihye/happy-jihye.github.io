@@ -15,6 +15,9 @@ search: true
 # 목차
 toc: true  
 toc_sticky: true 
+
+# 수식
+use_math: true
 ---
 {%- endblock header -%}
 
