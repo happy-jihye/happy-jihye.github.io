@@ -3,6 +3,7 @@
 {%- block header -%}
 ---
 title: "{{resources['metadata']['name']}}"
+excerpt: " "
 
 categories:
  - Notebook
