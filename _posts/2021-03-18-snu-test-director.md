@@ -24,7 +24,7 @@ use_math: true
 
 - [이 링크](https://drive.google.com/open?id=162xHLRyLbKLKKhLRr95UWrWoWnFIulFJ&authuser=100jihye%40snu.ac.kr&usp=drive_fs)를 통해 실행파일을 다운받으실 수 있습니다.
 - [version 1](https://github.com/happy-jihye/Snu-Remote-Test-Supervision-RTMP-HLS-ver1)
-- [IOS mobile client](https://github.com/happy-jihye/ios-rtmp-client) : 실시간 영상을 아이폰으로 송출해주는 어플리케이션을 개발하였습니다. 
+- [IOS mobile client](https://github.com/happy-jihye/snu-ios-rtmp-client) : 실시간 영상을 아이폰으로 송출해주는 어플리케이션을 개발하였습니다. 
 - [RestAPI](https://github.com/younghoSNU/restapi) : AWS를 이용하여 구현한 [Rest API](https://www.google.com/search?q=rest+api+%EB%9E%80&oq=rest+ap&aqs=chrome.1.0i433j0i131i433j0i20i263j69i57j0l3j69i60.3320j0j4&sourceid=chrome&ie=UTF-8)입니다.
 
 
