@@ -2,10 +2,14 @@
 title: "1_Sequence_to_Sequence_Learning_with_Neural_Networks"
 excerpt: " "
 
-categories:
- - Notebook
-tags:
- - Need_modify
+categories: 
+  - nlp
+tags: 
+  - deeplearning
+  - ai
+  - nlp
+  - pytorch
+  - seq2seq
 layout: jupyter
 search: true
 
