@@ -41,7 +41,7 @@ use_math: true
 - 가장 일반적인 Seq2Seq 모델은 `encoder-decoder` 모델입니다. input 문장을 RNN으로 single vector로 인코딩한 후, 이 single vector를 다시 RNN 네트워크를 통해 디코딩합니다.
 - single vector는 **context vector**라고도 불리며, 전체 입력 문장의 추상적인 표현으로 생각할 수 있습니다.
 
-![](/images/seq2seq1.png)
+![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/seq2seq1.png?raw=1)
 
 **Encoder**
 - 위의 이미지는 대표적인 번역 예제로, "guten morgen"이라는 source 문장은 노란색의 `embedding layer`를 걸쳐  초록색의 `encoder`로 들어갑니다. 
@@ -340,7 +340,7 @@ torch.Size([128])
 - Encoder는 2개의 LSTM layer로 구성되어 있습니다. (논문에서는 4개의 layer를 사용했지만, 이 튜토리얼에서는 학습시간을 줄이기 위해 2개의 layer를 사용했습니다.)
 - RNN에서는 첫번째 layer의 hidden state를 $h_t^1 = \text{EncoderRNN}^1(e(x_t), h_{t-1}^1)$로, 두번째 layer의 hidden state를 $h_t^2 = \text{EncoderRNN}^2(h_t^1, h_{t-1}^2)$로 표현했다면, LSTM은 `cell state`인  $c_t$도 입력으로 들어갑니다.
 
-![](/images/seq2seq2.png)
+![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/seq2seq2.png?raw=1)
 
 - 따라서 LSTM에서의 multi-layer equation을 표현하면 다음과 같이 표현할 수 있습니다.
 
@@ -384,7 +384,7 @@ class Encoder(nn.Module):
 
 ### Decoder
 - decoder도 encoder와 마찬가지로 2개의 LSTM layer를 사용했습니다. (논문에서는 4개의 layer를 사용했습니다.)
-  ![](/images/seq2seq3.png)
+  ![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/seq2seq3.png?raw=1)
 
 - 다음은 Decoder의 layer를 수식으로 나타낸 식입니다.
 
@@ -456,15 +456,15 @@ seq2seq model을 정리하면 다음과 같습니다.
 - encoder를 학습시켜 고정된 크기의 context vector를 출력한다.
 - context vector를 decoder에 넣어 예측된 target(output) sentence를 생성한다.
 
-![](/images/seq2seq4.png)
+![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/seq2seq4.png?raw=1)
 
 - 이번 튜토리얼에서는 Encoder와 Decoder에서의 layer의 수와 hidden/cell dimensions을 동일하게 맞춰주었습니다. 이는 항상 그래야하는 하는 것은 아니지만, layer의 개수나 차원을 다르게 해준다면 추가적으로 생각해줄 문제들이 많아질 것입니다. 
   - ex) 인코드의 레이어는 2개, 디코더의 레이어는 1개라면 context vector의 평균을 디코더에 넘겨줘야하나?
 - target문장과 output문장의 tensor는 다음과 같습니다.
-  ![](/images/seq2seq5.png)
+  ![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/seq2seq5.png?raw=1)
 
 **Teacher Forcing**
-![](/images/seq2seq6.png)
+![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/seq2seq6.png?raw=1)
 - teacher forcing은 다음 입력으로 디코더의 예측을 사용하는 대신 실제 목표 출력을 다음 입력으로 사용하는 컨셉입니다. ([참고](https://tutorials.pytorch.kr/intermediate/seq2seq_translation_tutorial.html)) 즉, `target word`(Ground Truth)를 디코더의 다음 입력으로 넣어줌으로써 학습시 더 정확한 예측을 가능하게 합니다.
 - [참고2](https://blog.naver.com/PostView.nhn?blogId=sooftware&logNo=221790750668&categoryNo=0&parentCategoryNo=0&viewDate=&currentPage=1&postListTopCurrentPage=1&from=postView)
 
