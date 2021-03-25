@@ -1,5 +1,5 @@
 ---
-title: "1_Sequence_to_Sequence_Learning_with_Neural_Networks"
+title: "[nlp] Seq2Seq Model - Sequence to Sequence Learning with Neural Networks 논문 리뷰 및 코드 실습"
 excerpt: " "
 
 categories: 
@@ -20,7 +20,8 @@ toc_sticky: true
 # 수식
 use_math: true
 ---
-# 1 - Sequence to Sequence Learning with Neural Networks
+
+**1 - Sequence to Sequence Learning with Neural Networks**
 
 - Seq2Seq 시리즈에서는 Pytorch와 torch text를 이용하여 하나의 `seq`를 다른 `seq`로 바꾸는 머신 러닝 모델을 구축할 예정입니다. 
 - tutorial-1에서는 `독일어`를 `영어`로 번역하는 translation model을 학습합니다. Seq2Seq model 모델은 번역 외에도 내용 요약(Text Summarization), STT(Speech to Text)등에 사용됩니다.
