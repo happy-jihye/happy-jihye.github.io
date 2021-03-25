@@ -28,6 +28,9 @@ use_math: true
 
 - 이번 노트북에서는 [Sequence to Sequence Learning with Neural Networks](https://arxiv.org/abs/1409.3215) paper의 모델을 간단하게 구현할 예정입니다. 이 논문은 encoder-decoder model을 제시한 모델로, 자연어 처리에 있어 굉장히 중요한 논문이니 한번쯤은 읽어보시는 것을 추천드립니다 :)
 
+- [Github](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/1_Sequence_to_Sequence_Learning_with_Neural_Networks.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/happy-jihye/Natural-Language-Processing/blob/main/1_Sequence_to_Sequence_Learning_with_Neural_Networks.ipynb)
+
+
 > 2021/03/26 Happy-jihye 🌺
 > 
 > **Reference** : [pytorch-seq2seq/1 - Sequence to Sequence Learning with Neural Networks](https://github.com/bentrevett/pytorch-seq2seq)
