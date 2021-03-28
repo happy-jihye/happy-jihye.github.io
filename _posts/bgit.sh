@@ -1,7 +1,8 @@
 #! /bin/bash
 
-UPDATE_DATE=`date "+%Y-%m-%d-"`
-
 git add .
-git commit -m "UPDATE_DATE ${UPDATE_DATE}"
+git commit -m "$*"
+
+echo "git commit -m $*"
+
 git push
