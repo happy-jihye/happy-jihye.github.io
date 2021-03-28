@@ -6,3 +6,5 @@ main:
     url: /tags/
   - title: "NLP"
     url: /nlp/
+  - title: "Visions"
+    url: /vision/
