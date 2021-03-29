@@ -1,15 +1,11 @@
 ---
-title: "[nlp] Seq2Seq Model - Sequence to Sequence Learning with Neural Networks 논문 리뷰 및 코드 실습"
+title: "2_Learning_Phrase_Representations_using_RNN_Encoder_Decoder_for_Statistical_Machine_Translation"
 excerpt: " "
 
-categories: 
-  - nlp
-tags: 
-  - deeplearning
-  - ai
-  - nlp
-  - pytorch
-  - seq2seq
+categories:
+ - Notebook
+tags:
+ - Need_modify
 layout: jupyter
 search: true
 
@@ -20,61 +16,38 @@ toc_sticky: true
 # 수식
 use_math: true
 ---
-
-**1 - Sequence to Sequence Learning with Neural Networks**
-
-- Seq2Seq 시리즈에서는 Pytorch와 torch text를 이용하여 하나의 `seq`를 다른 `seq`로 바꾸는 머신 러닝 모델을 구축할 예정입니다. 
-- tutorial-1에서는 `독일어`를 `영어`로 번역하는 translation model을 학습합니다. Seq2Seq model 모델은 번역 외에도 내용 요약(Text Summarization), STT(Speech to Text)등에 사용됩니다.
-
-- 이번 노트북에서는 Google의 [Sequence to Sequence Learning with Neural Networks](https://arxiv.org/abs/1409.3215) paper의 모델을 간단하게 구현할 예정입니다. 이 논문은 Seq2Seq개념을 최초로 Neural Machine Translation에 적용한 모델로, 자연어 처리에 있어 굉장히 중요한 논문이니 한번쯤은 읽어보시는 것을 추천드립니다 :)
-
-- [Github](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/1_Sequence_to_Sequence_Learning_with_Neural_Networks.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/happy-jihye/Natural-Language-Processing/blob/main/1_Sequence_to_Sequence_Learning_with_Neural_Networks.ipynb)
+# 2 - Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation
 
 
-> 2021/03/26 Happy-jihye 🌺
+> 2021/03/29 Happy-jihye 🌺
 > 
-> **Reference** : [pytorch-seq2seq/1 - Sequence to Sequence Learning with Neural Networks](https://github.com/bentrevett/pytorch-seq2seq)
+> **Reference** : [pytorch-seq2seq/2 - Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation](https://github.com/bentrevett/pytorch-seq2seq)
 
 --- 
 
+## 0. Introduction
 
+- 이번 노트북에서는 [Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation(2014)](https://arxiv.org/abs/1406.1078) paper의 모델을 간단하게 구현할 예정입니다.
 
-## Seq2Seq
+- 이 논문은 두 가지 내용으로 유명합니다. <u>하나는 기계번역 Neural Machine Translation(NMT) 분야에서 널리 쓰이고 있는 Seq2Seq architecture의 제안이고, 두번째는 LSTM의 대안인 Gated Recurrent Unit(GRU)의 도입입니다.</u>
+  
+  - 이 논문은 Seq2Seq model을 제시한 논문이지, 이를 NMT 분야에 사용한 논문은 아닙니다. 이 논문에서는 당시 활용되던 Statical Machine Translation(SMT)분야의 한 파트로서 **RNN Encoder-Decoder model**을 제안하였습니다. 
+  - 실제로 이 모델을 NMT 분야에 적용한 논문은 [Sequence to Sequence Learning with Neural Networks](https://arxiv.org/abs/1409.3215)입니다.
+  - [SMT vs NMT](https://smartlion.co.kr/news-%EC%8B%A0%EA%B2%BD%EA%B8%B0%EA%B3%84%EB%B2%88%EC%97%ADnmt%EC%9D%98%EC%8B%9C%EB%8C%80/)
+  
+- Sequence to Sequence Learning with Neural Networks, LSTM 등에 대해 공부하고 싶으시다면 이 글들([Seq2Seq-NMT](https://happy-jihye.github.io/nlp/1_Sequence_to_Sequence_Learning_with_Neural_Networks/)과 [Understanding LSTM Network](http://colah.github.io/posts/2015-08-Understanding-LSTMs/))을 참고하시면 좋을 것 같습니다 :)
 
-- 가장 일반적인 Seq2Seq 모델은 `encoder-decoder` 모델입니다. input 문장을 RNN으로 single vector로 인코딩한 후, 이 single vector를 다시 RNN 네트워크를 통해 디코딩합니다.
-- single vector는 **context vector**라고도 불리며, 전체 입력 문장의 추상적인 표현으로 생각할 수 있습니다.
+### RNN Encoder-Decoder
 
 ![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/seq2seq1.png?raw=1)
 
-**Encoder**
-- 위의 이미지는 대표적인 번역 예제로, "guten morgen"이라는 source 문장은 노란색의 `embedding layer`를 걸쳐  초록색의 `encoder`로 들어갑니다. 
-- `<sos>` token은 *start of sequence*, <eos> token은 *end of sequence*의 약자로 문장의 시작과 끝을 알리는 token입니다. 
-- Encoder RNN은 이전 time step의 hidden state와 현재 time step의 ebedding값을 input으로 받습니다. 수식으로 표현하면 다음과 같습니다.
+이번 시간에 배울 모델의 architecture는 간단합니다. 
 
-  $h_t = \text{EncoderRNN}(e(x_t), h_{t-1})$
-  - 여기서 input sentence는 $X = \{x_1, x_2, ..., x_T\}$로 표현되며, $x_1$ 은 `<sos>`, $x_2$ 는 `guten`이 됩니다. 
-  - 또한 초기 hidden state, $h_0$는 0이 되거나 학습된 parameter로 초기화됩니다.
+**RNN Encoder-Decoder** 은 encoder와 decoder 역할을 하는 2개의 Recurrent Neural Network(RNN)으로 구성되어 있으며, **Encoder**는 가변 길이의 `source sequence`를 고정된 크기의 `context vector`로 만들고 **Decoder**는 이 `context vector`를 다시 가변 길이의 `target sequence`로 변환합니다.
 
-- RNN로는 LSTM (Long Short-Term Memory)나 GRU (Gated Recurrent Unit)와 같은 architecture를 사용할 수 있습니다.
 
-**context vector**
-- 최종 단어인 $x_T$, `<eos>`가 embedding layer를 통해 RNN에 전달되면, 우리는 마지막 hidden state인 $h_T$을 얻을 수 있으며, 이를 context vector라고 부릅니다. 
-- context vector는 전체 문장을 대표하며, $h_T = z$로 표현할 수 있습니다.
+context vector는 모든 decoder의 노드들에 관여를 하며, 번역이 문장 단위가 아닌, 단어나 구문 단위로 쪼개서 되기 때문에 이 모델은 통계 기계 번역(Statistical Machine Translation, SMT)를 따른다고 볼 수 있습니다.
 
-**Decoder**
-- 이제 우리는 context vector인 $z$를 output/target sentence로 디코딩해야합니다. 이를 위해 문장의 앞 뒤에 `<sos>`와 `<eos>` token을 추가합니다.
-- 디코딩 과정을 수식으로 표현하면 다음과 같습니다.
-  
-  $s_t = \text{DecoderRNN}(d(y_t), s_{t-1})$
-
-  - 여기서 현재 단어를 embedding, $y$한 값이 $d(y_t)$이며, context vector $z = h_T$는 첫번째 hidden state인 $s_0$과도 같습니다.
-
-- 우리는 decoder의 hidden state $s_t$를 보라색의 `Linear layer`에 넣음으로써 prediction값을 얻을 수 있습니다.
-
-  $\hat{y}_t = f(s_t)$
-
-- 이때, decoder의 단어는 각 time step당 하나씩 차례대로 생성됩니다. decoder를 거치면서 많은 단어들이 생성이 되는데, `<eos>` token이 출력되면 decoding을 멈춥니다.
-- 예측값  $\hat{Y} = \{ \hat{y}_1, \hat{y}_2, ..., \hat{y}_T \}$을 실제 target sentece의 값 $Y = \{ y_1, y_2, ..., y_T \}$과 비교하여 정확도를 계산합니다. 
 
 ## 1. Preparing Data
 
@@ -123,15 +96,10 @@ spacy_de = spacy.load('de')
 spacy_en = spacy.load('en')
 ```
 
-**Reversing the order of the words**
-
-  
-이 논문에서는 단어의 순서를 바꾸면 최적화가 더 쉬워져 성능이 더 좋아진다고 말하고 있습니다. 따라서 이를 위해 source 문장인 `독일어`를 token화를 한 후 역순으로 list에 저장했습니다.
-
 
 ```python
 def tokenize_de(text):
-  return [tok.text for tok in spacy_de.tokenizer(text)][::-1]
+  return [tok.text for tok in spacy_de.tokenizer(text)]
 
 def tokenize_en(text):
   return [tok.text for tok in spacy_en.tokenizer(text)]
@@ -171,7 +139,7 @@ downloading training.tar.gz
 {:.output_stream}
 
 ```
-training.tar.gz: 100%|██████████| 1.21M/1.21M [00:02<00:00, 544kB/s]
+training.tar.gz: 100%|██████████| 1.21M/1.21M [00:01<00:00, 705kB/s]
 
 ```
 
@@ -185,7 +153,7 @@ downloading validation.tar.gz
 {:.output_stream}
 
 ```
-validation.tar.gz: 100%|██████████| 46.3k/46.3k [00:00<00:00, 173kB/s]
+validation.tar.gz: 100%|██████████| 46.3k/46.3k [00:00<00:00, 174kB/s]
 
 ```
 
@@ -199,7 +167,7 @@ downloading mmt_task1_test2016.tar.gz
 {:.output_stream}
 
 ```
-mmt_task1_test2016.tar.gz: 100%|██████████| 66.2k/66.2k [00:00<00:00, 165kB/s]
+mmt_task1_test2016.tar.gz: 100%|██████████| 66.2k/66.2k [00:00<00:00, 159kB/s]
 
 ```
 
@@ -235,8 +203,8 @@ print(vars(train_data.examples[1]))
 ```
 13
 8
-{'src': ['.', 'büsche', 'vieler', 'nähe', 'der', 'in', 'freien', 'im', 'sind', 'männer', 'weiße', 'junge', 'zwei'], 'trg': ['two', 'young', ',', 'white', 'males', 'are', 'outside', 'near', 'many', 'bushes', '.']}
-{'src': ['.', 'antriebsradsystem', 'ein', 'bedienen', 'schutzhelmen', 'mit', 'männer', 'mehrere'], 'trg': ['several', 'men', 'in', 'hard', 'hats', 'are', 'operating', 'a', 'giant', 'pulley', 'system', '.']}
+{'src': ['zwei', 'junge', 'weiße', 'männer', 'sind', 'im', 'freien', 'in', 'der', 'nähe', 'vieler', 'büsche', '.'], 'trg': ['two', 'young', ',', 'white', 'males', 'are', 'outside', 'near', 'many', 'bushes', '.']}
+{'src': ['mehrere', 'männer', 'mit', 'schutzhelmen', 'bedienen', 'ein', 'antriebsradsystem', '.'], 'trg': ['several', 'men', 'in', 'hard', 'hats', 'are', 'operating', 'a', 'giant', 'pulley', 'system', '.']}
 
 ```
 
@@ -272,18 +240,6 @@ Unique tokens in target (en) vocabulary: 5893
 ```python
 # for using GPU
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-```
-
-
-```python
-print(train_data)
-```
-
-{:.output_stream}
-
-```
-<torchtext.datasets.translation.Multi30k object at 0x7f0410c961d0>
-
 ```
 
 
@@ -324,14 +280,13 @@ print(len(train_iterator)*128)
 
 ```
 1
-첫 번째 배치의 text 크기: torch.Size([128, 31])
-tensor([   2,    4, 4334,   14,   22,   69,   25,   66,    5,    3,    1,    1,
-           1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-           1,    1,    1,    1,    1,    1,    1], device='cuda:0')
-tensor([   2,    4, 1700,  118,  254,   23,  443,   10,  589,    0,   18,   98,
-          60,   16,    8,    3,    1,    1,    1,    1,    1,    1,    1,    1,
-           1,    1,    1,    1,    1,    1,    1], device='cuda:0')
-torch.Size([128])
+첫 번째 배치의 text 크기: torch.Size([128, 33])
+tensor([   2,    8,   67,  217,   12,   33,  214,    9,   35,   17,  101,   17,
+         998,   20, 1787,   93,    4,    3,    1,    1,    1,    1,    1,    1,
+           1,    1,    1,    1,    1,    1,    1,    1,    1], device='cuda:0')
+tensor([  2,  43,  41,  57, 215,   9,  14,   7, 555,   9,  18, 101,   7, 234,
+          9,  22, 354,  14, 337, 119,  69,   4,   3,   1,   1,   1,   1,   1,
+          1,   1,   1,   1,   1], device='cuda:0')
 227
 29056
 
@@ -340,30 +295,36 @@ torch.Size([128])
 ## Building the Seq2Seq Model
 
 ### Encoder
-- Encoder는 2개의 LSTM layer로 구성되어 있습니다. (논문에서는 4개의 layer를 사용했지만, 이 튜토리얼에서는 학습시간을 줄이기 위해 2개의 layer를 사용했습니다.)
-- RNN에서는 첫번째 layer의 hidden state를 $h_t^1 = \text{EncoderRNN}^1(e(x_t), h_{t-1}^1)$로, 두번째 layer의 hidden state를 $h_t^2 = \text{EncoderRNN}^2(h_t^1, h_{t-1}^2)$로 표현했다면, LSTM은 `cell state`인  $c_t$도 입력으로 들어갑니다.
+- Encoder는 1개의 GRU layer로 구성되어 있습니다. LSTM과는 달리 GRU에서는 각 dropout이 RNN의 각 layer간에 사용되기 때문에 dropout을 GRU의 인수로 주지 않아도 됩니다.
 
-![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/seq2seq2.png?raw=1)
+- 또한, <u>GRU는 LSTM과 달리 cell state를 RNN network의 입출력으로 사용하지 않습니다.</u>
 
-- 따라서 LSTM에서의 multi-layer equation을 표현하면 다음과 같이 표현할 수 있습니다.
+  $h_t = \text{GRU}(e(x_t), h_{t-1})\\
+(h_t, c_t) = \text{LSTM}(e(x_t), h_{t-1}, c_{t-1})\\
+h_t = \text{RNN}(e(x_t), h_{t-1})$
 
-  $(h_t^1, c_t^1) = \text{EncoderLSTM}^1(e(x_t), (h_{t-1}^1, c_{t-1}^1))$
-  $(h_t^2, c_t^2) = \text{EncoderLSTM}^2(h_t^1, (h_{t-1}^2, c_{t-1}^2))$
- 
-- RNN architecture에 대한 설명은 [이 글](https://happy-jihye.github.io/nlp/2_Updated_Sentiment_Analysis/#lstm-long-short-term-memory)에 자세히 적어놓았습니다.
+- Encoder의 최종식을 표현하면 다음과 같습니다. 
+
+  $(h_t) = \text{EncoderGRU}^1(e(x_t), h_{t-1})$
+
+- 마지막 RNN을 거치고 나면, context vector인 $z=h_T$를 얻게 됩니다.
+
+![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/seq2seq7.png?raw=1)
+
+
+-  GRU는 LSTM과 비슷한 성능을 내지만, 메모리를 보다 효율적으로 사용할 수 있는 모듈로 현재에도 LSTM의 대용으로 많이 사용되고 있습니다 :) GRU의 아키텍처에 대해서는 [이 글](https://blog.floydhub.com/gru-with-pytorch/)을 참고하세요 :)
 
 
 ```python
 class Encoder(nn.Module):
-  def __init__(self, input_dim, emb_dim, hid_dim, n_layers, dropout):
+  def __init__(self, input_dim, emb_dim, hid_dim, dropout):
     super().__init__()
 
     self.hid_dim = hid_dim
-    self.n_layers = n_layers
 
     self.embedding = nn.Embedding(input_dim, emb_dim)
 
-    self.rnn = nn.LSTM(emb_dim, hid_dim, n_layers, dropout = dropout)
+    self.rnn = nn.GRU(emb_dim, hid_dim)
 
     self.dropout = nn.Dropout(dropout)
 
@@ -374,45 +335,49 @@ class Encoder(nn.Module):
 
     # embedded = [src len, batch size, emb dim]
 
-    outputs, (hidden, cell) = self.rnn(embedded)
-
-    # hidden = [n layers * n directions, batch size, hid dim]
-    # cell = [n layer * n directions, batch size, hid dim]
+    ## cell state가 없습니다 !
+    outputs, hidden = self.rnn(embedded)
 
     # outputs = [src len, batch size, hid dim * n directions]
-    ## output은 언제나 hidden layer의 top에 있음
+    # hidden = [n layers * n directions, batch size, hid dim]
 
-    return hidden, cell
+    ## output은 언제나 hidden layer의 top에 있습니다.
+
+    return hidden
 ```
 
 ### Decoder
-- decoder도 encoder와 마찬가지로 2개의 LSTM layer를 사용했습니다. (논문에서는 4개의 layer를 사용했습니다.)
-  ![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/seq2seq3.png?raw=1)
+- decoder도 encoder와 유사하지만, 한가지 다른 점은 모든 네트워크에 `context vector`가 관여한다는 점입니다.
+- GRU에 embedding vector뿐만 아니라 context vector도 입력으로 들어가기 때문에, GRU의 input dimension은 `emb_dim + hid_dim`가 됩니다.
+- 또한 최종 output의 입력에는 context vector, hidden state, embedding vector가 관여하므로 dimension이 `emb_dim + hid_dim * 2`입니다.
+
+  ![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/seq2seq8.png?raw=1)
 
 - 다음은 Decoder의 layer를 수식으로 나타낸 식입니다.
 
-  $(s_t^1, c_t^1) = \text{DecoderLSTM}^1(d(y_t), (s_{t-1}^1, c_{t-1}^1))\\
-  (s_t^2, c_t^2) = \text{DecoderLSTM}^2(s_t^1, (s_{t-1}^2, c_{t-1}^2))$
+  $s_t = \text{DecoderGRU}(d(y_t), s_{t-1}, z))$
+
+  $\hat{y}_{t+1} = f(d(y_t), s_t, z)$
 
 
 ```python
 class Decoder(nn.Module):
-    def __init__(self, output_dim, emb_dim, hid_dim, n_layers, dropout):
+    def __init__(self, output_dim, emb_dim, hid_dim, dropout):
         super().__init__()
 
         self.output_dim = output_dim
         self.hid_dim = hid_dim
-        self.n_layers = n_layers
         
         self.embedding = nn.Embedding(output_dim, emb_dim)
         
-        self.rnn = nn.LSTM(emb_dim, hid_dim, n_layers, dropout = dropout)
+        # input : context vec + embedding vec
+        self.rnn = nn.GRU(emb_dim + hid_dim, hid_dim)
         
-        self.fc_out = nn.Linear(hid_dim, output_dim)
+        self.fc_out = nn.Linear(emb_dim + hid_dim * 2, output_dim)
         
         self.dropout = nn.Dropout(dropout)
     
-    def forward(self, input, hidden, cell):
+    def forward(self, input, hidden, context):
         
         # input = [batch size]
         ## 한번에 하나의 token만 decoding하므로 forward에서의 input token의 길이는 1입니다.
@@ -420,9 +385,9 @@ class Decoder(nn.Module):
         # hidden = [n layers * n directions, batch size, hid dim]
         # cell = [n layers * n directions, batch size, hid dim]
         
-        # n directions in the decoder will both always be 1, therefore:
-        # hidden = [n layers, batch size, hid dim]
-        # context = [n layers, batch size, hid dim]
+        #n layers and n directions in the decoder will both always be 1, therefore:
+        # hidden = [1, batch size, hid dim]
+        # context = [1, batch size, hid dim]
         
         input = input.unsqueeze(0)
         
@@ -434,22 +399,29 @@ class Decoder(nn.Module):
         # embedding layer를 통과한 후에 dropout을 합니다.
         # embedded = [1, batch size, emb dim]
                 
-        output, (hidden, cell) = self.rnn(embedded, (hidden, cell))
+        emb_con = torch.cat((embedded, context), dim = 2)
         
+        # emb_con = [1, batch size, emb dim + hid dim]
+
+        output, hidden = self.rnn(emb_con, hidden)
+
         # output = [seq len, batch size, hid dim * n directions]
         # hidden = [n layers * n directions, batch size, hid dim]
-        # cell = [n layers * n directions, batch size, hid dim]
         
         # seq len and n directions will always be 1 in the decoder, therefore:
         # output = [1, batch size, hid dim]
-        # hidden = [n layers, batch size, hid dim]
-        # cell = [n layers, batch size, hid dim]
+        # hidden = [1, batch size, hid dim]
+
+        output = torch.cat((embedded.squeeze(0), hidden.squeeze(0), context.squeeze(0)), dim = 1)
         
-        prediction = self.fc_out(output.squeeze(0))
+        # output = [batch size, emb dim + hid dim * 2]
+
+        prediction = self.fc_out(output)
         
         #prediction = [batch size, output dim]
         
-        return prediction, hidden, cell
+        return prediction, hidden
+
 ```
 
 ## Seq2Seq
@@ -459,17 +431,8 @@ seq2seq model을 정리하면 다음과 같습니다.
 - encoder를 학습시켜 고정된 크기의 context vector를 출력한다.
 - context vector를 decoder에 넣어 예측된 target(output) sentence를 생성한다.
 
-![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/seq2seq4.png?raw=1)
+  ![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/seq2seq9.png?raw=1)
 
-- 이번 튜토리얼에서는 Encoder와 Decoder에서의 layer의 수와 hidden/cell dimensions을 동일하게 맞춰주었습니다. 이는 항상 그래야하는 하는 것은 아니지만, layer의 개수나 차원을 다르게 해준다면 추가적으로 생각해줄 문제들이 많아질 것입니다. 
-  - ex) 인코드의 레이어는 2개, 디코더의 레이어는 1개라면 context vector의 평균을 디코더에 넘겨줘야하나?
-- target문장과 output문장의 tensor는 다음과 같습니다.
-  ![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/seq2seq5.png?raw=1)
-
-**Teacher Forcing**
-![](https://github.com/happy-jihye/Natural-Language-Processing/blob/main/images/seq2seq6.png?raw=1)
-- teacher forcing은 다음 입력으로 디코더의 예측을 사용하는 대신 실제 목표 출력을 다음 입력으로 사용하는 컨셉입니다. ([참고](https://tutorials.pytorch.kr/intermediate/seq2seq_translation_tutorial.html)) 즉, `target word`(Ground Truth)를 디코더의 다음 입력으로 넣어줌으로써 학습시 더 정확한 예측을 가능하게 합니다.
-- [참고2](https://blog.naver.com/PostView.nhn?blogId=sooftware&logNo=221790750668&categoryNo=0&parentCategoryNo=0&viewDate=&currentPage=1&postListTopCurrentPage=1&from=postView)
 
 
 ```python
@@ -484,8 +447,6 @@ class Seq2Seq(nn.Module):
         
         assert encoder.hid_dim == decoder.hid_dim, \
             "Hidden dimensions of encoder and decoder must be equal!"
-        assert encoder.n_layers == decoder.n_layers, \
-            "Encoder and decoder must have equal number of layers!"
         
     def forward(self, src, trg, teacher_forcing_ratio = 0.5):
         
@@ -501,9 +462,12 @@ class Seq2Seq(nn.Module):
         # output을 저장할 tensor를 만듭니다.(처음에는 전부 0으로)
         outputs = torch.zeros(trg_len, batch_size, trg_vocab_size).to(self.device)
         
-        # src문장을 encoder에 넣은 후 hidden, cell값을 구합니다.
-        hidden, cell = self.encoder(src)
+        # src문장을 encoder에 넣은 후 context vector를 구합니다.
+        context = self.encoder(src)
         
+        # decoder의 initial hidden state는 context vector입니다.
+        hidden = context
+
         # decoder에 입력할 첫번째 input입니다.
         # 첫번째 input은 모두 <sos> token입니다.
         # trg[0,:].shape = BATCH_SIZE 
@@ -515,9 +479,9 @@ class Seq2Seq(nn.Module):
         또한, 1번의 for문당 128개의 문장의 각 token들이 다같이 decoding되는 것'''
         for t in range(1, trg_len):
             
-            # input token embedding과 이전 hidden/cell state를 decoder에 입력합니다.
-            # 새로운 hidden/cell states와 예측 output값이 출력됩니다.
-            output, hidden, cell = self.decoder(input, hidden, cell)
+            # input token embedding과 이전 hidden state와 context state를 decoder에 입력합니다.
+            # 새로운 hidden state와 예측 output값이 출력됩니다.
+            output, hidden = self.decoder(input, hidden, context)
 
             #output = [batch size, output dim]
 
@@ -549,23 +513,22 @@ OUTPUT_DIM = len(TRG.vocab)
 ENC_EMB_DIM = 256
 DEC_EMB_DIM = 256
 HID_DIM = 512
-N_LAYERS = 2
 ENC_DROPOUT = 0.5
 DEC_DROPOUT = 0.5
 
-enc = Encoder(INPUT_DIM, ENC_EMB_DIM, HID_DIM, N_LAYERS, ENC_DROPOUT)
-dec = Decoder(OUTPUT_DIM, DEC_EMB_DIM, HID_DIM, N_LAYERS, DEC_DROPOUT)
+enc = Encoder(INPUT_DIM, ENC_EMB_DIM, HID_DIM, ENC_DROPOUT)
+dec = Decoder(OUTPUT_DIM, DEC_EMB_DIM, HID_DIM, DEC_DROPOUT)
 
 model = Seq2Seq(enc, dec, device).to(device)
 ```
 
-- 초기 가중치값은 $\mathcal{U}(-0.08, 0.08)$의 정규분포로부터 얻었습니다.
+- 초기 가중치값은 $\mathcal{N}(0, 0.01)$의 정규분포로부터 얻었습니다.
 
 
 ```python
 def init_weights(m):
     for name, param in m.named_parameters():
-        nn.init.uniform_(param.data, -0.08, 0.08)
+        nn.init.normal_(param.data, mean = 0, std = 0.01)
         
 model.apply(init_weights)
 ```
@@ -579,13 +542,13 @@ model.apply(init_weights)
 Seq2Seq(
   (encoder): Encoder(
     (embedding): Embedding(7855, 256)
-    (rnn): LSTM(256, 512, num_layers=2, dropout=0.5)
+    (rnn): GRU(256, 512)
     (dropout): Dropout(p=0.5, inplace=False)
   )
   (decoder): Decoder(
     (embedding): Embedding(5893, 256)
-    (rnn): LSTM(256, 512, num_layers=2, dropout=0.5)
-    (fc_out): Linear(in_features=512, out_features=5893, bias=True)
+    (rnn): GRU(768, 512)
+    (fc_out): Linear(in_features=1280, out_features=5893, bias=True)
     (dropout): Dropout(p=0.5, inplace=False)
   )
 )
@@ -604,7 +567,7 @@ print(f'The model has {count_parameters(model):,} trainable parameters')
 {:.output_stream}
 
 ```
-The model has 13,899,013 trainable parameters
+The model has 14,220,293 trainable parameters
 
 ```
 
@@ -733,7 +696,7 @@ for epoch in range(N_EPOCHS):
     
     if valid_loss < best_valid_loss:
         best_valid_loss = valid_loss
-        torch.save(model.state_dict(), 'tut1-model.pt')
+        torch.save(model.state_dict(), 'tut2-model.pt')
     
     print(f'Epoch: {epoch+1:02} | Time: {epoch_mins}m {epoch_secs}s')
     print(f'\tTrain Loss: {train_loss:.3f} | Train PPL: {math.exp(train_loss):7.3f}')
@@ -743,44 +706,51 @@ for epoch in range(N_EPOCHS):
 {:.output_stream}
 
 ```
-Epoch: 01 | Time: 0m 38s
-	Train Loss: 5.052 | Train PPL: 156.330
-	 Val. Loss: 5.009 |  Val. PPL: 149.767
-Epoch: 02 | Time: 0m 37s
-	Train Loss: 4.483 | Train PPL:  88.471
-	 Val. Loss: 4.817 |  Val. PPL: 123.627
-Epoch: 03 | Time: 0m 37s
-	Train Loss: 4.193 | Train PPL:  66.237
-	 Val. Loss: 4.675 |  Val. PPL: 107.187
+Epoch: 01 | Time: 0m 36s
+	Train Loss: 5.041 | Train PPL: 154.550
+	 Val. Loss: 5.141 |  Val. PPL: 170.908
+Epoch: 02 | Time: 0m 36s
+	Train Loss: 4.377 | Train PPL:  79.604
+	 Val. Loss: 5.104 |  Val. PPL: 164.637
+Epoch: 03 | Time: 0m 36s
+	Train Loss: 4.060 | Train PPL:  58.001
+	 Val. Loss: 4.731 |  Val. PPL: 113.397
 Epoch: 04 | Time: 0m 37s
-	Train Loss: 4.006 | Train PPL:  54.940
-	 Val. Loss: 4.543 |  Val. PPL:  93.994
-Epoch: 05 | Time: 0m 37s
-	Train Loss: 3.853 | Train PPL:  47.152
-	 Val. Loss: 4.419 |  Val. PPL:  83.004
-Epoch: 06 | Time: 0m 37s
-	Train Loss: 3.717 | Train PPL:  41.151
-	 Val. Loss: 4.419 |  Val. PPL:  83.041
+	Train Loss: 3.766 | Train PPL:  43.194
+	 Val. Loss: 4.479 |  Val. PPL:  88.112
+Epoch: 05 | Time: 0m 36s
+	Train Loss: 3.473 | Train PPL:  32.222
+	 Val. Loss: 4.165 |  Val. PPL:  64.397
+Epoch: 06 | Time: 0m 36s
+	Train Loss: 3.213 | Train PPL:  24.857
+	 Val. Loss: 3.995 |  Val. PPL:  54.303
 Epoch: 07 | Time: 0m 37s
-	Train Loss: 3.598 | Train PPL:  36.537
-	 Val. Loss: 4.235 |  Val. PPL:  69.030
+	Train Loss: 2.993 | Train PPL:  19.937
+	 Val. Loss: 3.856 |  Val. PPL:  47.268
 Epoch: 08 | Time: 0m 37s
-	Train Loss: 3.462 | Train PPL:  31.871
-	 Val. Loss: 4.120 |  Val. PPL:  61.552
+	Train Loss: 2.726 | Train PPL:  15.267
+	 Val. Loss: 3.880 |  Val. PPL:  48.448
 Epoch: 09 | Time: 0m 37s
-	Train Loss: 3.339 | Train PPL:  28.205
-	 Val. Loss: 4.060 |  Val. PPL:  57.994
-Epoch: 10 | Time: 0m 37s
-	Train Loss: 3.212 | Train PPL:  24.839
-	 Val. Loss: 4.076 |  Val. PPL:  58.898
+	Train Loss: 2.543 | Train PPL:  12.714
+	 Val. Loss: 3.810 |  Val. PPL:  45.146
+Epoch: 10 | Time: 0m 36s
+	Train Loss: 2.352 | Train PPL:  10.511
+	 Val. Loss: 3.768 |  Val. PPL:  43.309
 
 ```
 
 
 ```python
-model.load_state_dict(torch.load('tut1-model.pt'))
+model.load_state_dict(torch.load('tut2-model.pt'))
 
 test_loss = evaluate(model, test_iterator, criterion)
 
 print(f'| Test Loss: {test_loss:.3f} | Test PPL: {math.exp(test_loss):7.3f} |')
+```
+
+{:.output_stream}
+
+```
+| Test Loss: 3.703 | Test PPL:  40.569 |
+
 ```
