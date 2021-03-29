@@ -1,11 +1,15 @@
 ---
-title: "2_Learning_Phrase_Representations_using_RNN_Encoder_Decoder_for_Statistical_Machine_Translation"
+title: "[nlp] Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation 논문 리뷰 및 코드 실습"
 excerpt: " "
 
-categories:
- - Notebook
-tags:
- - Need_modify
+categories: 
+  - nlp
+tags: 
+  - deeplearning
+  - ai
+  - nlp
+  - pytorch
+  - seq2seq
 layout: jupyter
 search: true
 
@@ -16,8 +20,6 @@ toc_sticky: true
 # 수식
 use_math: true
 ---
-# 2 - Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation
-
 
 > 2021/03/29 Happy-jihye 🌺
 > 
