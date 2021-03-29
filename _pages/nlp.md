@@ -54,6 +54,11 @@ Pytorch를 활용하여 자연어 처리에 대해 공부한 글입니다.
   - NMT 분야에 최초로 Seq2Seq model을 적용한 논문인 [Sequence to Sequence Learning with Neural Networks](https://arxiv.org/abs/1409.3215) paper의 모델을 간단하게 구현하였습니다.
   - 이 notebook에서는 Encoder-Decoder 구조에 대해 학습할 수 있으며, 독일어를 영어로 번역하는 간단한 예제를 만들어볼 수 있습니다.
 
+- 2 - [Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation 논문 리뷰 및 코드 실습](https://happy-jihye.github.io/nlp/nlp-7/) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/happy-jihye/Natural-Language-Processing/blob/main/2_Learning_Phrase_Representations_using_RNN_Encoder_Decoder_for_Statistical_Machine_Translation.ipynb)
+
+  - Seq2Seq model과 GRU model을 최초로 제안한 논문인 [Sequence to Sequence Learning with Neural Networks](https://arxiv.org/abs/1409.3215) paper의 모델을 간단하게 구현하였습니다.
+
+
 
 ## Reference 
 - https://github.com/bentrevett/pytorch-sentiment-analysis
