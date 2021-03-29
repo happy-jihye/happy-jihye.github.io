@@ -19,3 +19,5 @@ layout: single
 3 - [Loss Functions and Optimization](https://happy-jihye.github.io/cs231n/cs231n-3/)
 
 4 - [Backpropagation and Neural Networks](https://happy-jihye.github.io/cs231n/cs231n-4/)
+  
+5 - [Convolutional Neural Networks](https://happy-jihye.github.io/cs231n/cs231n-5/)
