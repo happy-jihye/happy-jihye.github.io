@@ -25,12 +25,5 @@ function converter(){
     mv $FILE_NAME "ipynb_folder"
     mv $POST_NAME $POST_DATE_NAME
 
-    cd ..
-    git add .
-    git commit -m "blog"
-
-    git push
-    
-    cd -
 }
 converter
