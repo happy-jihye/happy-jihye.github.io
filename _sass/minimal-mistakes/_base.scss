@@ -117,16 +117,17 @@ abbr[data-original-title] {
 
 /* blockquotes */
 
-blockquote,
-q {
+blockquote {
+  margin: 2em 1em 2em 0;
+  padding-left: 1em;
+  padding-right: 1em;
+  border-left: 0.25em solid $primary-color;
+  color: #F6F8FA;
+  cite {
 
-  footer {
-    font-size: 80%;
-    font-style: normal;
-
-    &::before {
-      padding-right: 0.25rem;
+    &:before {
       content: "\2014";
+      padding-right: 5px;
     }
   }
 }
