@@ -7,6 +7,7 @@ layout: single
 ---
   
 
+---
 
 **GAN : Generative Adversarial Networks**
 
