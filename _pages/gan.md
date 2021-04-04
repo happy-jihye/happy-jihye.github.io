@@ -18,6 +18,11 @@ layout: single
 
     - Paper : [Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://arxiv.org/abs/1511.06434)(2015 / Alec Radford, Luke Metz, Soumith Chintala)
 
-2 - [[Paper Review] CGAN : Conditional Generative Adversarial Nets 논문 분석](https://happy-jihye.github.io/gan/gan-3/)
+3 - [[Paper Review] CGAN : Conditional Generative Adversarial Nets 논문 분석](https://happy-jihye.github.io/gan/gan-3/)
 
     - Paper : [Conditional Generative Adversarial Nets](https://arxiv.org/abs/1411.1784)(2014 / Mehdi Mirza, Simon Osindero)
+
+4 - [[Paper Review] Generative Adversarial Text to Image Synthesis 논문 분석](https://happy-jihye.github.io/gan/gan-4/)
+
+    - Paper : [Generative Adversarial Text to Image Synthesis](https://arxiv.org/abs/1605.05396)
+            (2016 / Scott Reed, Zeynep Akata, Xinchen Yan, Lajanugen Logeswaran, Bernt Schiele, Honglak Lee)
