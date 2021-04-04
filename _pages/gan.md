@@ -1,5 +1,5 @@
 ---
-title: "GAN"
+title: "GAN(Generative Adversarial Networks)"
 permalink: /gan/
 toc_sticky: true
 toc_ads : true
@@ -9,7 +9,6 @@ layout: single
 
 ---
 
-**GAN : Generative Adversarial Networks**
 
 1 - [[Paper Review] Generative Adversarial Networks(GAN) 논문 설명 및 pytorch 코드 구현](https://happy-jihye.github.io/gan/gan-1/)
 
