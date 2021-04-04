@@ -1,6 +1,6 @@
 #! /bin/bash
 
-git add .
+git add -p
 git commit -m "$*"
 
 echo "git commit -m $*"
