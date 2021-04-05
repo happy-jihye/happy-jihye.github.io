@@ -10,7 +10,7 @@ layout: single
 ---
 
 1 - [[Paper Review] Generative Adversarial Networks(GAN) 논문 설명 및 pytorch 코드 구현](https://happy-jihye.github.io/gan/gan-1/)
-- Paper : [Generative Adversarial Networks (NIPS 2014)](https://arxiv.org/abs/1406.2661)
+- Paper : [Generative Adversarial Networks](https://arxiv.org/abs/1406.2661)(2014 / Ian J. Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, Yoshua Bengio)
 
 2 - [[Paper Review] DCGAN : Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks 논문 분석](https://happy-jihye.github.io/gan/gan-2/)
 - Paper : [Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://arxiv.org/abs/1511.06434)(2015 / Alec Radford, Luke Metz, Soumith Chintala)
