@@ -2,6 +2,10 @@
 *~
 *.sw[p_]
 
+
+# ignore the file
+blog/_posts/jekyll_blog/2021-04-06-blog-3.md
+
 # Sublime Text
 *.sublime-project
 *.sublime-workspace
