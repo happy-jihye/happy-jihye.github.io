@@ -41,4 +41,7 @@ layout: single
 - Paper : [Generative Adversarial Text to Image Synthesis](https://arxiv.org/abs/1605.05396)
     (2016 / Scott Reed, Zeynep Akata, Xinchen Yan, Lajanugen Logeswaran, Bernt Schiele, Honglak Lee)
 
+5- [[Paper Review] PGGAN : Progressive Growing of GANs for Improved Quality, Stability, and Variation 논문 분석]((https://happy-jihye.github.io/gan/gan-5/))
+- Paper : [Progressive Growing of GANs for Improved Quality, Stability, and Variation](https://arxiv.org/abs/1710.10196)
+    (2018 / Tero Karras, Timo Aila, Samuli Laine, Jaakko Lehtinen)
 
