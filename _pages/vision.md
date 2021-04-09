@@ -45,3 +45,6 @@ layout: single
 - Paper : [Progressive Growing of GANs for Improved Quality, Stability, and Variation](https://arxiv.org/abs/1710.10196)
     (2018 / Tero Karras, Timo Aila, Samuli Laine, Jaakko Lehtinen)
 
+6 - [[Paper Review] StyleGAN : A Style-Based Generator Architecture for Generative Adversarial Networks 논문 분석](https://happy-jihye.github.io/gan/gan-6/)
+- Paper : [A Style-Based Generator Architecture for Generative Adversarial Networks](https://arxiv.org/abs/1812.04948)
+          (2019 / Tero Karras, Samuli Laine, Timo Aila)
