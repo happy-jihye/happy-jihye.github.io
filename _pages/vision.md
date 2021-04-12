@@ -26,7 +26,7 @@ layout: single
 6 - [Training Neural Networks (1)](https://happy-jihye.github.io/cs231n/cs231n-6/)
 
 
-**GAN : Generative Adversarial Networks**
+**GAN : Generative Adversarial Networks** ([Github](https://github.com/happy-jihye/GAN-Papers))
 
 1 - [[Paper Review] Generative Adversarial Networks(GAN) 논문 설명 및 pytorch 코드 구현](https://happy-jihye.github.io/gan/gan-1/)
 - Paper : [Generative Adversarial Networks (NIPS 2014)](https://arxiv.org/abs/1406.2661)
