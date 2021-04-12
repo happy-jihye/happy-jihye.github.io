@@ -29,3 +29,6 @@ layout: single
 6 - [[Paper Review] StyleGAN : A Style-Based Generator Architecture for Generative Adversarial Networks 논문 분석](https://happy-jihye.github.io/gan/gan-6/)
 - Paper : [A Style-Based Generator Architecture for Generative Adversarial Networks](https://arxiv.org/abs/1812.04948)
           (2019 / Tero Karras, Samuli Laine, Timo Aila)
+
+7 - [[Paper Review] StyleGAN2 : Analyzing and Improving the Image Quality of StyleGAN 논문 분석](https://happy-jihye.github.io/gan/gan-7/)
+- Paper : [Analyzing and Improving the Image Quality of StyleGAN](https://arxiv.org/abs/1912.04958) (2020 / Tero Karras, Samuli Laine, Miika Aittala, Janne Hellsten, Jaakko Lehtinen, Timo Aila)
