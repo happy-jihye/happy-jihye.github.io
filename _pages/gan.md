@@ -35,3 +35,6 @@ layout: single
 
 8 - [[Paper Review] Pix2pix : Image-to-Image Translation with Conditional Adversarial Networks 논문 분석](https://happy-jihye.github.io/gan/gan-8/)
 - Paper : [Image-to-Image Translation with Conditional Adversarial Networks](https://arxiv.org/abs/1611.07004) (CVPR 2017 / Phillip Isola, Jun-Yan Zhu, Tinghui Zhou, Alexei A. Efros)
+
+9 - [[Paper Review] SPADE : Semantic Image Synthesis with Spatially-Adaptive Normalization 논문 분석](https://happy-jihye.github.io/gan/gan-9/)
+- Paper : [Semantic Image Synthesis with Spatially-Adaptive Normalization](https://arxiv.org/abs/1903.07291) (CVPR 2019 / Taesung Park, Ming-Yu Liu, Ting-Chun Wang, Jun-Yan Zhu)
