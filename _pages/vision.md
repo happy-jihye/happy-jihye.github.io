@@ -51,3 +51,6 @@ layout: single
 
 7 - [[Paper Review] StyleGAN2 : Analyzing and Improving the Image Quality of StyleGAN 논문 분석](https://happy-jihye.github.io/gan/gan-7/)
 - Paper : [Analyzing and Improving the Image Quality of StyleGAN](https://arxiv.org/abs/1912.04958) (2020 / Tero Karras, Samuli Laine, Miika Aittala, Janne Hellsten, Jaakko Lehtinen, Timo Aila)
+
+8 - [[Paper Review] Pix2pix : Image-to-Image Translation with Conditional Adversarial Networks 논문 분석](https://happy-jihye.github.io/gan/gan-8/)
+- Paper : [Image-to-Image Translation with Conditional Adversarial Networks](https://arxiv.org/abs/1611.07004) (CVPR 2017 / Phillip Isola, Jun-Yan Zhu, Tinghui Zhou, Alexei A. Efros)
