@@ -9,34 +9,34 @@ layout: single
 
 ---
 
-- [[GAN] Generative Adversarial Networks](https://arxiv.org/abs/1406.2661)(2014) : [Review](https://happy-jihye.github.io/gan/gan-1/) 
+- [[GAN] Generative Adversarial Networks](https://arxiv.org/abs/1406.2661) (2014) : [Review](https://happy-jihye.github.io/gan/gan-1/) 
 
-- [[DCGAN] Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://arxiv.org/abs/1511.06434)(2015) : [Review](https://happy-jihye.github.io/gan/gan-2/)
+- [[DCGAN] Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://arxiv.org/abs/1511.06434) (2015) : [Review](https://happy-jihye.github.io/gan/gan-2/)
 
-- [[CGAN] Conditional Generative Adversarial Nets](https://arxiv.org/abs/1411.1784)(2014) : [Review](https://happy-jihye.github.io/gan/gan-3/)
+- [[CGAN] Conditional Generative Adversarial Nets](https://arxiv.org/abs/1411.1784) (2014) : [Review](https://happy-jihye.github.io/gan/gan-3/)
 
-- [Generative Adversarial Text to Image Synthesis](https://arxiv.org/abs/1605.05396)(2016) : [Review](https://happy-jihye.github.io/gan/gan-4/)
+- [Generative Adversarial Text to Image Synthesis](https://arxiv.org/abs/1605.05396) (2016) : [Review](https://happy-jihye.github.io/gan/gan-4/)
 
-- [[ACGAN] Conditional Image Synthesis With Auxiliary Classifier GANs](https://arxiv.org/abs/1610.09585)(2016)
+- [[ACGAN] Conditional Image Synthesis With Auxiliary Classifier GANs](https://arxiv.org/abs/1610.09585) (2016)
 
-- [[BigGAN] Large Scale GAN Training for High Fidelity Natural Image Synthesis](https://arxiv.org/abs/1809.11096)(2019)
+- [[BigGAN] Large Scale GAN Training for High Fidelity Natural Image Synthesis](https://arxiv.org/abs/1809.11096) (2019)
 
-- [[Progressive GAN] Progressive Growing of GANs for Improved Quality, Stability, and Variation](https://arxiv.org/abs/1710.10196)(2018) : [Review](https://happy-jihye.github.io/gan/gan-5/)
+- [[Progressive GAN] Progressive Growing of GANs for Improved Quality, Stability, and Variation](https://arxiv.org/abs/1710.10196) (2018) : [Review](https://happy-jihye.github.io/gan/gan-5/)
 
-- [[StyleGAN] A Style-Based Generator Architecture for Generative Adversarial Networks](https://arxiv.org/abs/1812.04948)(2019) : [Review](https://happy-jihye.github.io/gan/gan-6/)
+- [[StyleGAN] A Style-Based Generator Architecture for Generative Adversarial Networks](https://arxiv.org/abs/1812.04948) (2019) : [Review](https://happy-jihye.github.io/gan/gan-6/)
     
-    - [AdaIN : Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization](https://arxiv.org/abs/1703.06868)(2017)
+    - [AdaIN : Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization](https://arxiv.org/abs/1703.06868) (2017)
 
-- [[StyleGAN2] Analyzing and Improving the Image Quality of StyleGAN](https://arxiv.org/abs/1912.04958)(2020) : [Review](https://happy-jihye.github.io/gan/gan-7/)
+- [[StyleGAN2] Analyzing and Improving the Image Quality of StyleGAN](https://arxiv.org/abs/1912.04958) (2020) : [Review](https://happy-jihye.github.io/gan/gan-7/)
 
-- [Image2StyleGAN++: How to Edit the Embedded Images?](https://arxiv.org/abs/1911.11544)(CVPR 2020)
+- [Image2StyleGAN++: How to Edit the Embedded Images?](https://arxiv.org/abs/1911.11544) (CVPR 2020)
 
-- [StyleCLIP: Text-Driven Manipulation of StyleGAN Imagery](https://arxiv.org/abs/2103.17249)(arXiv 2021)
+- [StyleCLIP: Text-Driven Manipulation of StyleGAN Imagery](https://arxiv.org/abs/2103.17249) (arXiv 2021)
 
-- [[Pix2Pix] Image-to-Image Translation with Conditional Adversarial Networks](https://arxiv.org/abs/1611.07004)(CVPR 2017) : [Review](https://happy-jihye.github.io/gan/gan-8/)
+- [[Pix2Pix] Image-to-Image Translation with Conditional Adversarial Networks](https://arxiv.org/abs/1611.07004) (CVPR 2017) : [Review](https://happy-jihye.github.io/gan/gan-8/)
 
-- [[SPADE] Semantic Image Synthesis with Spatially Adaptive Normalization](https://arxiv.org/abs/1903.07291)(CVPR 2019) : [Review](https://happy-jihye.github.io/gan/gan-9/)
+- [[SPADE] Semantic Image Synthesis with Spatially Adaptive Normalization](https://arxiv.org/abs/1903.07291) (CVPR 2019) : [Review](https://happy-jihye.github.io/gan/gan-9/)
 
-- [[CycleGAN] Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks](https://arxiv.org/abs/1703.10593)(ICCV 2017)
+- [[CycleGAN] Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks](https://arxiv.org/abs/1703.10593) (ICCV 2017)
 
-- [StarGAN: Unified Generative Adversarial Networks for Multi-Domain Image-to-Image Translation](https://arxiv.org/abs/1711.09020)(CVPR 2018)
+- [StarGAN: Unified Generative Adversarial Networks for Multi-Domain Image-to-Image Translation](https://arxiv.org/abs/1711.09020) (CVPR 2018)
