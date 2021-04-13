@@ -25,6 +25,7 @@ layout: single
 
 6 - [Training Neural Networks (1)](https://happy-jihye.github.io/cs231n/cs231n-6/)
 
+---
 
 **Generative Adversarial Networks : Paper Review** ([Github](https://github.com/happy-jihye/GAN-Papers))
 
