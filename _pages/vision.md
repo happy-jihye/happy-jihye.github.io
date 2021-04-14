@@ -46,3 +46,5 @@ layout: single
 - [[Pix2Pix] Image-to-Image Translation with Conditional Adversarial Networks](https://arxiv.org/abs/1611.07004) (CVPR 2017) : [Review](https://happy-jihye.github.io/gan/gan-8/)
 
 - [[SPADE] Semantic Image Synthesis with Spatially Adaptive Normalization](https://arxiv.org/abs/1903.07291) (CVPR 2019) : [Review](https://happy-jihye.github.io/gan/gan-9/)
+
+- [[CycleGAN] Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks](https://arxiv.org/abs/1703.10593)(ICCV 2017) : [Review](https://happy-jihye.github.io/gan/gan-10/)
