@@ -32,3 +32,5 @@ layout: single
 - [[CycleGAN] Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks](https://arxiv.org/abs/1703.10593)(ICCV 2017) : [Review](https://happy-jihye.github.io/gan/gan-10/)
 
 - [StarGAN: Unified Generative Adversarial Networks for Multi-Domain Image-to-Image Translation](https://arxiv.org/abs/1711.09020)(CVPR 2018) : [Review](https://happy-jihye.github.io/gan/gan-12/)
+
+- [MUNIT : Multi-Modal Unsupervised Image-to-Image Translation](https://arxiv.org/abs/1804.04732) (ECCV 2018) : [Review](https://happy-jihye.github.io/gan/gan-14/)
