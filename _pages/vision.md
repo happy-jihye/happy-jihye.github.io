@@ -9,7 +9,7 @@ layout: single
 
 ---
 
-**CS231n 강의 노트**
+#### CS231n 강의 노트
 
 스탠포드 대학교의 딥러닝 강의인 cs231n을 요약한 내용입니다.
 
@@ -27,7 +27,7 @@ layout: single
 
 ---
 
-**Generative Adversarial Networks : Paper Review** ([Github](https://github.com/happy-jihye/GAN-Papers))
+#### **Generative Adversarial Networks : Paper Review** ([Github](https://github.com/happy-jihye/GAN-Papers))
 
 **GAN Basics**
 
