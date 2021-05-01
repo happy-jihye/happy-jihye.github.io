@@ -9,13 +9,13 @@ layout: single
 
 ---
 
-**GAN Basics**
+<span style='background-color: #E5EBF7;'> **GAN Basics** </span>
 
 - [[GAN] Generative Adversarial Networks](https://happy-jihye.github.io/gan/gan-1/) (2014) : [Paper](https://arxiv.org/abs/1406.2661)
 
 - [[DCGAN] Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://happy-jihye.github.io/gan/gan-2/) (2015) : [Paper](https://arxiv.org/abs/1511.06434)
 
-**Conditional GAN**
+<span style='background-color: #E5EBF7;'> **Conditional GAN** </span>
 
 - [[CGAN] Conditional Generative Adversarial Nets](https://happy-jihye.github.io/gan/gan-3/) (2014) : [Paper](https://arxiv.org/abs/1411.1784)
 
@@ -37,7 +37,7 @@ layout: single
   - [MUNIT : Multi-Modal Unsupervised Image-to-Image Translation](https://happy-jihye.github.io/gan/gan-14/) (ECCV 2018) : [Paper](https://arxiv.org/abs/1804.04732)
 
 
-**GAN Architecture**
+<span style='background-color: #E5EBF7;'> **GAN Architecture** </span>
 
 - [[Progressive GAN] Progressive Growing of GANs for Improved Quality, Stability, and Variation](https://happy-jihye.github.io/gan/gan-5/) (2018) : [Paper](https://arxiv.org/abs/1710.10196)
 
@@ -46,6 +46,6 @@ layout: single
   - [[StyleGAN2] Analyzing and Improving the Image Quality of StyleGAN](https://happy-jihye.github.io/gan/gan-7/) (2020) : [Paper](https://arxiv.org/abs/1912.04958)
   
 
-**Text-to-Image**
+<span style='background-color: #E5EBF7;'> **Text-to-Image** </span>
 
 - [Generative Adversarial Text to Image Synthesis](https://happy-jihye.github.io/gan/gan-4/) (2016) : [Paper](https://arxiv.org/abs/1605.05396)
