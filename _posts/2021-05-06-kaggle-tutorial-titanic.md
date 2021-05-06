@@ -3,9 +3,9 @@ title: "Kaggle Tutorial #01 : Titanic (for Beginner) "
 excerpt: " "
 
 categories:
- - Notebook
+ - Kaggle
 tags:
- - Need_modify
+ - Kaggle
 layout: jupyter
 search: true
 
