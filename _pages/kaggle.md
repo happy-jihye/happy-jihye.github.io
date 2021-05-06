@@ -6,4 +6,4 @@ toc_ads : true
 layout: single
 ---
   
-- [Kaggle 따라잡기 #01 : Titanic Tutorial (for Beginner)]   (https://happy-jihye.github.io/kaggle/kaggle-1/)
+- [Kaggle 따라잡기 #01 : Titanic Tutorial (for Beginner)](https://happy-jihye.github.io/kaggle/kaggle-1/)
