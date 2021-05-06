@@ -527,7 +527,7 @@ msno.matrix(df=train.iloc[:, :], figsize=(8, 8), color=(0.4, 0.6, 0.8))
 
 
 
-![png](kaggle-tutorial-titanic_files/kaggle-tutorial-titanic_16_1.png)
+![png](images/kaggle/kaggle-tutorial-titanic_files/kaggle-tutorial-titanic_16_1.png)
 
 
 
@@ -547,7 +547,7 @@ msno.bar(df=train.iloc[:, :], figsize=(8, 8), color=(0.4, 0.6, 0.8))
 
 
 
-![png](kaggle-tutorial-titanic_files/kaggle-tutorial-titanic_17_1.png)
+![png](images/kaggle/kaggle-tutorial-titanic_files/kaggle-tutorial-titanic_17_1.png)
 
 
 ### 2.3 Count the rate of Survival 
@@ -570,7 +570,7 @@ plt.show()
 ```
 
 
-![png](kaggle-tutorial-titanic_files/kaggle-tutorial-titanic_19_0.png)
+![png](images/kaggle/kaggle-tutorial-titanic_files/kaggle-tutorial-titanic_19_0.png)
 
 
 ## 3. Exploratory Data Analysis (EDA)
@@ -727,7 +727,7 @@ plt.show()
 ```
 
 
-![png](kaggle-tutorial-titanic_files/kaggle-tutorial-titanic_26_0.png)
+![png](images/kaggle/kaggle-tutorial-titanic_files/kaggle-tutorial-titanic_26_0.png)
 
 
 `pclass`에 대한 data를 `one-hot encoding` 해줍니다.
@@ -903,7 +903,7 @@ plt.show()
 ```
 
 
-![png](kaggle-tutorial-titanic_files/kaggle-tutorial-titanic_31_0.png)
+![png](images/kaggle/kaggle-tutorial-titanic_files/kaggle-tutorial-titanic_31_0.png)
 
 
 성별에 대한 data를 `one-hot encoding` 해줍니다. 
@@ -1095,7 +1095,7 @@ plt.show()
 ```
 
 
-![png](kaggle-tutorial-titanic_files/kaggle-tutorial-titanic_37_0.png)
+![png](images/kaggle/kaggle-tutorial-titanic_files/kaggle-tutorial-titanic_37_0.png)
 
 
 나이 범위에 따른 생존률을 확인해보자.
@@ -1116,7 +1116,7 @@ plt.show()
 ```
 
 
-![png](kaggle-tutorial-titanic_files/kaggle-tutorial-titanic_39_0.png)
+![png](images/kaggle/kaggle-tutorial-titanic_files/kaggle-tutorial-titanic_39_0.png)
 
 
 `Age` 데이터는 20%정도가 NaN value입니다. 잘 모르는 데이터에 대해서는 평균값으로 채우도록 합시다.
@@ -1229,7 +1229,7 @@ plt.show()
 ```
 
 
-![png](kaggle-tutorial-titanic_files/kaggle-tutorial-titanic_46_0.png)
+![png](images/kaggle/kaggle-tutorial-titanic_files/kaggle-tutorial-titanic_46_0.png)
 
 
 ### 3.5 Fare
@@ -1245,7 +1245,7 @@ g = g.legend(loc = "best")
 ```
 
 
-![png](kaggle-tutorial-titanic_files/kaggle-tutorial-titanic_48_0.png)
+![png](images/kaggle/kaggle-tutorial-titanic_files/kaggle-tutorial-titanic_48_0.png)
 
 
 
@@ -1264,7 +1264,7 @@ g = g.legend(loc = "best")
 ```
 
 
-![png](kaggle-tutorial-titanic_files/kaggle-tutorial-titanic_49_0.png)
+![png](images/kaggle/kaggle-tutorial-titanic_files/kaggle-tutorial-titanic_49_0.png)
 
 
 탑승료에는 `test` dataset에 하나의 데이터가 비어있습니다. 빈 부분에 대해서는 평균값을 넣어주겠습니다.
@@ -1309,7 +1309,7 @@ train[["Embarked", "Survived"]].groupby(["Embarked"], as_index = True).mean().so
 
 
 
-![png](kaggle-tutorial-titanic_files/kaggle-tutorial-titanic_55_1.png)
+![png](images/kaggle/kaggle-tutorial-titanic_files/kaggle-tutorial-titanic_55_1.png)
 
 
 `Embarked`에는 2개의 Null value가 있었습니다. `S` 탑승구에 가장 많은 승객이 있으므로 null value의 `Embarked`는 `S`로 채웠습니다.
@@ -1772,7 +1772,7 @@ plt.show()
 ```
 
 
-![png](kaggle-tutorial-titanic_files/kaggle-tutorial-titanic_85_0.png)
+![png](images/kaggle/kaggle-tutorial-titanic_files/kaggle-tutorial-titanic_85_0.png)
 
 
 ### 4.4 Prediction on Test set 
