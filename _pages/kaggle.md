@@ -1,6 +1,6 @@
 ---
 title: "Kaggle ✍🏻 캐글 따라잡기 !"
-permalink: /gan/
+permalink: /kaggle/
 toc_sticky: true
 toc_ads : true
 layout: single
