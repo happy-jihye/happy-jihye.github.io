@@ -11,8 +11,31 @@ layout: single
 Pytorch를 활용하여 자연어 처리에 대해 공부한 글입니다. 
 궁금한 점이 있다면 댓글 남겨주세요 :)
 
+## Papers
 
-### Posts 
+자연어처리 관련 paper들과 해당 논문 review입니다. 읽는 순서대로 업데이트할 예정입니다.
+
+
+- [Sequence to Sequence Learning with Neural Networks](https://arxiv.org/abs/1409.3215)(2014) : [Review](https://happy-jihye.github.io/nlp/nlp-6/) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/happy-jihye/Natural-Language-Processing/blob/main/code/1_Sequence_to_Sequence_Learning_with_Neural_Networks.ipynb)
+
+- [Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation](https://arxiv.org/abs/1406.1078)(2014) : [Review](https://happy-jihye.github.io/nlp/nlp-7/) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/happy-jihye/Natural-Language-Processing/blob/main/code/2_Learning_Phrase_Representations_using_RNN_Encoder_Decoder_for_Statistical_Machine_Translation.ipynb)
+
+- [Transformer : Attention is All you need](https://arxiv.org/abs/1706.03762)(2017) : [Review](https://happy-jihye.github.io/nlp/nlp-8/) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/happy-jihye/Natural-Language-Processing/blob/main/code/6_Attention_is_All_You_Need.ipynb)
+
+- [Reformer: The Efficient Transformer](https://arxiv.org/abs/2001.04451)(2020) : [Review](https://happy-jihye.github.io/nlp/nlp-10/)
+
+- [Visual Transformer(ViT) : An Image is Worth 16X16 Words: Transformers for Image Recognition at Scale](https://arxiv.org/abs/2010.11929)(2020) : [Review](https://happy-jihye.github.io/nlp/nlp-9/)
+
+- [ELMo : Deep contextualized word representations](https://arxiv.org/abs/1802.05365)(2018)
+
+- [BERT : Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/abs/1810.04805)(2019)
+
+
+
+### Tutorials
+
+- bentrevett의 pytorch tutorial을 통해 학습한 내용입니다. 
+
 
 **감정 분석 모델(Sentiment Analysis)** 
 [GitHub](https://github.com/happy-jihye/Natural-Language-Processing)
@@ -58,6 +81,9 @@ Pytorch를 활용하여 자연어 처리에 대해 공부한 글입니다.
 
   - Seq2Seq model과 GRU model을 최초로 제안한 논문인 [Sequence to Sequence Learning with Neural Networks](https://arxiv.org/abs/1409.3215) paper의 모델을 간단하게 구현하였습니다.
 
+- 3 - [Transformer : Attention is All You Need 논문 분석 및 코드 실습](https://happy-jihye.github.io/nlp/nlp-8/) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/happy-jihye/Natural-Language-Processing/blob/main/code/6_Attention_is_All_You_Need.ipynb)
+
+  - 대표적인 nlp 모델인 Transformer 설명 및 코드 실습입니다.
 
 
 ## Reference 
