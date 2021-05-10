@@ -87,6 +87,6 @@ Pytorch를 활용하여 자연어 처리에 대해 공부한 글입니다.
 
 
 ## Reference 
-- https://github.com/bentrevett/pytorch-sentiment-analysis
+- [https://github.com/bentrevett/pytorch-sentiment-analysis](https://github.com/bentrevett/pytorch-sentiment-analysis)
 
 
