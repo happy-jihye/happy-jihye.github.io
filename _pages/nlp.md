@@ -6,7 +6,9 @@ toc_ads : true
 layout: single
 ---
 
-
+<p align='right'> 
+ <a href='https://github.com/happy-jihye/Natural-Language-Processing' role='button' target='_blank'> <img class='notebook-badge-image' src='/assets/badges/github.svg' alt='View On GitHub'> </a> 
+</p>
 
 Pytorch를 활용하여 자연어 처리에 대해 공부한 글입니다. 
 궁금한 점이 있다면 댓글 남겨주세요 :)
@@ -32,13 +34,13 @@ Pytorch를 활용하여 자연어 처리에 대해 공부한 글입니다.
 
 
 
-### Tutorials
+## Tutorials
 
 - bentrevett의 pytorch tutorial을 통해 학습한 내용입니다. 
 
 
 **감정 분석 모델(Sentiment Analysis)** 
-[GitHub](https://github.com/happy-jihye/Natural-Language-Processing)
+
 
 1 - [RNN을 이용한 간단한 감정 분석 모델](https://happy-jihye.github.io/nlp/nlp-1/) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/happy-jihye/Natural-Language-Processing/blob/main/1_Simple_Sentiment_Analysis.ipynb)
 
