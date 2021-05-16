@@ -218,6 +218,7 @@ plugins:
   - jekyll-gist
   - jekyll-feed
   - jekyll-include-cache
+  
   - jekyll-coffeescript
   - jekyll-default-layout
   - jekyll-github-metadata
