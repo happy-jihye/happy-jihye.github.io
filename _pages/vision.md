@@ -71,4 +71,4 @@ layout: single
 
 - [Generative Adversarial Text to Image Synthesis](https://happy-jihye.github.io/gan/gan-4/) (2016) : [Paper](https://arxiv.org/abs/1605.05396)
 
-- [StyleCLIP: Text-Driven Manipulation of StyleGAN Imagery](https://happy-jihye.github.io/gan/gan-15/) (2021) : [Paper](https://arxiv.org/abs/2103.17249)
+- [StyleCLIP: Text-Driven Manipulation of StyleGAN Imagery](https://happy-jihye.github.io/gan/gan-15/) (arXiv 2021) : [Paper](https://arxiv.org/abs/2103.17249)
