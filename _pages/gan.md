@@ -1,5 +1,5 @@
 ---
-title: "GAN(Generative Adversarial Networks)"
+title: " 🦓 GAN-Zoos! "
 permalink: /gan/
 toc_sticky: true
 toc_ads : true
@@ -49,3 +49,5 @@ layout: single
 <span style='background-color: #E5EBF7;'> **Text-to-Image** </span>
 
 - [Generative Adversarial Text to Image Synthesis](https://happy-jihye.github.io/gan/gan-4/) (2016) : [Paper](https://arxiv.org/abs/1605.05396)
+
+- [StyleCLIP: Text-Driven Manipulation of StyleGAN Imagery](https://happy-jihye.github.io/gan/gan-15/) (2021) : [Paper](https://arxiv.org/abs/2103.17249)
