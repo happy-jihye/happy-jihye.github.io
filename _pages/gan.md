@@ -57,3 +57,5 @@ layout: single
 - [SS-GAN: Self-Supervised GANs via Auxiliary Rotation Loss](https://happy-jihye.github.io/gan/gan-16/) (CVPR 2019) : [Paper](https://openaccess.thecvf.com/content_CVPR_2019/papers/Chen_Self-Supervised_GANs_via_Auxiliary_Rotation_Loss_CVPR_2019_paper.pdf)
 
 - [CR-GAN: Consistency Regularization for Generative Adversarial Networks](https://happy-jihye.github.io/gan/gan-17/) (ICLR 2020) : [Paper](https://arxiv.org/abs/1910.12027)
+
+- [ICR-GAN: Improved Consistency Regularization for GANs](https://happy-jihye.github.io/gan/gan-18/) (AAAI 2021) : [Paper](https://arxiv.org/abs/2002.04724)
