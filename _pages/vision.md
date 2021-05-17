@@ -32,25 +32,25 @@ layout: single
 
 <span style='background-color: #E5EBF7;'> **GAN Basics** </span>
 
-- [[GAN] Generative Adversarial Networks](https://happy-jihye.github.io/gan/gan-1/) (2014) : [Paper](https://arxiv.org/abs/1406.2661)
+- [GAN: Generative Adversarial Networks](https://happy-jihye.github.io/gan/gan-1/) (2014) : [Paper](https://arxiv.org/abs/1406.2661)
 
-- [[DCGAN] Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://happy-jihye.github.io/gan/gan-2/) (2015) : [Paper](https://arxiv.org/abs/1511.06434)
+- [DCGAN: Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://happy-jihye.github.io/gan/gan-2/) (2015) : [Paper](https://arxiv.org/abs/1511.06434)
 
 <span style='background-color: #E5EBF7;'> **Conditional GAN** </span>
 
-- [[CGAN] Conditional Generative Adversarial Nets](https://happy-jihye.github.io/gan/gan-3/) (2014) : [Paper](https://arxiv.org/abs/1411.1784)
+- [CGAN: Conditional Generative Adversarial Nets](https://happy-jihye.github.io/gan/gan-3/) (2014) : [Paper](https://arxiv.org/abs/1411.1784)
 
-- [[ACGAN] Conditional Image Synthesis With Auxiliary Classifier GANs](https://happy-jihye.github.io/gan/gan-13/) (ICML 2017) : [Paper](https://arxiv.org/abs/1610.09585)
+- [ACGAN: Conditional Image Synthesis With Auxiliary Classifier GANs](https://happy-jihye.github.io/gan/gan-13/) (ICML 2017) : [Paper](https://arxiv.org/abs/1610.09585)
 
 - **Pair Dataset** 
 
-  - [[Pix2Pix] Image-to-Image Translation with Conditional Adversarial Networks](https://happy-jihye.github.io/gan/gan-8/) (CVPR 2017) : [Paper](https://arxiv.org/abs/1611.07004)
+  - [Pix2Pix: Image-to-Image Translation with Conditional Adversarial Networks](https://happy-jihye.github.io/gan/gan-8/) (CVPR 2017) : [Paper](https://arxiv.org/abs/1611.07004)
 
-  - [[SPADE] Semantic Image Synthesis with Spatially Adaptive Normalization](https://happy-jihye.github.io/gan/gan-9/) (CVPR 2019) : [Paper](https://arxiv.org/abs/1903.07291)
+  - [SPADE: Semantic Image Synthesis with Spatially Adaptive Normalization](https://happy-jihye.github.io/gan/gan-9/) (CVPR 2019) : [Paper](https://arxiv.org/abs/1903.07291)
 
 - **Unpair Dataset** 
 
-  - [[CycleGAN] Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks](https://happy-jihye.github.io/gan/gan-10/) (ICCV 2017) : [Paper](https://arxiv.org/abs/1703.10593)
+  - [CycleGAN: Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks](https://happy-jihye.github.io/gan/gan-10/) (ICCV 2017) : [Paper](https://arxiv.org/abs/1703.10593)
 
 - **Multi Domain**
   - [StarGAN: Unified Generative Adversarial Networks for Multi-Domain Image-to-Image Translation](https://happy-jihye.github.io/gan/gan-12/) (CVPR 2018) : [Paper](https://arxiv.org/abs/1711.09020)
@@ -60,11 +60,11 @@ layout: single
 
 <span style='background-color: #E5EBF7;'> **GAN Architecture** </span>
 
-- [[Progressive GAN] Progressive Growing of GANs for Improved Quality, Stability, and Variation](https://happy-jihye.github.io/gan/gan-5/) (2018) : [Paper](https://arxiv.org/abs/1710.10196)
+- [Progressive GAN: Progressive Growing of GANs for Improved Quality, Stability, and Variation](https://happy-jihye.github.io/gan/gan-5/) (2018) : [Paper](https://arxiv.org/abs/1710.10196)
 
-- [[StyleGAN] A Style-Based Generator Architecture for Generative Adversarial Networks](https://happy-jihye.github.io/gan/gan-6/) (2019) : [Paper](https://arxiv.org/abs/1812.04948)
+- [StyleGAN: A Style-Based Generator Architecture for Generative Adversarial Networks](https://happy-jihye.github.io/gan/gan-6/) (2019) : [Paper](https://arxiv.org/abs/1812.04948)
 
-  - [[StyleGAN2] Analyzing and Improving the Image Quality of StyleGAN](https://happy-jihye.github.io/gan/gan-7/) (2020) : [Paper](https://arxiv.org/abs/1912.04958)
+  - [StyleGAN2: Analyzing and Improving the Image Quality of StyleGAN](https://happy-jihye.github.io/gan/gan-7/) (2020) : [Paper](https://arxiv.org/abs/1912.04958)
   
 
 <span style='background-color: #E5EBF7;'> **Text-to-Image** </span>
