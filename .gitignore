@@ -35,3 +35,8 @@ Gemfile.lock
 node_modules
 npm-debug.log*
 cmd.sh
+
+gan.sh
+python.sh
+git.sh
+image.sh
