@@ -19,6 +19,20 @@ toc_sticky: true
 # 수식
 use_math: true
 ---
+
+<p align="right">
+  <a href="https://github.com/happy-jihye/Kaggle-Tutorial/blob/main/1-kaggle-tutorial-titanic.ipynb" role="button" target="_blank">
+    <img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+  </a>
+  <a href="https://mybinder.org/v2/gh/happy-jihye/Kaggle-Tutorial/main?filepath=1-kaggle-tutorial-titanic.ipynb" target="_blank">
+      <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+  </a>
+  <a href="https://colab.research.google.com/github/happy-jihye/Kaggle-Tutorial/blob/main/1-kaggle-tutorial-titanic.ipynb" target="_blank">
+      <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+  </a>
+</p>
+
+
 {%- endblock header -%}
 
 
