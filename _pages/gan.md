@@ -45,6 +45,7 @@ layout: single
 
   - [StyleGAN2: Analyzing and Improving the Image Quality of StyleGAN](https://happy-jihye.github.io/gan/gan-7/) (2020) : [Paper](https://arxiv.org/abs/1912.04958)
   
+  - Training Generative Adversarial Networks with Limited Data [#01](https://happy-jihye.github.io/gan/gan-19/), [#02](https://happy-jihye.github.io/gan/gan-20/) (NeurlPS 2020) : [Paper](https://arxiv.org/abs/2006.06676)
 
 <span style='background-color: #E5EBF7;'> **Text-to-Image** </span>
 
@@ -59,3 +60,7 @@ layout: single
 - [CR-GAN: Consistency Regularization for Generative Adversarial Networks](https://happy-jihye.github.io/gan/gan-17/) (ICLR 2020) : [Paper](https://arxiv.org/abs/1910.12027)
 
 - [ICR-GAN: Improved Consistency Regularization for GANs](https://happy-jihye.github.io/gan/gan-18/) (AAAI 2021) : [Paper](https://arxiv.org/abs/2002.04724)
+
+<span style='background-color: #E5EBF7;'> **Talking Head** </span>
+
+- [Few-Shot Adversarial Learning of Realistic Neural Talking Head Models](https://happy-jihye.github.io/gan/gan-22/) (arxiv 2019) : [Paper](https://arxiv.org/abs/1905.08233)
