@@ -61,6 +61,19 @@ layout: single
 
 - [ICR-GAN: Improved Consistency Regularization for GANs](https://happy-jihye.github.io/gan/gan-18/) (AAAI 2021) : [Paper](https://arxiv.org/abs/2002.04724)
 
+<span style='background-color: #E5EBF7;'> **GAN Inversion** </span>
+
+1. **Latent Optimization**
+   - [Image2stylegan: How to embed images into the stylegan latent space?](https://happy-jihye.github.io/gan/gan-23/) (ICCV 2019) : [Paper](https://arxiv.org/abs/1904.03189)
+   - Image2stylegan++: How to edit the embedded images?
+2. **Encoder**
+   - ALAE: Adversarial latent autoencoders ([github](https://github.com/podgorskiy/ALAE))
+   - [pSp: Encoding in Style: a StyleGAN Encoder for Image-to-Image Translation](https://happy-jihye.github.io/gan/gan-23/) (CVPR 2021) : [Paper](https://arxiv.org/abs/2008.00951)
+3. **Hybrid approach**
+   - stylegan-encoder : [Github](https://github.com/pbaylies/stylegan-encoder)
+   - [IdInvert : In-Domain GAN Inversion for Real Image Editing](https://happy-jihye.github.io/gan/gan-23/) (ECCV 2020) : [Paper](https://arxiv.org/abs/2004.00049)
+
 <span style='background-color: #E5EBF7;'> **Talking Head** </span>
 
 - [Few-Shot Adversarial Learning of Realistic Neural Talking Head Models](https://happy-jihye.github.io/gan/gan-22/) (arxiv 2019) : [Paper](https://arxiv.org/abs/1905.08233)
+- Neural Head Reenactment with Latent Pose Descriptors (IEEE 2020) : [Paper](https://arxiv.org/abs/2004.12000) 
