@@ -73,7 +73,28 @@ layout: single
    - stylegan-encoder : [Github](https://github.com/pbaylies/stylegan-encoder)
    - [IdInvert : In-Domain GAN Inversion for Real Image Editing](https://happy-jihye.github.io/gan/gan-23/) (ECCV 2020) : [Paper](https://arxiv.org/abs/2004.00049)
 
+<span style='background-color: #E5EBF7;'> **Disentangled Manipulation** </span>
+
+- GANSpace: Discovering Interpretable GAN Controls (NeurIPS 2020) : [arxiv](https://arxiv.org/abs/2004.02546), [code](https://github.com/harskish/ganspace)
+- GAN-Latent-Discovery: Unsupervised Discovery of Interpretable Directions in the GAN Latent Space (2020) : [arxiv](https://arxiv.org/abs/2002.03754), [code](https://github.com/anvoynov/GANLatentDiscovery)
+- Editing in style: Uncovering the Local Semantics of GANs (CVPR 2020) : [arxiv](https://arxiv.org/abs/2004.14367), [code](https://github.com/IVRL/GANLocalEditing)
+- InterFaceGAN Interpreting the Disentangled Face Representation Learned by GANs (TPAMI 2020) : [arxiv](https://arxiv.org/abs/2005.09635)
+- StyleSpace: StyleSpace Analysis: Disentangled Controls for StyleGAN Image Generation (2021) : [arxiv](https://arxiv.org/abs/2011.12799), [code](https://github.com/xrenaa/StyleSpace-pytorch), [code2](https://github.com/happy-jihye/GAN/tree/main/StyleSpace)
+
+
+<span style='background-color: #E5EBF7;'> **Image Editing** </span>
+
+- [StyleCLIP: Text-Driven Manipulation of StyleGAN Imagery](https://happy-jihye.github.io/gan/gan-15/) (arXiv 2021) : [arxiv](https://arxiv.org/abs/2103.17249), [code](https://github.com/orpatashnik/StyleCLIP)
+- sefa: Closed-Form Factorization of Latent Semantics in GANs (CVPR 2021) : [arxiv](https://arxiv.org/abs/2007.06600), [code](https://github.com/happy-jihye/GAN/tree/main/SEFA)
+- EigenGAN: Layer-Wise Eigen-Learning for GANs : [arxiv](https://arxiv.org/abs/2104.12476), [code](https://github.com/bryandlee/eigengan-pytorch)
+- StyleMapGAN: Exploiting Spatial Dimensions of Latent in GAN for Real-time Image Editing (CVPR 2021) : [arxiv](https://arxiv.org/abs/2104.14754), [code](https://github.com/naver-ai/StyleMapGAN)
+- SEAN: Image Synthesis with Semantic Region-Adaptive Normalization (CVPR 2020) : [arxiv](https://arxiv.org/abs/1911.12861), [code](https://github.com/ZPdesu/SEAN)
+- [CD3D: Cross-Domain and Disentangled Face Manipulation with 3D Guidance](https://happy-jihye.github.io/gan/gan-24/) (2021) : [arxiv](https://arxiv.org/abs/2104.11228), [code](https://github.com/cassiePython/cddfm3d), [project](https://cassiepython.github.io/sigasia/cddfm3d.html)
+
+
 <span style='background-color: #E5EBF7;'> **Talking Head** </span>
 
 - [Few-Shot Adversarial Learning of Realistic Neural Talking Head Models](https://happy-jihye.github.io/gan/gan-22/) (arxiv 2019) : [Paper](https://arxiv.org/abs/1905.08233)
 - Neural Head Reenactment with Latent Pose Descriptors (IEEE 2020) : [Paper](https://arxiv.org/abs/2004.12000) 
+- FOMM: First Order Motion Model for Image Animation (NeurIPS 2019) : [arxiv](https://arxiv.org/abs/2003.00196), [code](https://github.com/AliaksandrSiarohin/first-order-model)
+- Motion Representations for Articulated Animation (CVPR 2021) : [arxiv](https://arxiv.org/abs/2104.11280), [code](https://github.com/snap-research/articulated-animation), [project](https://snap-research.github.io/articulated-animation/)
