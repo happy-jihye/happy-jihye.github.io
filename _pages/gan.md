@@ -11,7 +11,7 @@ layout: single
 
 <span style='background-color: #E5EBF7;'> **GAN Basics** </span>
 
-- [GAN: Generative Adversarial Networks](https://happy-jihye.github.io/gan/gan-1/) (2014) : [Paper](https://arxiv.org/abs/1406.2661)
+- [GAN: Generative Adversarial Networks](https://happy-jihye.github.io/gan/gan-1/) (NIPS 2014) : [Paper](https://arxiv.org/abs/1406.2661)
 
 - [DCGAN: Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://happy-jihye.github.io/gan/gan-2/) (2015) : [Paper](https://arxiv.org/abs/1511.06434)
 
