@@ -32,7 +32,11 @@ layout: single
 
 <span style='background-color: #E5EBF7;'> **GAN Basics** </span>
 
+<<<<<<< HEAD
 - [`GAN`: Generative Adversarial Networks](https://happy-jihye.github.io/gan/gan-1/) (NIPS 2014) : [arxiv](https://arxiv.org/abs/1406.2661), [review](https://happy-jihye.github.io/gan/gan-1/) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/happy-jihye/GAN/blob/main/gan/gan.ipynb)
+=======
+- [GAN: Generative Adversarial Networks](https://happy-jihye.github.io/gan/gan-1/) (NIPS 2014) : [Paper](https://arxiv.org/abs/1406.2661)
+>>>>>>> c0aa036975251de06f40e48b10d4f6a0a15805c2
 
 - [`DCGAN`: Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://happy-jihye.github.io/gan/gan-2/) (ICLR 2016) : [arxiv](https://arxiv.org/abs/1511.06434), [review](https://happy-jihye.github.io/gan/gan-2/)
 
