@@ -135,8 +135,8 @@ layout: single
 
 <span style='background-color: #E5EBF7;'> **Talking Head** </span>
 
-- [Few-Shot Adversarial Learning of Realistic Neural Talking Head Models](https://happy-jihye.github.io/gan/gan-22/) (arxiv 2019) : [arxiv](https://arxiv.org/abs/1905.08233) : [review](https://happy-jihye.github.io/gan/gan-22/)
-- `LPD`: Neural Head Reenactment with Latent Pose Descriptors (IEEE 2020) : [arxiv](https://arxiv.org/abs/2004.12000)  
+- [Few-Shot Adversarial Learning of Realistic Neural Talking Head Models](https://happy-jihye.github.io/gan/gan-22/) (ICCV 2019) : [arxiv](https://arxiv.org/abs/1905.08233) : [review](https://happy-jihye.github.io/gan/gan-22/)
+- `LPD`: Neural Head Reenactment with Latent Pose Descriptors (CVPR 2020) : [Paper](https://arxiv.org/abs/2004.12000), [project](https://saic-violet.github.io/latent-pose-reenactment/), [code](https://github.com/shrubb/latent-pose-reenactment)
 - `FOMM`: First Order Motion Model for Image Animation (NeurIPS 2019) : [arxiv](https://arxiv.org/abs/2003.00196), [code](https://github.com/AliaksandrSiarohin/first-order-model)
 - Motion Representations for Articulated Animation (CVPR 2021) : [arxiv](https://arxiv.org/abs/2104.11280), [code](https://github.com/snap-research/articulated-animation), [project](https://snap-research.github.io/articulated-animation/)
 - [`MocoGAN-HD`: A Good Image Generator Is What You Need for High-Resolution Video Synthesis](https://happy-jihye.github.io/gan/gan-27/) (ICLR 2021) : [arxiv](https://arxiv.org/abs/2104.15069), [review](https://happy-jihye.github.io/gan/gan-27/), [code](https://github.com/snap-research/MoCoGAN-HD), [project](https://bluer555.github.io/MoCoGAN-HD/)
