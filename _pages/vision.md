@@ -7,23 +7,6 @@ layout: single
 ---
   
 
----
-
-#### 📒 CS231n 강의 노트
-
-스탠포드 대학교의 딥러닝 강의인 cs231n을 요약한 내용입니다.
-
-1 - [Introduction to Convolutional Neural Networks for Visual Recognition](https://happy-jihye.github.io/cs231n/cs231n-1/)
-
-2 - [Image Classfication pipeline](https://happy-jihye.github.io/cs231n/cs231n-2/)
-
-3 - [Loss Functions and Optimization](https://happy-jihye.github.io/cs231n/cs231n-3/)
-
-4 - [Backpropagation and Neural Networks](https://happy-jihye.github.io/cs231n/cs231n-4/)
-  
-5 - [Convolutional Neural Networks](https://happy-jihye.github.io/cs231n/cs231n-5/)
-
-6 - [Training Neural Networks (1)](https://happy-jihye.github.io/cs231n/cs231n-6/)
 
 ---
 
@@ -133,7 +116,23 @@ layout: single
 - [`CDDFM3D`: Cross-Domain and Disentangled Face Manipulation with 3D Guidance](https://happy-jihye.github.io/gan/gan-24/) (2021) : [arxiv](https://arxiv.org/abs/2104.11228), [review](https://happy-jihye.github.io/gan/gan-24/), [code](https://github.com/cassiePython/cddfm3d)
 - [`MocoGAN-HD`: A Good Image Generator Is What You Need for High-Resolution Video Synthesis](https://happy-jihye.github.io/gan/gan-27/) (ICLR 2021) : [arxiv](https://arxiv.org/abs/2104.15069), [review](https://happy-jihye.github.io/gan/gan-27/), [code](https://github.com/snap-research/MoCoGAN-HD), [project](https://bluer555.github.io/MoCoGAN-HD/)
 
-<span style='background-color: #E5EBF7;'> **Talking Head** </span>
+
+<span style='background-color: #E5EBF7;'> **3D GAN** </span>
+
+- `HoloGAN`: Unsupervised learning of 3D representations from natural images (ICCV 2019): [paper](https://arxiv.org/abs/1904.01326), [code](https://github.com/thunguyenphuoc/HoloGAN)
+- `pi-GAN`: Periodic Implicit Generative Adversarial Networks for 3D-Aware Image Synthesis (CVPR 2021): [paper](https://arxiv.org/pdf/2012.00926.pdf), [project](https://marcoamonteiro.github.io/pi-GAN-website/), [code](https://marcoamonteiro.github.io/pi-GAN-website/)
+- [`CDDFM3D`: Cross-Domain and Disentangled Face Manipulation with 3D Guidance](https://happy-jihye.github.io/gan/gan-24/) (2021) : [arxiv](https://arxiv.org/abs/2104.11228), [review](https://happy-jihye.github.io/gan/gan-24/), [project](https://cassiepython.github.io/cddfm3d/index), [code](https://github.com/cassiePython/cddfm3d)
+- `StyleGANRender`: Image GANs meet Differentiable Rendering for Inverse Graphics and Interpretable 3D Neural Rendering (ICLR 2021) : [arxiv](https://arxiv.org/abs/2010.09125), [project page](https://nv-tlabs.github.io/GANverse3D/)
+- `StyleNeRF`: A Style-based 3D Aware Generator for High-resolution Image Synthesis(ICLR 2022): [paper](https://openreview.net/forum?id=iUuzzTMUw9K)
+
+<span style='background-color: #E5EBF7;'> **Novel View Synthesis** </span>
+
+- `NeRF`: Representing Scenes as Neural Radiance Fields for View Synthesis (ECCV 2020) : [arxiv](https://arxiv.org/abs/2003.08934), [project page](https://www.matthewtancik.com/nerf)
+
+---
+
+#### 😊 Talking Head : [Paper list](https://stream-chameleon-81c.notion.site/1fa3a78b6c54415784175c50eddfe3cc?v=ddc7ecf4fb0f484d8a98cb7da3fd1ea5)
+
 
 - [Few-Shot Adversarial Learning of Realistic Neural Talking Head Models](https://happy-jihye.github.io/gan/gan-22/) (ICCV 2019) : [arxiv](https://arxiv.org/abs/1905.08233) : [review](https://happy-jihye.github.io/gan/gan-22/)
 - `LPD`: Neural Head Reenactment with Latent Pose Descriptors (CVPR 2020) : [Paper](https://arxiv.org/abs/2004.12000), [project](https://saic-violet.github.io/latent-pose-reenactment/), [code](https://github.com/shrubb/latent-pose-reenactment)
@@ -143,12 +142,20 @@ layout: single
 
 
 
-<span style='background-color: #E5EBF7;'> **3D GAN** </span>
+---
 
-- [`CDDFM3D`: Cross-Domain and Disentangled Face Manipulation with 3D Guidance](https://happy-jihye.github.io/gan/gan-24/) (2021) : [arxiv](https://arxiv.org/abs/2104.11228), [review](https://happy-jihye.github.io/gan/gan-24/), [code](https://github.com/cassiePython/cddfm3d)
-- `StyleGANRender`: Image GANs meet Differentiable Rendering for Inverse Graphics and Interpretable 3D Neural Rendering (ICLR 2021) : [arxiv](https://arxiv.org/abs/2010.09125), [project page](https://nv-tlabs.github.io/GANverse3D/)
+#### 📒 CS231n 강의 노트
 
+스탠포드 대학교의 딥러닝 강의인 cs231n을 요약한 내용입니다.
 
-<span style='background-color: #E5EBF7;'> **Novel View Synthesis** </span>
+1 - [Introduction to Convolutional Neural Networks for Visual Recognition](https://happy-jihye.github.io/cs231n/cs231n-1/)
 
-- `NeRF`: Representing Scenes as Neural Radiance Fields for View Synthesis (ECCV 2020) : [arxiv](https://arxiv.org/abs/2003.08934), [project page](https://www.matthewtancik.com/nerf)
+2 - [Image Classfication pipeline](https://happy-jihye.github.io/cs231n/cs231n-2/)
+
+3 - [Loss Functions and Optimization](https://happy-jihye.github.io/cs231n/cs231n-3/)
+
+4 - [Backpropagation and Neural Networks](https://happy-jihye.github.io/cs231n/cs231n-4/)
+  
+5 - [Convolutional Neural Networks](https://happy-jihye.github.io/cs231n/cs231n-5/)
+
+6 - [Training Neural Networks (1)](https://happy-jihye.github.io/cs231n/cs231n-6/)
