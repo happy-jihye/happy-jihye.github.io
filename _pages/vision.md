@@ -135,17 +135,18 @@ layout: single
 
 - [`MocoGAN-HD`: A Good Image Generator Is What You Need for High-Resolution Video Synthesis](https://happy-jihye.github.io/gan/gan-27/) (ICLR 2021) : [arxiv](https://arxiv.org/abs/2104.15069), [review](https://happy-jihye.github.io/gan/gan-27/), [code](https://github.com/snap-research/MoCoGAN-HD), [project](https://bluer555.github.io/MoCoGAN-HD/)
 
-<span style='background-color: #E5EBF7;'> **Warping-based Model** </span>
+<span style='background-color: #E5EBF7;'> **Landmark-based Model** </span>
 
 - [Few-Shot Adversarial Learning of Realistic Neural Talking Head Models](https://happy-jihye.github.io/gan/gan-22/) (ICCV 2019) : [arxiv](https://arxiv.org/abs/1905.08233), [review](https://happy-jihye.github.io/gan/gan-22/)
 - `LPD`: Neural Head Reenactment with Latent Pose Descriptors (CVPR 2020) : [Paper](https://arxiv.org/abs/2004.12000), [project](https://saic-violet.github.io/latent-pose-reenactment/), [code](https://github.com/shrubb/latent-pose-reenactment)
 
-<span style='background-color: #E5EBF7;'> **Landmark-based Model** </span>
+<span style='background-color: #E5EBF7;'> **Warping-based Model** </span>
 
 - `X2Face`: A network for controlling face generation by using images, audio, and pose codes (ECCV 2018) : [arxiv](https://arxiv.org/abs/1807.10550), [project](https://www.robots.ox.ac.uk/~vgg/research/unsup_learn_watch_faces/x2face.html)
 - `Monkey-Net`: Animating Arbitrary Objects via Deep Motion Transfer (CVPR 2019) : [arxiv](https://arxiv.org/abs/1812.08861), [project](http://www.stulyakov.com/papers/monkey-net.html), [code](https://github.com/AliaksandrSiarohin/monkey-net)
 - `FOMM`: First Order Motion Model for Image Animation (NeurIPS 2019) : [arxiv](https://arxiv.org/abs/2003.00196), [code](https://github.com/AliaksandrSiarohin/first-order-model)
-- Motion Representations for Articulated Animation (CVPR 2021) : [arxiv](https://arxiv.org/abs/2104.11280), [code](https://github.com/snap-research/articulated-animation), [project](https://snap-research.github.io/articulated-animation/)
+- `face vid2vid`: One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing (CVPR 2021): [arxiv](https://arxiv.org/abs/2011.15126), [project](https://nvlabs.github.io/face-vid2vid/)
+- `articulated animation`: Motion Representations for Articulated Animation (CVPR 2021) : [arxiv](https://arxiv.org/abs/2104.11280), [code](https://github.com/snap-research/articulated-animation), [project](https://snap-research.github.io/articulated-animation/)
 
 
 ---
