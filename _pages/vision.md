@@ -117,17 +117,18 @@ layout: single
 - [`MocoGAN-HD`: A Good Image Generator Is What You Need for High-Resolution Video Synthesis](https://happy-jihye.github.io/gan/gan-27/) (ICLR 2021) : [arxiv](https://arxiv.org/abs/2104.15069), [review](https://happy-jihye.github.io/gan/gan-27/), [code](https://github.com/snap-research/MoCoGAN-HD), [project](https://bluer555.github.io/MoCoGAN-HD/)
 
 
-<span style='background-color: #E5EBF7;'> **3D GAN** </span>
+<span style='background-color: #E5EBF7;'> **3D GAN & Rendering** </span>
 
 - `HoloGAN`: Unsupervised learning of 3D representations from natural images (ICCV 2019): [paper](https://arxiv.org/abs/1904.01326), [code](https://github.com/thunguyenphuoc/HoloGAN)
-- `pi-GAN`: Periodic Implicit Generative Adversarial Networks for 3D-Aware Image Synthesis (CVPR 2021): [paper](https://arxiv.org/pdf/2012.00926.pdf), [project](https://marcoamonteiro.github.io/pi-GAN-website/), [code](https://marcoamonteiro.github.io/pi-GAN-website/)
 - [`CDDFM3D`: Cross-Domain and Disentangled Face Manipulation with 3D Guidance](https://happy-jihye.github.io/gan/gan-24/) (2021) : [arxiv](https://arxiv.org/abs/2104.11228), [review](https://happy-jihye.github.io/gan/gan-24/), [project](https://cassiepython.github.io/cddfm3d/index), [code](https://github.com/cassiePython/cddfm3d)
+- `SofGAN`: A Portrait Image Generator with Dynamic Styling (arxiv 2021): [arxiv](https://arxiv.org/abs/2007.03780), [project](https://apchenstu.github.io/sofgan/), [code](https://github.com/apchenstu/sofgan)
+- `pi-GAN`: Periodic Implicit Generative Adversarial Networks for 3D-Aware Image Synthesis (CVPR 2021): [paper](https://arxiv.org/pdf/2012.00926.pdf), [project](https://marcoamonteiro.github.io/pi-GAN-website/), [code](https://marcoamonteiro.github.io/pi-GAN-website/)
 - `StyleGANRender`: Image GANs meet Differentiable Rendering for Inverse Graphics and Interpretable 3D Neural Rendering (ICLR 2021) : [arxiv](https://arxiv.org/abs/2010.09125), [project page](https://nv-tlabs.github.io/GANverse3D/)
-- `StyleNeRF`: A Style-based 3D Aware Generator for High-resolution Image Synthesis(ICLR 2022): [paper](https://openreview.net/forum?id=iUuzzTMUw9K)
+- `StyleNeRF`: A Style-based 3D Aware Generator for High-resolution Image Synthesis (ICLR 2022): [paper](https://openreview.net/forum?id=iUuzzTMUw9K)
+  - `NeRF`: Representing Scenes as Neural Radiance Fields for View Synthesis (ECCV 2020) : [arxiv](https://arxiv.org/abs/2003.08934), [project](https://www.matthewtancik.com/nerf)
+- `CIPS-3D`: A 3D-Aware Generator of GANs Based on Conditionally-Independent Pixel Synthesis (arxiv 2021): [arxiv](https://arxiv.org/abs/2110.09788), [code](https://github.com/PeterouZh/CIPS-3D)
 
-<span style='background-color: #E5EBF7;'> **Novel View Synthesis** </span>
 
-- `NeRF`: Representing Scenes as Neural Radiance Fields for View Synthesis (ECCV 2020) : [arxiv](https://arxiv.org/abs/2003.08934), [project](https://www.matthewtancik.com/nerf)
 
 ---
 
