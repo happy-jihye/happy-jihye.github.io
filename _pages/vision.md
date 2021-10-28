@@ -85,6 +85,7 @@ layout: single
    - [`Image2stylegan`: How to embed images into the stylegan latent space?](https://happy-jihye.github.io/gan/gan-23/) (ICCV 2019) : [arxiv](https://arxiv.org/abs/1904.03189), [review](https://happy-jihye.github.io/gan/gan-23/)
    - `Image2stylegan++`: How to edit the embedded images? (CVPR 2020) : [arxiv](https://arxiv.org/abs/1911.11544)
    - [`StyleFlow`: Attribute-conditioned Exploration of StyleGAN-Generated Images using Conditional Continuous Normalizing Flows](https://happy-jihye.github.io/gan/gan-25/#123-styleflow) (ACM TOG 2021) : [arxiv](https://arxiv.org/abs/2008.02401), [review](https://happy-jihye.github.io/gan/gan-25/#123-styleflow), [project page](https://rameenabdal.github.io/StyleFlow/)
+   - [`BDInvert`: GAN Inversion for Out-of-Range Images with Geometric Transformations](https://happy-jihye.github.io/gan/gan-32/) (ICCV 2021) : [arxiv](https://arxiv.org/abs/2108.08998), [review](https://happy-jihye.github.io/gan/gan-32), [code](https://github.com/kkang831/BDInvert_Release)
 
 2. **Encoder**
    - `ALAE`: Adversarial latent autoencoders (CVPR 2020) : [arxiv](https://arxiv.org/abs/2004.04467), [code](https://github.com/podgorskiy/ALAE)

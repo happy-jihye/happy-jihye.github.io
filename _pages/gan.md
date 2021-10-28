@@ -84,6 +84,7 @@ layout: single
    - [`Image2stylegan`: How to embed images into the stylegan latent space?](https://happy-jihye.github.io/gan/gan-23/) (ICCV 2019) : [arxiv](https://arxiv.org/abs/1904.03189), [review](https://happy-jihye.github.io/gan/gan-23/)
    - `Image2stylegan++`: How to edit the embedded images? (CVPR 2020) : [arxiv](https://arxiv.org/abs/1911.11544)
    - [`StyleFlow`: Attribute-conditioned Exploration of StyleGAN-Generated Images using Conditional Continuous Normalizing Flows](https://happy-jihye.github.io/gan/gan-25/#123-styleflow) (ACM TOG 2021) : [arxiv](https://arxiv.org/abs/2008.02401), [review](https://happy-jihye.github.io/gan/gan-25/#123-styleflow), [project page](https://rameenabdal.github.io/StyleFlow/)
+   - [`BDInvert`: GAN Inversion for Out-of-Range Images with Geometric Transformations](https://happy-jihye.github.io/gan/gan-32/) (ICCV 2021) : [arxiv](https://arxiv.org/abs/2108.08998), [review](https://happy-jihye.github.io/gan/gan-32), [code](https://github.com/kkang831/BDInvert_Release)
 
 2. **Encoder**
    - `ALAE`: Adversarial latent autoencoders (CVPR 2020) : [arxiv](https://arxiv.org/abs/2004.04467), [code](https://github.com/podgorskiy/ALAE)
@@ -116,17 +117,18 @@ layout: single
 - [`MocoGAN-HD`: A Good Image Generator Is What You Need for High-Resolution Video Synthesis](https://happy-jihye.github.io/gan/gan-27/) (ICLR 2021) : [arxiv](https://arxiv.org/abs/2104.15069), [review](https://happy-jihye.github.io/gan/gan-27/), [code](https://github.com/snap-research/MoCoGAN-HD), [project](https://bluer555.github.io/MoCoGAN-HD/)
 
 
-<span style='background-color: #E5EBF7;'> **3D GAN** </span>
+<span style='background-color: #E5EBF7;'> **3D GAN & Rendering** </span>
 
 - `HoloGAN`: Unsupervised learning of 3D representations from natural images (ICCV 2019): [paper](https://arxiv.org/abs/1904.01326), [code](https://github.com/thunguyenphuoc/HoloGAN)
-- `pi-GAN`: Periodic Implicit Generative Adversarial Networks for 3D-Aware Image Synthesis (CVPR 2021): [paper](https://arxiv.org/pdf/2012.00926.pdf), [project](https://marcoamonteiro.github.io/pi-GAN-website/), [code](https://marcoamonteiro.github.io/pi-GAN-website/)
 - [`CDDFM3D`: Cross-Domain and Disentangled Face Manipulation with 3D Guidance](https://happy-jihye.github.io/gan/gan-24/) (2021) : [arxiv](https://arxiv.org/abs/2104.11228), [review](https://happy-jihye.github.io/gan/gan-24/), [project](https://cassiepython.github.io/cddfm3d/index), [code](https://github.com/cassiePython/cddfm3d)
+- `SofGAN`: A Portrait Image Generator with Dynamic Styling (arxiv 2021): [arxiv](https://arxiv.org/abs/2007.03780), [project](https://apchenstu.github.io/sofgan/), [code](https://github.com/apchenstu/sofgan)
+- `pi-GAN`: Periodic Implicit Generative Adversarial Networks for 3D-Aware Image Synthesis (CVPR 2021): [paper](https://arxiv.org/pdf/2012.00926.pdf), [project](https://marcoamonteiro.github.io/pi-GAN-website/), [code](https://marcoamonteiro.github.io/pi-GAN-website/)
 - `StyleGANRender`: Image GANs meet Differentiable Rendering for Inverse Graphics and Interpretable 3D Neural Rendering (ICLR 2021) : [arxiv](https://arxiv.org/abs/2010.09125), [project page](https://nv-tlabs.github.io/GANverse3D/)
-- `StyleNeRF`: A Style-based 3D Aware Generator for High-resolution Image Synthesis(ICLR 2022): [paper](https://openreview.net/forum?id=iUuzzTMUw9K)
+- `StyleNeRF`: A Style-based 3D Aware Generator for High-resolution Image Synthesis (ICLR 2022): [paper](https://openreview.net/forum?id=iUuzzTMUw9K)
+  - `NeRF`: Representing Scenes as Neural Radiance Fields for View Synthesis (ECCV 2020) : [arxiv](https://arxiv.org/abs/2003.08934), [project](https://www.matthewtancik.com/nerf)
+- `CIPS-3D`: A 3D-Aware Generator of GANs Based on Conditionally-Independent Pixel Synthesis (arxiv 2021): [arxiv](https://arxiv.org/abs/2110.09788), [code](https://github.com/PeterouZh/CIPS-3D)
 
-<span style='background-color: #E5EBF7;'> **Novel View Synthesis** </span>
 
-- `NeRF`: Representing Scenes as Neural Radiance Fields for View Synthesis (ECCV 2020) : [arxiv](https://arxiv.org/abs/2003.08934), [project page](https://www.matthewtancik.com/nerf)
 
 ---
 
@@ -134,15 +136,17 @@ layout: single
 
 - [`MocoGAN-HD`: A Good Image Generator Is What You Need for High-Resolution Video Synthesis](https://happy-jihye.github.io/gan/gan-27/) (ICLR 2021) : [arxiv](https://arxiv.org/abs/2104.15069), [review](https://happy-jihye.github.io/gan/gan-27/), [code](https://github.com/snap-research/MoCoGAN-HD), [project](https://bluer555.github.io/MoCoGAN-HD/)
 
-<span style='background-color: #E5EBF7;'> **Warping-based Model** </span>
-
-- [Few-Shot Adversarial Learning of Realistic Neural Talking Head Models](https://happy-jihye.github.io/gan/gan-22/) (ICCV 2019) : [arxiv](https://arxiv.org/abs/1905.08233) : [review](https://happy-jihye.github.io/gan/gan-22/)
-- `LPD`: Neural Head Reenactment with Latent Pose Descriptors (CVPR 2020) : [Paper](https://arxiv.org/abs/2004.12000), [project](https://saic-violet.github.io/latent-pose-reenactment/), [code](https://github.com/shrubb/latent-pose-reenactment)
-
 <span style='background-color: #E5EBF7;'> **Landmark-based Model** </span>
 
-- `X2Face`: A network for controlling face generation by using images, audio, and pose codes (ECCV 2018) : [Paper](https://arxiv.org/abs/1807.10550), [project](https://www.robots.ox.ac.uk/~vgg/research/unsup_learn_watch_faces/x2face.html)
-- `Monkey-Net`: Animating Arbitrary Objects via Deep Motion Transfer (CVPR 2019) : [Paper](https://arxiv.org/abs/1812.08861), [project](http://www.stulyakov.com/papers/monkey-net.html), [code](https://github.com/AliaksandrSiarohin/monkey-net)
+- [Few-Shot Adversarial Learning of Realistic Neural Talking Head Models](https://happy-jihye.github.io/gan/gan-22/) (ICCV 2019) : [arxiv](https://arxiv.org/abs/1905.08233), [review](https://happy-jihye.github.io/gan/gan-22/)
+- `LPD`: Neural Head Reenactment with Latent Pose Descriptors (CVPR 2020) : [Paper](https://arxiv.org/abs/2004.12000), [project](https://saic-violet.github.io/latent-pose-reenactment/), [code](https://github.com/shrubb/latent-pose-reenactment)
+
+<span style='background-color: #E5EBF7;'> **Warping-based Model** </span>
+
+- `X2Face`: A network for controlling face generation by using images, audio, and pose codes (ECCV 2018) : [arxiv](https://arxiv.org/abs/1807.10550), [project](https://www.robots.ox.ac.uk/~vgg/research/unsup_learn_watch_faces/x2face.html)
+- `Monkey-Net`: Animating Arbitrary Objects via Deep Motion Transfer (CVPR 2019) : [arxiv](https://arxiv.org/abs/1812.08861), [project](http://www.stulyakov.com/papers/monkey-net.html), [code](https://github.com/AliaksandrSiarohin/monkey-net)
 - `FOMM`: First Order Motion Model for Image Animation (NeurIPS 2019) : [arxiv](https://arxiv.org/abs/2003.00196), [code](https://github.com/AliaksandrSiarohin/first-order-model)
-- Motion Representations for Articulated Animation (CVPR 2021) : [arxiv](https://arxiv.org/abs/2104.11280), [code](https://github.com/snap-research/articulated-animation), [project](https://snap-research.github.io/articulated-animation/)
+- `face vid2vid`: One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing (CVPR 2021): [arxiv](https://arxiv.org/abs/2011.15126), [project](https://nvlabs.github.io/face-vid2vid/)
+- `articulated animation`: Motion Representations for Articulated Animation (CVPR 2021) : [arxiv](https://arxiv.org/abs/2104.11280), [code](https://github.com/snap-research/articulated-animation), [project](https://snap-research.github.io/articulated-animation/)
+
 
