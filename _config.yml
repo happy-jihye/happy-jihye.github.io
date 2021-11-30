@@ -227,6 +227,11 @@ whitelist:
   - jekyll-include-cache
 
 
+# toggle
+dark_theme_toggle        : true # 다크 모드 토글 기능 추가
+after_footer_scripts:
+  - /assets/js/custom/dark-theme.js
+
 # Archives
 #  Type
 #  - GitHub Pages compatible archive pages built with Liquid ~> type: liquid (default)

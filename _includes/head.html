@@ -14,6 +14,12 @@
 <!-- For all browsers -->
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 
+<!-- darkmode css -->
+{% if site.dark_theme_toggle == true %}
+<link rel="stylesheet" href="/assets/css/main_dark.css">
+{% endif %}
+<!-- ... -->
+
 <!--[if IE]>
   <style>
     /* old IE unsupported flexbox fixes */
