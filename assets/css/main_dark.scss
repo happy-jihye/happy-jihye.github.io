@@ -7,7 +7,7 @@
 @import "custom/customImport.scss";
 @import "custom/customOverride.scss";
 
-@import "minimal-mistakes/skins/dark"; // skin
+@import "minimal-mistakes/skins/{{ 'dark' }}"; // skin
 @import "minimal-mistakes"; // main partials
 
 @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic');

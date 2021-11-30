@@ -30,6 +30,8 @@
           <span class="visually-hidden">{{ site.data.ui-text[site.locale].menu_label | default: "Toggle menu" }}</span>
           <div class="navicon"></div>
         </button>
+
+
         <!-- 다크 모드 토글 버튼 -->
         {% if site.dark_theme_toggle == true %}
         <input id="toggle_dark_theme" class="mh_toogle" type="checkbox">
@@ -39,7 +41,6 @@
             <span class="visually-hidden">{{ site.data.ui-text[site.locale].menu_label | default: "Toggle menu" }}</span>
             <div class="navicon"></div>
         </button>
-
         <!-- ... -->
 
         <ul class="hidden-links hidden"></ul>
