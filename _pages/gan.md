@@ -120,6 +120,20 @@ layout: single
 - [`CDDFM3D`: Cross-Domain and Disentangled Face Manipulation with 3D Guidance](https://happy-jihye.github.io/gan/gan-24/) (2021) : [arxiv](https://arxiv.org/abs/2104.11228), [review](https://happy-jihye.github.io/gan/gan-24/), [code](https://github.com/cassiePython/cddfm3d)
 - [`MocoGAN-HD`: A Good Image Generator Is What You Need for High-Resolution Video Synthesis](https://happy-jihye.github.io/gan/gan-27/) (ICLR 2021) : [arxiv](https://arxiv.org/abs/2104.15069), [review](https://happy-jihye.github.io/gan/gan-27/), [code](https://github.com/snap-research/MoCoGAN-HD), [project](https://bluer555.github.io/MoCoGAN-HD/)
 
+<span style='background-color: #E5EBF7;'> **Webtoon/Anime GAN & Image Blending** </span>
+
+- [`Cartoon-StyleGAN`: Fine-tuning StyleGAN2 for Cartoon Face Generation]((https://happy-jihye.github.io/gan/gan-21/)) (arxiv 2021) : [arxiv](https://arxiv.org/abs/2106.12445), [review](https://happy-jihye.github.io/gan/gan-21/), [code](https://github.com/happy-jihye/Cartoon-StyleGAN)
+- `BlendGAN`: Implicitly GAN Blending for Arbitrary Stylized Face Generation (NeurIPS 2021) : [arxiv](https://arxiv.org/abs/2110.11728), [project](https://onion-liu.github.io/BlendGAN/), [code](https://github.com/onion-liu/BlendGAN)
+- `HifiFace`: 3D Shape and Semantic Prior Guided High Fidelity Face Swapping (IJCAI 2021) : [arxiv](https://arxiv.org/abs/2106.09965)
+- `AnimeGAN`: A Novel Lightweight GAN for Photo Animation (ISICA 2019)
+  - `AnimeGANv2` (2021) : [project](https://tachibanayoshino.github.io/AnimeGANv2/), [code](https://github.com/bryandlee/animegan2-pytorch)
+- `StyleGAN of All Trades`: Image Manipulation with Only Pretrained StyleGAN (arxiv 2021) : [arxiv](https://arxiv.org/abs/2111.01619), [code](https://github.com/mchong6/SOAT)
+
+
+<span style='background-color: #E5EBF7;'> **Super Resolution** </span>
+
+- `BSRGAN`: Designing a Practical Degradation Model for Deep Blind Image Super-Resolution (ICCV 2021) : [arxiv](https://arxiv.org/abs/2103.14006), [code](https://github.com/cszn/BSRGAN)
+- `Real-ESRGAN`: Training Real-World Blind Super-Resolution with Pure Synthetic Data (ICCVW 2021): [arxiv](https://arxiv.org/abs/2107.10833), [code](https://github.com/xinntao/Real-ESRGAN)
 
 <span style='background-color: #E5EBF7;'> **Sketch based Generation** </span>
 
