@@ -29,7 +29,7 @@ layout: single
 
   - [`Pix2Pix`: Image-to-Image Translation with Conditional Adversarial Networks](https://happy-jihye.github.io/gan/gan-8/) (CVPR 2017) : [arxiv](https://arxiv.org/abs/1611.07004), [review](https://happy-jihye.github.io/gan/gan-8/)
   - [`GAN Dissection`: Visualizing and Understanding Generative Adversarial Networks](https://happy-jihye.github.io/gan/gan-25/#111-gan-dissection) (ICLR 2019) : [arxiv](https://arxiv.org/abs/1811.10597), [review](https://happy-jihye.github.io/gan/gan-25/#111-gan-dissection, [project page](https://gandissect.csail.mit.edu/)
-  - [`SPADE`: Semantic Image Synthesis with Spatially Adaptive Normalization](https://happy-jihye.github.io/gan/gan-9/) (CVPR 2019) : [arxiv](https://arxiv.org/abs/1903.07291), [review](https://happy-jihye.github.io/gan/gan-9/)
+  - [`GauGAN`: Semantic Image Synthesis with Spatially Adaptive Normalization (SPADE)](https://happy-jihye.github.io/gan/gan-9/) (CVPR 2019) : [arxiv](https://arxiv.org/abs/1903.07291), [review](https://happy-jihye.github.io/gan/gan-9/)
 
 - **Unsupervised Approach** 
 
@@ -56,6 +56,11 @@ layout: single
   - [`StyleGAN v2`: Analyzing and Improving the Image Quality of StyleGAN](https://happy-jihye.github.io/gan/gan-7/) (2020) : [arxiv](https://arxiv.org/abs/1912.04958), [review](https://happy-jihye.github.io/gan/gan-7/)
   
   - `StyleGAN-ADA`: Training Generative Adversarial Networks with Limited Data (NeurlPS 2020) : [arxiv](https://arxiv.org/abs/2006.06676)  : review [#01](https://happy-jihye.github.io/gan/gan-19/), [#02](https://happy-jihye.github.io/gan/gan-20/) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/happy-jihye/GAN-Papers/blob/main/gan/stylegan2-ada.ipynb)
+
+  - [`StyleGAN v3`: Alias-Free Generative Adversarial Networks](https://happy-jihye.github.io/gan/gan-33/) (NeurIPS 2021) : [arxiv](https://arxiv.org/abs/2106.12423), [code](https://github.com/NVlabs/stylegan3), [project](https://nvlabs.github.io/alias-free-gan/), [review](https://happy-jihye.github.io/gan/gan-33/)
+
+    - [`StyleGAN3-Editing`: Third Time’s the Charm? Image and Video Editing with StyleGAN3](https://happy-jihye.github.io/gan/gan-35/) (arxiv 2022) : [arxiv](https://arxiv.org/abs/2201.13433), [project](https://yuval-alaluf.github.io/stylegan3-editing/), [code](https://github.com/yuval-alaluf/stylegan3-editing), [review](https://happy-jihye.github.io/gan/gan-35/)
+
 
 - `BigGAN`: Large Scale GAN Training for High Fidelity Natural Image Synthesis (2019) : [arxiv](https://arxiv.org/abs/1809.11096) 
 
@@ -117,6 +122,10 @@ layout: single
 - [`CDDFM3D`: Cross-Domain and Disentangled Face Manipulation with 3D Guidance](https://happy-jihye.github.io/gan/gan-24/) (2021) : [arxiv](https://arxiv.org/abs/2104.11228), [review](https://happy-jihye.github.io/gan/gan-24/), [code](https://github.com/cassiePython/cddfm3d)
 - [`MocoGAN-HD`: A Good Image Generator Is What You Need for High-Resolution Video Synthesis](https://happy-jihye.github.io/gan/gan-27/) (ICLR 2021) : [arxiv](https://arxiv.org/abs/2104.15069), [review](https://happy-jihye.github.io/gan/gan-27/), [code](https://github.com/snap-research/MoCoGAN-HD), [project](https://bluer555.github.io/MoCoGAN-HD/)
 
+
+<span style='background-color: #E5EBF7;'> **Sketch based Generation** </span>
+
+- [`GANSketching` : Sketch Your Own GAN](https://happy-jihye.github.io/gan/gan-36/) (ICCV 2021) : [arxiv](https://arxiv.org/abs/2108.02774), [project](https://peterwang512.github.io/GANSketching/), [code](https://github.com/PeterWang512/GANSketching), [review](https://happy-jihye.github.io/gan/gan-36/)
 
 <span style='background-color: #E5EBF7;'> **3D GAN & Rendering** </span>
 
