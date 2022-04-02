@@ -1,5 +1,5 @@
 ---
-title: "블록체인이란 무엇인가"
+title: "[blockchain #01] 블록체인이란 무엇인가"
 excerpt: ""
 
 categories: 
