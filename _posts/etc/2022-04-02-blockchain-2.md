@@ -150,11 +150,11 @@ time stamp는 각각의 거래들에 대한(block에 대한) 순서를 보장해
 - 입금액이 출금액보다 큰 경우에 이 값은 수수료이다.
     - 수수료  = 입금액 - 출금액
 
-<p align='center'><img src='https://github.com/happy-jihye/happy-jihye.github.io/blob/master/_posts/images/etc/blockchain-2/Untitled%205.png?raw=1' width = '600' ></p>
+<p align='center'><img src='https://github.com/happy-jihye/happy-jihye.github.io/blob/master/_posts/images/etc/blockchain-2/Untitled%205.png?raw=1' width = '350' ></p>
 
 ## 10. Privacy
 
-<p align='center'><img src='https://github.com/happy-jihye/happy-jihye.github.io/blob/master/_posts/images/etc/blockchain-2/Untitled%206.png?raw=1' width = '600' ></p>
+<p align='center'><img src='https://github.com/happy-jihye/happy-jihye.github.io/blob/master/_posts/images/etc/blockchain-2/Untitled%206.png?raw=1' width = '750' ></p>
 
 기존의 banking system은 거래와 관련된 정보들을 신뢰기관에게 전달하여 개인 정보를 보호하면서도, 거래의 유효성을 보장받고자 하였다.
 
