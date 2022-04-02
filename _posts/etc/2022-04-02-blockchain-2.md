@@ -1,5 +1,5 @@
 ---
-title: "비트코인이란 무엇인가? (Bitcoin: A Peer-to-Peer Electronic Cash System 논문 리뷰)"
+title: "[blockchain #02] 비트코인이란 무엇인가? (Bitcoin: A Peer-to-Peer Electronic Cash System 논문 리뷰)"
 excerpt: ""
 
 categories: 
@@ -25,7 +25,7 @@ toc_sticky: true
 - 기존 온라인 금융 시스템은 전자 거래의 신뢰성을 보장해주는 제 3자 금융기관이 필요했고, 이 때문에 user들은 소액 거래에도 많은 cost를 지불해야했음
 - ⭐️ 비트코인은 신뢰(trust)가 아닌 **암호학적인 증명(cryptographic proof)에 기반을 둔 전자 금융 시스템**(electronic payment system)으로, 중간 매개체 없이 당사자들끼리 거래를 할 수 있게 하였음 (p2p transaction)
 - ⭐️ 비트코인은 **거래를 시간 별로(time stamp) 분산 시스템에 저장**하여 돈이 이중으로 지불되는 문제를 해결
-    - 기존 금융 시스템은 거래의 reversible(철회가능)한 속성을 신용으로써 보장을 했다면, 비트코인은 비가역적인 시스템을 만들어서 판매자가 사기당할 위험이 없도록 보장
+    - 기존 금융 시스템은 거래의 reversible(철회가능)한 속성을 신용으로써 보장을 했다면, 비트코인은 비가역적인 시스템을 만들어서 판매자가 사기당할 위험이 없도록 보장하였다.
 
 ## 2. Transactions
 
