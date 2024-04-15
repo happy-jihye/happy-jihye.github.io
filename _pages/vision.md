@@ -7,7 +7,6 @@ layout: single
 ---
   
 
-
 ---
 
 #### 🖼 **Generative Adversarial Networks : Paper Review** ([Github](https://github.com/happy-jihye/GAN-Papers))

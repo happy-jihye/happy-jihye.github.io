@@ -10,12 +10,11 @@ layout: single
  <a href='https://github.com/happy-jihye/Natural-Language-Processing' role='button' target='_blank'> <img class='notebook-badge-image' src='/assets/badges/github.svg' alt='View On GitHub'> </a> 
 </p>
 
-Pytorch를 활용하여 자연어 처리에 대해 공부한 글입니다. 
-궁금한 점이 있다면 댓글 남겨주세요 :)
+> 이 페이지는 2022년까지만 운영되었던 페이지입니다. 이전에 작성된 게시물들은 아카이브로 남아 있으나, 새로운 콘텐츠는 더 이상 추가되지 않습니다.
 
 ## Papers
 
-자연어처리 관련 paper들과 해당 논문 review입니다. 읽는 순서대로 업데이트할 예정입니다.
+자연어처리 관련 paper들과 해당 논문 review입니다.
 
 
 - [Sequence to Sequence Learning with Neural Networks](https://arxiv.org/abs/1409.3215)(2014) : [Review](https://happy-jihye.github.io/nlp/nlp-6/) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/happy-jihye/Natural-Language-Processing/blob/main/code/1_Sequence_to_Sequence_Learning_with_Neural_Networks.ipynb)

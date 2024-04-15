@@ -5,6 +5,6 @@ main:
   - title: "Tags"
     url: /tags/
   - title: "NLP"
-    url: /nlp/
+    url: /n-nlp/    
   - title: "Visions"
     url: /vision/
