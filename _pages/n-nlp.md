@@ -14,6 +14,7 @@ layout: single
 
 |  Date  |       keywords       |    Institute    | Paper                                                                                                                                                                               | review | Publication |
 | :-----: | :------------------: | :--------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------: | :---------: |
+| 2023-03 |  | |[A Survey of Large Language Models](https://arxiv.org/abs/2303.18223)| [link-1](https://happy-jihye.github.io/nlp/nlp-22/), [link-2](https://happy-jihye.github.io/nlp/nlp-23/)|  |
 | 2023-02 | LLaMA-1 |Meta|[LLaMA: Open and Efficient Foundation Language Models](https://research.facebook.com/publications/llama-open-and-efficient-foundation-language-models/)| [link](https://happy-jihye.github.io/nlp/nlp-12/)|  |
 | 2023-07	 | LLaMA-2 |Meta|[Llama 2: Open Foundation and Fine-Tuned Chat Models](https://arxiv.org/pdf/2307.09288)| [link](https://happy-jihye.github.io/nlp/nlp-14/)| |
 | 2024-04 | LLaMA-3 |Meta|[LLaMA3](https://llama.meta.com/llama3/)| [link](https://happy-jihye.github.io/nlp/nlp-14/)|  |
@@ -26,3 +27,12 @@ layout: single
 | 2023-12 | Phi-2 | Microsoft |[Phi-2: The surprising power of small language models](https://www.microsoft.com/en-us/research/blog/phi-2-the-surprising-power-of-small-language-models/)| [link](https://happy-jihye.github.io/nlp/nlp-19/) | 
 | 2024-05 | Phi-3 | Microsoft |[Phi-3 Technical Report: A Highly Capable Language Model Locally on Your Phone](https://arxiv.org/abs/2404.14219)| [link](https://happy-jihye.github.io/nlp/nlp-19/) | 
 | 2023-07 |  | |[Chinchilla’s Death](https://espadrine.github.io/blog/posts/chinchilla-s-death.html)| [link](https://happy-jihye.github.io/nlp/nlp-17/)|  |
+| 2024-03 |  | | [RAFT: Adapting Language Model to Domain Specific RAG](https://arxiv.org/abs/2403.10131) | [link](https://happy-jihye.github.io/nlp/nlp-25/)|  |
+
+### **📒 LLM 시리즈: 기본 개념부터 최신 LLM 까지**
+
+- [1] [DeepLearning 기본 이론](https://happy-jihye.github.io/nlp/nlp-20/)
+- [2] [Network - CNN, RNN, LSTM, Transformer](https://happy-jihye.github.io/nlp/nlp-21/)
+- [3-1] [A Survey of Large Language Models - 다양한 LLMs부터, Data, Architecture, Training 까지](https://happy-jihye.github.io/nlp/nlp-22/)
+- [3-2] [A Survey of Large Language Models - Adaptation of LLMs](https://happy-jihye.github.io/nlp/nlp-23/)
+- [4] [RAG (Retriever Augumented Generation)](https://happy-jihye.github.io/nlp/nlp-24/)
