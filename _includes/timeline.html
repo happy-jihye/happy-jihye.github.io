@@ -1,0 +1,45 @@
+{%- assign cv = site.data.cv -%}
+{%- assign y0 = 2020 -%}
+{%- assign now_y = site.time | date: "%Y" | plus: 0 -%}
+{%- assign now_m = site.time | date: "%m" | plus: 0 -%}
+{%- assign y1 = now_y | plus: 1 -%}
+{%- assign span = y1 | minus: y0 | times: 12 -%}
+{%- assign nyears = y1 | minus: y0 -%}
+<figure class="timeline" aria-label="Career timeline" style="--years: {{ nyears }}">
+  <ol class="tl-rows">
+    {%- for row in cv.timeline -%}
+      {%- assign s = row.start | split: "-" -%}
+      {%- assign sm = s[0] | plus: 0 | minus: y0 | times: 12 | plus: s[1] | minus: 1 -%}
+      {%- if row.end and row.end != "" -%}
+        {%- assign e = row.end | split: "-" -%}
+        {%- assign em = e[0] | plus: 0 | minus: y0 | times: 12 | plus: e[1] -%}
+        {%- assign ongoing = false -%}
+      {%- else -%}
+        {%- assign em = now_y | minus: y0 | times: 12 | plus: now_m -%}
+        {%- assign ongoing = true -%}
+      {%- endif -%}
+      {%- assign left = sm | times: 100.0 | divided_by: span | round: 2 -%}
+      {%- assign width = em | minus: sm | times: 100.0 | divided_by: span | round: 2 -%}
+    <li class="tl-row d-{{ row.domain }}">
+      <span class="tl-label">{% include t.html v=row.label %}</span>
+      <span class="tl-track"><span class="tl-bar{% if ongoing %} is-ongoing{% endif %}" style="left: {{ left }}%; width: {{ width }}%"></span></span>
+    </li>
+    {%- endfor -%}
+  </ol>
+  <div class="tl-axis" aria-hidden="true">
+    <span class="tl-label"></span>
+    <span class="tl-track">
+      {%- for y in (y0..now_y) -%}
+        {%- assign ym = y | minus: y0 | times: 12 -%}
+        {%- assign yl = ym | times: 100.0 | divided_by: span | round: 2 -%}
+      <span class="tl-tick" style="left: {{ yl }}%">{{ y }}</span>
+      {%- endfor -%}
+    </span>
+  </div>
+  <figcaption class="tl-legend">
+    {%- for d in cv.domains -%}
+    {%- assign dname = d[1] -%}
+    <span class="d-{{ d[0] }}"><i></i>{% include t.html v=dname %}</span>
+    {%- endfor -%}
+  </figcaption>
+</figure>

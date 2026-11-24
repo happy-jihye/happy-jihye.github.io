@@ -1,0 +1,7 @@
+{%- if include.links and include.links.size > 0 -%}
+<ul class="links">
+  {%- for l in include.links -%}
+  <li><a href="{{ l.url }}" target="_blank" rel="noopener">[{{ l.label }}]</a></li>
+  {%- endfor -%}
+</ul>
+{%- endif -%}

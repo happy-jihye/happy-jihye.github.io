@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" class="lang-en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ site.title }}</title>
+  <meta name="description" content="{{ site.description }}">
+  <link rel="canonical" href="{{ site.url }}{{ page.url | relative_url }}">
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="{{ site.title }}">
+  <meta property="og:description" content="{{ site.description }}">
+  <meta property="og:url" content="{{ site.url }}{{ page.url | relative_url }}">
+  <meta property="og:image" content="{{ site.url }}{{ site.data.cv.profile.photo | relative_url }}">
+  <meta name="twitter:card" content="summary">
+  <script>
+    // Pick the language before first paint: English by default, unless the visitor chose Korean.
+    (function () {
+      var l = 'en';
+      try { l = localStorage.getItem('lang') === 'ko' ? 'ko' : 'en'; } catch (e) {}
+      if (/[?&]lang=ko/.test(location.search)) l = 'ko';
+      if (/[?&]lang=en/.test(location.search)) l = 'en';
+      document.documentElement.className = 'lang-' + l;
+      document.documentElement.lang = l;
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%234A55C8'/><text x='16' y='22' font-family='Arial' font-size='15' font-weight='700' fill='white' text-anchor='middle'>JB</text></svg>">
+</head>
+<body>
+  {{ content }}
+  <script src="{{ '/assets/js/lang.js' | relative_url }}" defer></script>
+</body>
+</html>

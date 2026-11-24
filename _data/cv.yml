@@ -1,0 +1,474 @@
+# ─────────────────────────────────────────────────────────────
+#  All site content lives here. Edit this file and push.
+#  Text fields can be a plain string (same in both languages)
+#  or a map with `en:` and `ko:`. Markdown (**bold**, [link](url))
+#  works inside any text field.
+# ─────────────────────────────────────────────────────────────
+
+profile:
+  name: "Jihye Back"
+  name_ko: "백지혜"
+  role:
+    en: "AI Research Engineer at [Tether AI Research](https://tether.io)"
+    ko: "AI Research Engineer at [Tether AI Research](https://tether.io)"
+  location:
+    en: "Seoul, Korea"
+    ko: "대한민국 서울"
+  photo: /assets/img/profile.jpg
+  email: 100jihye@snu.ac.kr
+  links:
+    - label: "Google Scholar"
+      url: "https://scholar.google.co.kr/citations?user=LmU3mCgAAAAJ&hl=en"
+    - label: "GitHub"
+      url: "https://github.com/happy-jihye"
+    - label: "LinkedIn"
+      url: "https://www.linkedin.com/in/1oojihye/"
+
+  # Optional one-line summary under your name. Uncomment to show it.
+  # headline:
+  #   en: "..."
+  #   ko: "..."
+
+about:
+  - en: "I'm an AI Research Engineer at Tether AI Research, working on small language models for on-device agents and multilingual machine translation. I work across the full model development cycle, from data construction and pre-, mid- and post-training to evaluation and model compression for deployment."
+    ko: "Tether AI Research의 AI Research Engineer로, 온디바이스 에이전트와 다국어 기계번역을 위한 소형 언어 모델을 연구하고 있습니다. 데이터 구축부터 Pre-training, Mid-training, Post-training, 평가, 배포를 위한 경량화까지 모델 개발의 전 과정을 다룹니다."
+  - en: "Previously, at NAVER Search, I trained Korean-specialized LLMs and built models for AI Briefing, generative retrieval and ranking. Before that, at NAVER WEBTOON, I worked on generative models and led WebtoonMe and AI Character Chat from research through to launch. My work has been published at ACL, EMNLP, CVPR and SIGGRAPH Asia."
+    ko: "이전에는 네이버 검색에서 한국어 특화 LLM을 학습하고, AI 브리핑·생성형 검색·랭킹 모델을 개발했습니다. 그 전에는 NAVER WEBTOON에서 생성형 모델을 연구하며 WebtoonMe와 AI 캐릭터챗을 연구 단계부터 서비스 출시까지 이끌었습니다. 연구 성과는 ACL, EMNLP, CVPR, SIGGRAPH Asia에 발표했습니다."
+
+# Short dated highlights shown near the top. Newest first.
+news:
+  - date: "2026.11"
+    text:
+      en: "Released **BotPsy**, a 0.8B on-device agent model, as open weights. [Blog](https://huggingface.co/blog/qvac/botpsy) · [Model](https://huggingface.co/qvac/BotPsy-0.8B)"
+      ko: "0.8B 온디바이스 에이전트 모델 **BotPsy**를 오픈 웨이트로 공개했습니다. [블로그](https://huggingface.co/blog/qvac/botpsy) · [모델](https://huggingface.co/qvac/BotPsy-0.8B)"
+  - date: "2026.09"
+    text:
+      en: "**TranslatePsy-AfriSLM** was accepted to **EMNLP 2026**, and the paper, models, dataset and code are now public. [Paper](https://arxiv.org/abs/2608.18655) · [Blog](https://huggingface.co/blog/qvac/translate-psy-afrislm)"
+      ko: "**TranslatePsy-AfriSLM**이 **EMNLP 2026**에 채택되었고, 논문·모델·데이터셋·코드를 공개했습니다. [논문](https://arxiv.org/abs/2608.18655) · [블로그](https://huggingface.co/blog/qvac/translate-psy-afrislm)"
+  - date: "2026.04"
+    text:
+      en: "**AuthGR**, an authority-aware generative retrieval model I developed at NAVER Search, was accepted to the ACL 2026 Industry Track and recommended for an oral presentation."
+      ko: "네이버 검색에서 개발한 신뢰도(Authority) 기반 생성형 검색 모델 **AuthGR**이 ACL 2026 Industry Track에 채택되었습니다 (Oral 추천)."
+  - date: "2026.02"
+    text:
+      en: "Joined **Tether AI Research** as an AI Research Engineer."
+      ko: "**Tether AI Research**에 AI Research Engineer로 합류했습니다."
+  - date: "2026.01"
+    text:
+      en: "Received **1st prize (Service Track)** at NAVER's N Innovation Award 2025 for the AI Briefing real-time response model."
+      ko: "AI 브리핑 실시간 답변 생성 모델로 NAVER **N Innovation Award 2025 서비스 부문 1위**를 수상했습니다."
+
+# Career-at-a-glance chart (not shown on the page right now; add
+# `{% include timeline.html %}` back to index.html to bring it back).
+# domain: language | vision | software  (sets the bar color)
+timeline:
+  - label: { en: "Tether AI Research", ko: "Tether AI Research" }
+    start: "2026-02"
+    end: ""
+    domain: language
+  - label: { en: "NAVER Search", ko: "네이버 검색" }
+    start: "2024-12"
+    end: "2026-02"
+    domain: language
+  - label: { en: "WEBTOON, LLM", ko: "웹툰, LLM" }
+    start: "2023-02"
+    end: "2024-11"
+    domain: language
+  - label: { en: "WEBTOON, Vision", ko: "웹툰, 비전" }
+    start: "2022-02"
+    end: "2023-02"
+    domain: vision
+  - label: { en: "WEBTOON, intern", ko: "웹툰, 인턴" }
+    start: "2021-07"
+    end: "2021-12"
+    domain: vision
+  - label: { en: "SNU, AI research", ko: "서울대, AI 연구" }
+    start: "2021-04"
+    end: "2021-06"
+    domain: vision
+  - label: { en: "SNU, software intern", ko: "서울대, 개발 인턴" }
+    start: "2020-09"
+    end: "2021-02"
+    domain: software
+
+domains:
+  language: { en: "Language models", ko: "언어 모델" }
+  vision: { en: "Generative vision", ko: "생성형 비전" }
+  software: { en: "Software", ko: "소프트웨어" }
+
+# Selected projects, shown as image cards. Keep this to ~6 so each one gets read.
+#   summary: one line on what the project is
+#   role:    what *you* did (interviewers look for this first)
+#   impact:  results, with the numbers in **bold**
+#   details: optional bullets, hidden behind a "More" toggle
+#   image:   path under /assets/img/projects/ (16:10 box, cropped)
+#   fit:     "cover" (default) or "contain" (whole figure, white padding) for diagrams/plots
+#   url:     where the thumbnail and title link to (defaults to the first link)
+projects:
+  - title: "BotPsy: on-device tool-using agent"
+    title_ko: "BotPsy: 온디바이스 도구 사용 에이전트"
+    org: "Tether AI Research"
+    year: "2026"
+    image: /assets/img/projects/botpsy.png
+    summary:
+      en: "A 0.8B on-device agent model built for tool calling: it selects the right tools for a request and calls them to complete multi-turn tasks such as calendar, email, search and device control."
+      ko: "도구 호출(Tool Calling)에 특화된 0.8B 온디바이스 에이전트 모델로, 사용자 요청에 맞는 도구를 골라 호출하며 캘린더·이메일·검색·기기 제어 같은 멀티턴 작업을 수행합니다."
+    role:
+      en: "Built the training data and contributed to every post-training stage: SFT, multi-teacher on-policy distillation (MOPD) and two rounds of multi-environment RL, including RL with verifiable rewards (RLVR). Implemented the entire evaluation suite for tool calling, general knowledge and instruction following."
+      ko: "학습 데이터를 구축하고, SFT와 MOPD(Multi-teacher On-Policy Distillation), 두 차례의 멀티 환경 RL(RLVR 포함)로 이어지는 Post-training 전 단계에 참여했습니다. 도구 호출, 일반 지식, 지시 이행 평가 체계도 모두 직접 구현했습니다."
+    impact:
+      en: "Averages **45.0** on tool-use benchmarks versus **24.7** for its Qwen3.5-0.8B base (**~2×**), ranks first among the ≤1.2B models evaluated on all six agent benchmarks, and raises IFEval from **59.7 to 90.8**. Released as open weights under Apache 2.0."
+      ko: "도구 사용 벤치마크 평균 **45.0**으로 베이스 모델 Qwen3.5-0.8B(24.7)의 **약 2배**이며, 평가한 1.2B 이하 모델 가운데 6개 에이전트 벤치마크 모두에서 1위를 기록했습니다. IFEval은 **59.7에서 90.8**로 올랐고, Apache 2.0 오픈 웨이트로 공개했습니다."
+    details:
+      - en: "Evaluation suite: BFCL v4, ACEBench, τ-bench, Claw-Eval, BrowseComp-Plus and ToolSandbox (tool use); GPQA Diamond and MMLU-Pro (general knowledge); IFEval, IFBench and Multi-IF (instruction following)."
+        ko: "평가 체계: 도구 사용(BFCL v4, ACEBench, τ-bench, Claw-Eval, BrowseComp-Plus, ToolSandbox), 일반 지식(GPQA Diamond, MMLU-Pro), 지시 이행(IFEval, IFBench, Multi-IF)."
+      - en: "Outperforms a 2B model on five of the six agent benchmarks."
+        ko: "6개 에이전트 벤치마크 중 5개에서 2B 모델보다 높은 성능."
+      - en: "Released BF16, Q8 and Q4 GGUFs for on-device use."
+        ko: "온디바이스용 BF16·Q8·Q4 GGUF 공개."
+    links:
+      - { label: "Blog", url: "https://huggingface.co/blog/qvac/botpsy" }
+      - { label: "Model", url: "https://huggingface.co/qvac/BotPsy-0.8B" }
+      - { label: "QVAC blog", url: "https://qvac.tether.io/blog/on-device-ai-agent-botpsy" }
+      - { label: "Announcement", url: "https://tether.io/news/tethers-800m-ai-agent-beats-models-2-5x-its-size-on-everyday-phone-tasks/" }
+
+  - title: "TranslatePsy-AfriSLM: low-resource machine translation"
+    title_ko: "TranslatePsy-AfriSLM: 저자원 언어 기계번역"
+    org: "Tether AI Research"
+    year: "2026"
+    image: /assets/img/projects/translatepsy.png
+    fit: contain
+    summary:
+      en: "Lightweight models that translate between English and 19 low-resource Sub-Saharan African languages. Trained on high-quality synthetic data, they deliver strong translation quality at a small size and run offline on-device."
+      ko: "영어와 사하라 이남 아프리카 저자원 언어 19개 사이를 번역하는 경량 모델로, 고품질 합성 데이터로 학습해 작은 크기로도 높은 번역 품질을 내며 기기에서 오프라인으로 실행됩니다."
+    role:
+      en: "Co-first author. Worked on synthetic data generation, training of the 0.8B, 2B and 4B models, and evaluation."
+      ko: "공동 1저자로 합성 데이터 생성, 0.8B·2B·4B 모델 학습, 평가를 맡았습니다."
+    impact:
+      en: "The **0.8B model outperforms Qwen3.5-122B-A10B and TranslateGemma-27B** on the African MT benchmarks we evaluated, and quality filtering **reduces the training-data budget by up to 96%** at comparable quality. Published at **EMNLP 2026**."
+      ko: "평가한 아프리카 MT 벤치마크에서 **0.8B 모델이 Qwen3.5-122B-A10B와 TranslateGemma-27B를 앞섰고**, 품질 필터링으로 비슷한 성능을 유지하면서 **학습 데이터 예산을 최대 96% 줄였습니다**. **EMNLP 2026**에 발표했습니다."
+    details:
+      - en: "Pipeline: large-scale synthetic data generation, quality estimation, filtering and data-mixture design."
+        ko: "파이프라인: 대규모 합성 데이터 생성, 품질 추정(QE), 필터링, 데이터 믹스처 설계."
+      - en: "Released the models, synthetic training mix, code and GGUF checkpoints for offline use."
+        ko: "모델, 합성 학습 데이터, 코드, 오프라인 실행용 GGUF 체크포인트 공개."
+    links:
+      - { label: "Paper", url: "https://arxiv.org/abs/2608.18655" }
+      - { label: "Blog", url: "https://huggingface.co/blog/qvac/translate-psy-afrislm" }
+      - { label: "Models", url: "https://huggingface.co/collections/qvac/translatepsy-afrislm" }
+      - { label: "Dataset", url: "https://huggingface.co/datasets/qvac/TranslatePsy-AfriSLM-Synthetic-Mix" }
+      - { label: "Code", url: "https://github.com/tether-ai-research/qvac-translatepsy-afri-slm" }
+
+  - title: "AI Briefing: real-time response model"
+    title_ko: "AI 브리핑 실시간 답변 생성 모델"
+    org: "NAVER Search"
+    org_ko: "네이버 검색"
+    year: "2025"
+    image: /assets/img/projects/ai-briefing.png
+    position: top
+    summary:
+      en: "The model behind the AI answers at the top of NAVER Search, which summarizes multiple search results into accurate, well-grounded answers to the user's question."
+      ko: "네이버 검색 결과 상단에 표시되는 AI 답변을 생성하는 모델로, 여러 검색 문서를 근거로 사용자의 질문에 정확하고 신뢰할 수 있는 답변을 요약해 제공합니다."
+    role:
+      en: "Built a data pipeline that distills a multi-step agentic RAG process into training data, then trained a single 8B model on it with SFT and DPO."
+      ko: "다단계 Agentic RAG 과정을 학습 데이터로 증류하는 파이프라인을 만들고, 이 데이터로 단일 8B 모델을 SFT와 DPO로 학습했습니다."
+    impact:
+      en: "Serves **over 1M queries a week**. Hallucination filtering improved quality by **13% (LLM-judge) and 6% (human eval)**, unsafe-content F1 rose from **0.39 to 0.87**, and FP8 quantization cut latency by **25%**. Won **1st prize at the N Innovation Award 2025**."
+      ko: "**주간 100만 건 이상**의 쿼리를 처리합니다. 환각 필터링으로 품질이 **LLM-Judge 기준 13%, 사람 평가 기준 6%** 개선되었고, 유해 응답 탐지 F1은 **0.39에서 0.87**로 올랐으며, FP8 양자화로 지연 시간을 **25%** 줄였습니다. **N Innovation Award 2025 서비스 부문 1위**를 수상했습니다."
+    details:
+      - en: "My DAN25 talk covers the models behind AI Briefing's core components: answer generation, verification and related-question generation."
+        ko: "DAN25 발표에서 AI 브리핑의 핵심 구성 요소인 답변 생성·검증·관련 질문 생성 모델을 소개했습니다."
+    links:
+      - { label: "Service", url: "https://m.blog.naver.com/naver_search/223807628464" }
+      - { label: "DAN25 talk", url: "https://dan.naver.com/25/sessions/724" }
+
+  - title: "AuthGR: authority-aware generative retrieval"
+    title_ko: "AuthGR: 신뢰도 기반 생성형 검색"
+    org: "NAVER Search"
+    org_ko: "네이버 검색"
+    year: "2025 – 2026"
+    image: /assets/img/projects/authgr.png
+    fit: contain
+    summary:
+      en: "A generative retrieval model that directly generates the IDs of relevant documents for a query, weighing authority as well as relevance to surface trustworthy sources in domains such as healthcare, law and education."
+      ko: "검색어에 맞는 문서의 ID를 직접 생성하는 생성형 검색 모델로, 관련성뿐 아니라 문서의 신뢰도(Authority)까지 고려해 의료·법률·교육처럼 출처가 중요한 분야에서도 믿을 수 있는 문서를 찾아 줍니다."
+    role:
+      en: "Led the research end to end, from problem definition and authority scoring to the CPT → SFT → RL (GRPO) training pipeline and online A/B testing. Co-first author with a research intern."
+      ko: "문제 정의와 신뢰도 점수 설계부터 CPT → SFT → RL(GRPO) 학습 파이프라인, 온라인 A/B 테스트까지 연구 전반을 주도했습니다. 연구 인턴과 함께 공동 1저자로 참여했습니다."
+    impact:
+      en: "A **3B model matches a 14B baseline** and improves **Recall@10 by 262%**. Online A/B tests showed higher engagement and reliability, and the model was deployed to NAVER Search. Published at the **ACL 2026 Industry Track** (recommended for oral); patent filed."
+      ko: "**3B 모델로 14B 베이스라인과 동등한 성능**을 내며 **Recall@10을 262% 개선**했습니다. 온라인 A/B 테스트에서 사용자 참여도와 신뢰성이 높아져 네이버 검색에 배포되었습니다. **ACL 2026 Industry Track**에 발표했고(Oral 추천), 특허를 출원했습니다."
+    links:
+      - { label: "Paper", url: "https://aclanthology.org/2026.acl-industry.54/" }
+      - { label: "arXiv", url: "https://arxiv.org/abs/2604.13468" }
+
+  - title: "AI Character Chat"
+    title_ko: "AI 캐릭터챗"
+    org: "NAVER WEBTOON"
+    year: "2023 – 2024"
+    image: /assets/img/projects/character-chat.jpg
+    position: top
+    summary:
+      en: "NAVER WEBTOON's first LLM product: a dialogue model that keeps each character's voice and personality and draws on the story to respond, so readers can talk naturally with their favorite characters."
+      ko: "NAVER WEBTOON의 첫 LLM 서비스로, 캐릭터의 말투와 성격을 유지하면서 작품 속 스토리를 바탕으로 답하는 대화 모델을 통해 독자가 좋아하는 캐릭터와 자연스럽게 대화할 수 있게 합니다."
+    role:
+      en: "Proposed the project at a time when the company had no dedicated LLM organization. Designed the agent system, built and tuned retrieval over each story, and fine-tuned models to preserve each character's voice and persona."
+      ko: "전담 LLM 조직이 없던 시기에 프로젝트를 직접 제안했습니다. 에이전트 시스템을 설계하고, 작품별 스토리를 검색하는 모듈을 구축·최적화했으며, 캐릭터마다 말투와 페르소나를 유지하도록 모델을 학습했습니다."
+    impact:
+      en: "Launched **eight commercial chatbots**, which grew into a **revenue-generating core AI product**."
+      ko: "**상용 챗봇 8종**을 출시했고, **매출을 내는 핵심 AI 서비스**로 자리 잡았습니다."
+    details:
+      - en: "**Background:** I taught myself LLMs and organized a company-wide seminar (400+ attendees) that generated 40+ AI project ideas, one of which became this project."
+        ko: "**배경:** LLM을 독학한 뒤 400명 이상이 참석한 사내 세미나를 열었고, 여기서 나온 40여 개의 AI 프로젝트 아이디어 중 하나가 이 프로젝트로 이어졌습니다."
+    links:
+      - { label: "Service", url: "https://ai.comic.naver.com/lab/character-chat/list" }
+
+  - title: "WebtoonMe: full-body portrait stylization"
+    title_ko: "WebtoonMe: 전신 웹툰 캐릭터 변환"
+    org: "NAVER WEBTOON"
+    year: "2021 – 2023"
+    image: /assets/img/projects/webtoonme.png
+    summary:
+      en: "A generative model that turns a user's photo into a full-body webtoon character in real time while keeping the person's features, letting anyone see themselves as the hero of a webtoon."
+      ko: "사진 속 인물의 특징을 살리면서 전신을 웹툰 화풍으로 실시간 변환하는 생성 모델로, 누구나 웹툰 속 주인공이 되어 볼 수 있게 합니다."
+    role:
+      en: "Started as my own idea during my internship, where I built the first model and demo. I then led it from 0→1 to production with a three-person core team, tackling diverse skin tones and full-body stylization along the way."
+      ko: "인턴 시절 직접 제안한 아이디어로, 첫 모델과 데모를 만들었습니다. 이후 3인 핵심 팀과 함께 0→1 상용화를 이끌었고, 그 과정에서 다양한 피부톤 표현과 전신 스타일화 문제를 해결했습니다."
+    impact:
+      en: "Launched as a **real-time filter** at large global events, including Thailand Webtoon Brand Day and the Amazing Festival in France. Published at **SIGGRAPH Asia 2022 TC**, won **2nd prize at the N Innovation Award 2022**, and presented at DEVIEW 2023."
+      ko: "태국 웹툰 브랜드 데이, 프랑스 Amazing Festival 등 대규모 글로벌 행사에서 **실시간 필터**로 선보였습니다. **SIGGRAPH Asia 2022 TC**에 발표했고, **N Innovation Award 2022 2위**를 수상했으며, DEVIEW 2023에서 발표했습니다."
+    details:
+      - en: "Optimized and compressed the research models into a real-time filter that turns photos into characters instantly."
+        ko: "연구 모델을 최적화·경량화해 사진을 즉시 캐릭터로 변환하는 실시간 필터로 구현."
+      - en: "Related face-cartoonization work was published at the CVPR 2022 Workshops."
+        ko: "관련 얼굴 Cartoonization 연구를 CVPR 2022 Workshop에 발표."
+    links:
+      - { label: "Project page", url: "https://webtoon.github.io/WebtoonMe/" }
+      - { label: "Demo", url: "https://webtoon.github.io/WebtoonMe/v1/en" }
+      - { label: "DEVIEW 2023 talk", url: "https://deview.kr/2023/sessions/565" }
+
+# Earlier and smaller projects, shown as one-line rows under the featured ones.
+more_work:
+  - title: "QUPID: search relevance model"
+    title_ko: "QUPID: 검색 적합도 모델"
+    org: "NAVER Search"
+    org_ko: "네이버 검색"
+    year: "2025"
+    text:
+      en: "A model that judges how relevant a search result is to a query, built as an ensemble of small generative and embedding models. It achieves **67% higher agreement with human judgments** than leading LLMs (Cohen's κ 0.646 vs. 0.387) at **60× the speed**, and improved production ranking by 1.9% nDCG@5. ACL 2025 Industry Track."
+      ko: "검색 결과가 질문에 얼마나 적합한지 판정하는 모델로, 생성형 모델과 임베딩 모델을 결합한 소형 앙상블입니다. 최신 LLM보다 **사람 판단과의 일치도가 67% 높고**(Cohen's κ 0.646 vs. 0.387) **60배 빠르며**, 실서비스 랭킹을 nDCG@5 기준 1.9% 개선했습니다. ACL 2025 Industry Track."
+    links:
+      - { label: "Paper", url: "https://aclanthology.org/2025.acl-industry.38/" }
+  - title: "MAP: Magnitude Attention-based Dynamic Pruning"
+    org: "Personal research"
+    year: "2025"
+    image: /assets/img/projects/pruning.png
+    text:
+      en: "A dynamic pruning method that uses weight magnitude as attention during training, so the network finds and keeps its most important weights on its own. It outperforms prior pruning methods on CIFAR-10/100 and ImageNet; published in Expert Systems with Applications as first author."
+      ko: "학습 중 가중치의 크기를 attention처럼 활용해, 네트워크가 스스로 중요한 가중치를 찾아 남기도록 하는 동적 Pruning 기법입니다. CIFAR-10/100과 ImageNet에서 기존 기법보다 높은 성능을 보였으며, 제1저자로 Expert Systems with Applications에 게재했습니다."
+    links:
+      - { label: "Paper", url: "https://www.sciencedirect.com/science/article/abs/pii/S0957417425005792" }
+      - { label: "arXiv", url: "https://arxiv.org/abs/2306.05056" }
+  - title: "Interactive Cartoonization"
+    org: "NAVER WEBTOON"
+    year: "2022"
+    image: /assets/img/projects/cartoonization.jpg
+    text:
+      en: "A cartoonization model that turns photos into cartoon style while letting users adjust stroke style, abstraction and color. Separate texture and color decoders make these controllable at inference time. CVPR 2023."
+      ko: "사진을 만화 스타일로 바꾸면서 사용자가 선의 스타일·추상화 정도·색감을 직접 조절할 수 있는 Cartoonization 모델입니다. 텍스처와 색상 디코더를 분리해 추론 시점에 제어할 수 있게 했고, CVPR 2023에 발표했습니다."
+    links:
+      - { label: "Paper", url: "https://openaccess.thecvf.com/content/CVPR2023/html/Ahn_Interactive_Cartoonization_With_Controllable_Perceptual_Factors_CVPR_2023_paper.html" }
+      - { label: "arXiv", url: "https://arxiv.org/abs/2212.09555" }
+  - title: "AI PhotoCard"
+    title_ko: "AI 캐릭터 포토카드"
+    org: "NAVER WEBTOON"
+    year: "2024"
+    image: /assets/img/projects/photocard.jpg
+    text:
+      en: "A model that generates webtoon characters in new outfits, such as hanbok, while keeping their identity. Built by fine-tuning Stable Diffusion and launched in WEBTOON AI Lab."
+      ko: "웹툰 캐릭터의 정체성을 유지한 채 한복 등 새로운 의상을 입은 모습을 생성하는 모델입니다. Stable Diffusion을 파인튜닝해 만들었고, 웹툰 AI LAB에 서비스로 출시했습니다."
+    links:
+      - { label: "Service", url: "https://ai.comic.naver.com/lab/character-photocard/installGuide" }
+  - title: "Talking-head animation for LINE WEBTOON"
+    title_ko: "LINE WEBTOON 토킹 헤드 애니메이션"
+    org: "NAVER WEBTOON (intern)"
+    year: "2021"
+    image: /assets/img/projects/talking-head.gif
+    text:
+      en: "A model that animates still webtoon characters so they talk and move. I built a dataset of 73 series and 165 characters and developed StyleGAN- and warping-based models for exaggerated webtoon faces; the animations shipped on LINE WEBTOON's 2021 year-in-review page."
+      ko: "정지된 웹툰 캐릭터 이미지를 말하고 움직이는 애니메이션으로 만드는 모델입니다. 웹툰 73편·캐릭터 165명 데이터셋을 직접 구축하고 과장된 웹툰 얼굴에 맞는 StyleGAN·워핑 기반 모델을 개발했으며, 결과물은 LINE WEBTOON 2021 연말 결산 페이지에 실렸습니다."
+    links:
+      - { label: "Code", url: "https://github.com/happy-jihye/Line-Webtoon-Animation" }
+  - title: "Cartoon-StyleGAN"
+    org: "Personal research · open source"
+    year: "2021"
+    image: /assets/img/projects/cartoon-stylegan.gif
+    text:
+      en: "StyleGAN2 adapted to generate cartoon faces, using FreezeSG and a structure-aware loss to preserve facial structure. The open-source release earned **600+ GitHub stars and 45+ citations** and led to my internship at NAVER WEBTOON."
+      ko: "실제 얼굴을 만화 캐릭터 얼굴로 생성하도록 StyleGAN2를 도메인 적응시킨 모델입니다. FreezeSG와 구조 인식 손실로 얼굴 구조를 유지했고, 오픈소스로 공개해 **GitHub 스타 600개 이상, 인용 45회 이상**을 기록하며 NAVER WEBTOON 인턴십으로 이어졌습니다."
+    links:
+      - { label: "Code", url: "https://github.com/happy-jihye/Cartoon-StyleGAN" }
+      - { label: "arXiv", url: "https://arxiv.org/abs/2106.12445" }
+
+# Work history, shown as compact rows with a logo. Project details live above.
+experience:
+  - org: "Tether AI Research"
+    url: "https://tether.io"
+    logo: /assets/img/logos/tether.png
+    roles:
+      - title: "AI Research Engineer"
+        period: { en: "Feb 2026 – Present", ko: "2026.02 – 현재" }
+        location: { en: "Remote", ko: "원격" }
+    summary:
+      en: "I post-train LLMs with SFT, reinforcement learning and distillation, focusing on agentic small language models and machine translation. I also build the evaluation pipelines and benchmark infrastructure we use to measure them."
+      ko: "SFT, 강화학습, 증류를 활용해 LLM을 Post-training하며, 에이전트형 소형 언어 모델(SLM)과 기계번역을 중점적으로 연구하고 있습니다. 모델 성능을 측정하는 평가 파이프라인과 벤치마크 인프라도 함께 구축하고 있습니다."
+
+  - org: "NAVER Search"
+    org_ko: "네이버 검색"
+    url: "https://www.navercorp.com"
+    logo: /assets/img/logos/naver.png
+    roles:
+      - title: "AI Research Engineer"
+        period: { en: "Dec 2024 – Feb 2026", ko: "2024.12 – 2026.02" }
+        location: { en: "Full-time", ko: "정규직" }
+    summary:
+      en: "I was responsible for LLM development for Search and Shopping end to end, from data curation and training to optimization, evaluation and deployment. I built Korean- and domain-specialized LLMs with continual pre-training, pruning and distillation, and optimized them for real-time serving with quantization. On the service side, I developed the real-time response model behind AI Briefing and AuthGR, an authority-aware generative retrieval model, and designed a unified evaluation framework with an automated leaderboard."
+      ko: "검색·쇼핑 LLM 개발을 데이터 큐레이션부터 학습, 최적화, 평가, 배포까지 전담했습니다. Continual Pre-training과 Pruning·Distillation으로 한국어·도메인 특화 LLM을 만들고, 양자화로 실시간 서빙에 맞게 최적화했습니다. 서비스 측면에서는 AI 브리핑의 실시간 답변 생성 모델과 신뢰도 기반 생성형 검색 모델인 AuthGR을 개발했고, 표준 벤치마크와 서비스 품질 기준을 함께 보는 통합 평가 프레임워크와 자동 리더보드를 설계했습니다."
+
+  - org: "NAVER WEBTOON"
+    url: "https://www.webtoons.com"
+    logo: /assets/img/logos/webtoon.png
+    roles:
+      - title: "AI Research Engineer (LLM)"
+        period: { en: "Feb 2023 – Nov 2024", ko: "2023.02 – 2024.11" }
+        summary:
+          en: "With no dedicated LLM organization in the company, I proposed and led its first LLM project, AI Character Chat. I trained models to preserve each character's identity and story context and designed the agent system behind the chatbot, which launched successfully and became a revenue-generating product."
+          ko: "사내에 전담 LLM 조직이 없던 시기에 회사의 첫 LLM 프로젝트인 AI 캐릭터챗을 제안하고 이끌었습니다. 캐릭터의 정체성과 작품 맥락을 유지하도록 모델을 학습하고 에이전트 시스템을 설계해 캐릭터 챗봇을 만들었으며, 성공적으로 출시되어 매출을 내는 서비스로 자리 잡았습니다."
+      - title: "AI Research Engineer (Vision)"
+        period: { en: "Feb 2022 – Feb 2023", ko: "2022.02 – 2023.02" }
+        summary:
+          en: "I led the research behind WebtoonMe, turning a research prototype into a real-time service that handled large-scale traffic, and published the underlying research at SIGGRAPH Asia and CVPR. I also built AI PhotoCard, which dresses characters in new outfits using fine-tuned diffusion models, and a pipeline that turns webtoons into short promotional videos."
+          ko: "WebtoonMe의 연구를 주도하며 연구 프로토타입을 대규모 트래픽을 처리하는 실시간 서비스로 만들었고, 관련 연구를 SIGGRAPH Asia와 CVPR에 발표했습니다. 또한 Diffusion 모델을 파인튜닝해 캐릭터에 새 의상을 입히는 AI 포토카드와, 웹툰을 숏폼 홍보 영상으로 만드는 파이프라인을 개발했습니다."
+      - title: "AI Research Engineer Intern"
+        period: { en: "Jul 2021 – Dec 2021", ko: "2021.07 – 2021.12" }
+        summary:
+          en: "I independently built talking-head models that animate webtoon characters, which shipped on LINE WEBTOON's 2021 year-in-review page, and created the first WebtoonMe prototype from my own idea. This work led to a full-time offer before I graduated."
+          ko: "웹툰 캐릭터를 움직이게 하는 토킹 헤드 모델을 직접 개발해 LINE WEBTOON 2021 연말 결산 페이지에 적용했고, 제 아이디어에서 출발한 WebtoonMe의 첫 프로토타입을 만들었습니다. 이 성과로 졸업 전에 정규직 제안을 받았습니다."
+
+  - org: "Seoul National University"
+    org_ko: "서울대학교"
+    url: "https://www.snu.ac.kr"
+    logo: /assets/img/logos/snu.jpg
+    roles:
+      - title: "AI Researcher"
+        period: { en: "Apr 2021 – Jun 2021", ko: "2021.04 – 2021.06" }
+        summary:
+          en: "I taught myself deep learning and researched domain adaptation for StyleGAN2. The resulting open-source project, Cartoon-StyleGAN, reached 600+ GitHub stars and led to my internship at NAVER WEBTOON."
+          ko: "딥러닝을 독학하며 StyleGAN2의 도메인 적응을 연구했습니다. 이를 오픈소스로 공개한 Cartoon-StyleGAN은 GitHub 스타 600개 이상을 받았고, NAVER WEBTOON 인턴십으로 이어졌습니다."
+
+# Publications, newest first. Put "*" after a name for equal contribution,
+# "†" for corresponding author. `me` must match exactly how your name appears.
+publications_me: "Jihye Back"
+publications:
+  - year: 2026
+    title: "TranslatePsy-AfriSLM: High-Quality Data Scaling for Low-Resource Machine Translation"
+    authors: "Milan Gritta, Patrik Lambert, Jihye Back*, Amril Nazir"
+    venue: "EMNLP 2026"
+    links:
+      - { label: "arXiv", url: "https://arxiv.org/abs/2608.18655" }
+      - { label: "Blog", url: "https://huggingface.co/blog/qvac/translate-psy-afrislm" }
+      - { label: "Models", url: "https://huggingface.co/collections/qvac/translatepsy-afrislm" }
+      - { label: "Dataset", url: "https://huggingface.co/datasets/qvac/TranslatePsy-AfriSLM-Synthetic-Mix" }
+      - { label: "Code", url: "https://github.com/tether-ai-research/qvac-translatepsy-afri-slm" }
+  - year: 2026
+    title: "From Relevance to Authority: Authority-aware Generative Retrieval in Web Search Engines"
+    authors: "Sunkyung Lee*, Jihye Back*, Donghyeon Jeon, Soonhwan Kwon, Moonkwon Kim, Inho Kang, Jongwuk Lee†"
+    venue: "ACL 2026 Industry Track"
+    highlight: { en: "Recommended for oral presentation", ko: "Oral 발표 추천" }
+    links:
+      - { label: "ACL Anthology", url: "https://aclanthology.org/2026.acl-industry.54/" }
+      - { label: "arXiv", url: "https://arxiv.org/abs/2604.13468" }
+  - year: 2025
+    title: "Magnitude Attention-based Dynamic Pruning"
+    authors: "Jihye Back, Namhyuk Ahn, Jangho Kim"
+    venue: "Expert Systems with Applications, Vol. 276"
+    links:
+      - { label: "Journal", url: "https://www.sciencedirect.com/science/article/abs/pii/S0957417425005792" }
+      - { label: "arXiv", url: "https://arxiv.org/abs/2306.05056" }
+  - year: 2025
+    title: "QUPID: Quantified Understanding for Enhanced Performance, Insights, and Decisions in Korean Search Engines"
+    authors: "Ohjoon Kwon*, Changsu Lee*, Jihye Back, Lim Sun Suk, Inho Kang, Donghyeon Jeon†"
+    venue: "ACL 2025 Industry Track"
+    links:
+      - { label: "ACL Anthology", url: "https://aclanthology.org/2025.acl-industry.38/" }
+      - { label: "arXiv", url: "https://arxiv.org/abs/2505.07345" }
+  - year: 2023
+    title: "Interactive Cartoonization with Controllable Perceptual Factors"
+    authors: "Namhyuk Ahn, Patrick Kwon, Jihye Back, Kibeom Hong, Seungkwon Kim"
+    venue: "CVPR 2023"
+    links:
+      - { label: "Paper", url: "https://openaccess.thecvf.com/content/CVPR2023/html/Ahn_Interactive_Cartoonization_With_Controllable_Perceptual_Factors_CVPR_2023_paper.html" }
+  - year: 2022
+    title: "WebtoonMe: A Data-Centric Approach for Full-Body Portrait Stylization"
+    authors: "Jihye Back*, Seungkwon Kim*, Namhyuk Ahn"
+    venue: "SIGGRAPH Asia 2022 Technical Communications"
+    links:
+      - { label: "Project", url: "https://webtoon.github.io/WebtoonMe/" }
+      - { label: "arXiv", url: "https://arxiv.org/abs/2210.10335" }
+      - { label: "DOI", url: "https://doi.org/10.1145/3550340.3564226" }
+  - year: 2022
+    title: "Cross-Domain Style Mixing for Face Cartoonization"
+    authors: "Seungkwon Kim, Chaeheon Gwak, Dohyun Kim, Kwangho Lee, Jihye Back, Namhyuk Ahn, Daesik Kim"
+    venue: "CVPR 2022 Workshops"
+    links:
+      - { label: "arXiv", url: "https://arxiv.org/abs/2205.12450" }
+  - year: 2021
+    title: "Fine-Tuning StyleGAN2 for Cartoon Face Generation"
+    authors: "Jihye Back"
+    venue: "arXiv preprint"
+    highlight: { en: "600+ GitHub stars", ko: "GitHub 스타 600+" }
+    links:
+      - { label: "arXiv", url: "https://arxiv.org/abs/2106.12445" }
+      - { label: "Code", url: "https://github.com/happy-jihye/Cartoon-StyleGAN" }
+
+# Skills & tools, shown above Selected Projects (English in both languages).
+# Keep each line broad: capabilities, not a tool list.
+skills:
+  - area: "LLM Training"
+    items: "Pre-training, mid-training and post-training (SFT, RL, distillation)"
+  - area: "Data & Evaluation"
+    items: "Data curation and synthesis, benchmark and evaluation pipelines, LLM-as-a-Judge"
+  - area: "Agents & Search"
+    items: "Harness-based agent design, tool-use agents, RAG, generative retrieval and ranking"
+  - area: "Multilingual"
+    items: "Multilingual and low-resource modeling, machine translation"
+  - area: "Efficiency & Deployment"
+    items: "Pruning, distillation, quantization, distributed training, on-device and real-time serving"
+  - area: "Multimodal Generation"
+    items: "Image, video and character generation"
+
+talks:
+  - year: 2025
+    event: "DAN 25 (NAVER)"
+    title: { en: "Building Search-Optimized LLMs", ko: "검색 서비스에 최적화된 LLM 만들기: 데이터, 학습, 서비스 적용 사례" }
+    url: "https://dan.naver.com/25/sessions/724"
+  - year: 2023
+    event: "DEVIEW 2023 (NAVER)"
+    title: { en: "Building WebtoonMe", ko: "WebtoonMe 개발기" }
+    url: "https://deview.kr/2023/sessions/565"
+
+awards:
+  - year: 2026
+    title: { en: "N Innovation Award 2025, 1st prize (Service Track)", ko: "N Innovation Award 2025 서비스 부문 1위" }
+    org: "NAVER Corp"
+    detail: { en: "For building the real-time response model behind AI Briefing in NAVER Search.", ko: "네이버 검색 AI 브리핑의 실시간 답변 생성 모델 개발." }
+  - year: 2023
+    title: { en: "N Innovation Award 2022, 2nd prize (R&D Track)", ko: "N Innovation Award 2022 R&D 부문 2위" }
+    org: "NAVER Corp"
+    detail: { en: "For taking WebtoonMe from research to large-scale production with a three-person core team.", ko: "3인 핵심 팀으로 WebtoonMe를 연구 단계부터 대규모 상용화까지 이끈 공로." }
+
+education:
+  - school: { en: "Seoul National University", ko: "서울대학교" }
+    logo: /assets/img/logos/snu.jpg
+    degree: { en: "B.S., double major in Naval Architecture & Ocean Engineering and Electrical & Computer Engineering", ko: "학사, 조선해양공학과·전기정보공학부 복수전공" }
+    period: "2018.03 – 2023.02"

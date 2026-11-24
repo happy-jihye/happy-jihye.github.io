@@ -1,0 +1,39 @@
+{%- comment -%}
+  One project card: thumbnail on the left, text on the right.
+  Usage: {% include project.html pr=project %}  (fields documented in _data/cv.yml)
+{%- endcomment -%}
+{%- assign pr = include.pr -%}
+{%- assign href = pr.url | default: pr.links[0].url -%}
+<article class="project">
+  <a class="thumb{% if pr.fit == 'contain' %} is-contain{% endif %}" href="{{ href }}" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+    {%- if pr.image -%}
+    <img src="{{ pr.image | relative_url }}" alt="" loading="lazy" decoding="async"{% if pr.position %} style="object-position: {{ pr.position }}"{% endif %}>
+    {%- else -%}
+    <span class="thumb-text">{{ pr.title | split: ":" | first }}</span>
+    {%- endif -%}
+  </a>
+  <div class="project-body">
+    <h3 class="project-title">
+      <a href="{{ href }}" target="_blank" rel="noopener">{% if pr.title_ko %}<span class="l-en">{{ pr.title }}</span><span class="l-ko">{{ pr.title_ko }}</span>{% else %}{{ pr.title }}{% endif %}</a>
+    </h3>
+    <p class="project-meta">{% if pr.org_ko %}<span class="l-en">{{ pr.org }}</span><span class="l-ko">{{ pr.org_ko }}</span>{% else %}{{ pr.org }}{% endif %} · {{ pr.year }}</p>
+    <p class="project-summary">{% include t.html v=pr.summary %}</p>
+    {%- if pr.role or pr.impact -%}
+    <dl class="facts">
+      {%- if pr.role -%}<div><dt><span class="l-en">Role</span><span class="l-ko">역할</span></dt><dd>{% include t.html v=pr.role %}</dd></div>{%- endif -%}
+      {%- if pr.impact -%}<div><dt><span class="l-en">Impact</span><span class="l-ko">성과</span></dt><dd>{% include t.html v=pr.impact %}</dd></div>{%- endif -%}
+    </dl>
+    {%- endif -%}
+    {%- if pr.details and pr.details.size > 0 -%}
+    <details class="project-more">
+      <summary><span class="l-en">More</span><span class="l-ko">더 보기</span></summary>
+      <ul>
+        {%- for d in pr.details -%}
+        <li>{% include t.html v=d %}</li>
+        {%- endfor -%}
+      </ul>
+    </details>
+    {%- endif -%}
+    {% include links.html links=pr.links %}
+  </div>
+</article>

@@ -1,0 +1,10 @@
+{%- comment -%}
+  Bilingual text. Usage: {% include t.html v=some.field %}
+  `v` may be a plain string or a map with `en` / `ko` keys. Markdown is rendered inline.
+{%- endcomment -%}
+{%- assign v = include.v -%}
+{%- if v.en or v.ko -%}
+<span class="l-en">{{ v.en | markdownify | remove: '<p>' | remove: '</p>' | strip }}</span><span class="l-ko">{{ v.ko | default: v.en | markdownify | remove: '<p>' | remove: '</p>' | strip }}</span>
+{%- elsif v -%}
+{{ v | markdownify | remove: '<p>' | remove: '</p>' | strip }}
+{%- endif -%}

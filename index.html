@@ -1,0 +1,205 @@
+---
+layout: default
+---
+{%- assign cv = site.data.cv -%}
+{%- assign p = cv.profile -%}
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#about">{{ p.name }}</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#about"><span class="l-en">About</span><span class="l-ko">소개</span></a>
+      <a href="#skills"><span class="l-en">Skills</span><span class="l-ko">기술</span></a>
+      <a href="#projects"><span class="l-en">Projects</span><span class="l-ko">프로젝트</span></a>
+      <a href="#publications"><span class="l-en">Publications</span><span class="l-ko">논문</span></a>
+      <a href="#experience"><span class="l-en">Experience</span><span class="l-ko">경력</span></a>
+    </nav>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-set-lang="en" lang="en">EN</button>
+      <button type="button" data-set-lang="ko" lang="ko">한</button>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="page">
+
+  <!-- ── About ────────────────────────────────────────── -->
+  <section class="intro" id="about">
+    <img class="portrait" src="{{ p.photo | relative_url }}" alt="{{ p.name }}" width="400" height="515">
+    <h1 class="name">
+      <span class="l-en">{{ p.name }}</span><span class="l-ko">{{ p.name_ko }}</span>
+    </h1>
+    <p class="subtitle">{% include t.html v=p.role %}</p>
+    {%- if p.headline -%}
+    <p class="headline">{% include t.html v=p.headline %}</p>
+    {%- endif -%}
+    {%- for para in cv.about -%}
+    <p>{% include t.html v=para %}</p>
+    {%- endfor -%}
+    {%- if cv.interests -%}
+    <div class="interests">
+      <h3><span class="l-en">Research interests</span><span class="l-ko">관심 연구 분야</span></h3>
+      <ul>
+        {%- for it in cv.interests -%}
+        <li>{% include t.html v=it %}</li>
+        {%- endfor -%}
+      </ul>
+    </div>
+    {%- endif -%}
+    <p class="social">
+      <a href="mailto:{{ p.email }}">Email</a>
+      {%- for l in p.links -%}
+      <a href="{{ l.url }}" target="_blank" rel="noopener">{{ l.label }}</a>
+      {%- endfor -%}
+    </p>
+  </section>
+
+  <!-- ── News ─────────────────────────────────────────── -->
+  <section id="news" aria-labelledby="news-h">
+    <h2 id="news-h"><span class="l-en">News</span><span class="l-ko">소식</span></h2>
+    <ul class="news">
+      {%- for n in cv.news -%}
+      <li><time>{{ n.date }}</time><span>{% include t.html v=n.text %}</span></li>
+      {%- endfor -%}
+    </ul>
+  </section>
+
+  <!-- ── Skills ───────────────────────────────────────── -->
+  <section id="skills" aria-labelledby="skills-h">
+    <h2 id="skills-h"><span class="l-en">Core skills</span><span class="l-ko">핵심 기술</span></h2>
+    <dl class="skills">
+      {%- for sk in cv.skills -%}
+      <div><dt>{% include t.html v=sk.area %}</dt><dd>{% include t.html v=sk.items %}</dd></div>
+      {%- endfor -%}
+    </dl>
+  </section>
+
+  <!-- ── Selected projects ────────────────────────────── -->
+  <section id="projects" aria-labelledby="proj-h">
+    <h2 id="proj-h"><span class="l-en">Selected Projects</span><span class="l-ko">주요 프로젝트</span></h2>
+    <div class="projects">
+      {%- for pr in cv.projects -%}
+      {% include project.html pr=pr %}
+      {%- endfor -%}
+    </div>
+
+    {%- if cv.more_work -%}
+    <h3 class="subhead"><span class="l-en">Other projects</span><span class="l-ko">기타 프로젝트</span></h3>
+    <ul class="more-work">
+      {%- for w in cv.more_work -%}
+      {%- assign whref = w.url | default: w.links[0].url -%}
+      <li>
+        <a class="mini-thumb" href="{{ whref }}" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+          {%- if w.image -%}<img src="{{ w.image | relative_url }}" alt="" loading="lazy" decoding="async">{%- else -%}<span>{{ w.title | split: ":" | first }}</span>{%- endif -%}
+        </a>
+        <div>
+          <p class="mw-title"><a href="{{ whref }}" target="_blank" rel="noopener">{% if w.title_ko %}<span class="l-en">{{ w.title }}</span><span class="l-ko">{{ w.title_ko }}</span>{% else %}{{ w.title }}{% endif %}</a><span class="mw-meta">{% if w.org_ko %}<span class="l-en">{{ w.org }}</span><span class="l-ko">{{ w.org_ko }}</span>{% else %}{{ w.org }}{% endif %} · {{ w.year }}</span></p>
+          <p class="mw-text">{% include t.html v=w.text %}</p>
+          {% include links.html links=w.links %}
+        </div>
+      </li>
+      {%- endfor -%}
+    </ul>
+    {%- endif -%}
+  </section>
+
+  <!-- ── Publications ─────────────────────────────────── -->
+  <section id="publications" aria-labelledby="pub-h">
+    <h2 id="pub-h"><span class="l-en">Publications</span><span class="l-ko">논문</span></h2>
+    <p class="note">
+      <span class="l-en">* equal contribution, † corresponding author</span>
+      <span class="l-ko">* 공동 1저자, † 교신저자</span>
+    </p>
+    {%- assign me = cv.publications_me -%}
+    {%- assign me_b = '<b class="me">' | append: me | append: '</b>' -%}
+    <ol class="pubs">
+      {%- for pub in cv.publications -%}
+      <li class="pub">
+        <a class="pub-title" href="{{ pub.links[0].url }}" target="_blank" rel="noopener">{{ pub.title }}</a>
+        <p class="pub-authors">{{ pub.authors | replace: me, me_b }}</p>
+        <p class="pub-venue"><em>{{ pub.venue }}</em>{% if pub.highlight %}<strong class="pub-hl">{% include t.html v=pub.highlight %}</strong>{% endif %}</p>
+        {%- if pub.links -%}
+        <p class="pub-links">
+          {%- for l in pub.links -%}{% unless forloop.first %}<span class="sep">/</span>{% endunless %}<a href="{{ l.url }}" target="_blank" rel="noopener">{{ l.label }}</a>{%- endfor -%}
+        </p>
+        {%- endif -%}
+      </li>
+      {%- endfor -%}
+    </ol>
+  </section>
+
+  <!-- ── Experience ───────────────────────────────────── -->
+  <section id="experience" aria-labelledby="exp-h">
+    <h2 id="exp-h"><span class="l-en">Experience</span><span class="l-ko">경력</span></h2>
+    <ol class="xp">
+      {%- for job in cv.experience -%}
+      <li class="xp-org">
+        <img class="xp-logo" src="{{ job.logo | relative_url }}" alt="" width="40" height="40" loading="lazy">
+        <div class="xp-body">
+          <h3 class="xp-name">
+            <a href="{{ job.url }}" target="_blank" rel="noopener">
+              {%- if job.org_ko -%}<span class="l-en">{{ job.org }}</span><span class="l-ko">{{ job.org_ko }}</span>{%- else -%}{{ job.org }}{%- endif -%}
+            </a>
+          </h3>
+          <ol class="xp-roles">
+            {%- for r in job.roles -%}
+            {%- assign desc = r.summary -%}
+            {%- if desc == nil and job.roles.size == 1 -%}{%- assign desc = job.summary -%}{%- endif -%}
+            <li class="xp-role{% if forloop.first and forloop.parentloop.first %} is-current{% endif %}">
+              <p class="xp-date">{% include t.html v=r.period %}{% if r.location and r.location != "" %}<span class="xp-loc"> · {% include t.html v=r.location %}</span>{% endif %}</p>
+              <p class="xp-title">{{ r.title }}</p>
+              {%- if desc and desc != "" -%}
+              <p class="xp-desc">{% include t.html v=desc %}</p>
+              {%- endif -%}
+            </li>
+            {%- endfor -%}
+          </ol>
+        </div>
+      </li>
+      {%- endfor -%}
+    </ol>
+  </section>
+
+  <!-- ── Education ────────────────────────────────────── -->
+  <section id="education" aria-labelledby="edu-h">
+    <h2 id="edu-h"><span class="l-en">Education</span><span class="l-ko">학력</span></h2>
+    {%- for e in cv.education -%}
+    <article class="org">
+      <img class="org-logo" src="{{ e.logo | relative_url }}" alt="" width="32" height="32" loading="lazy">
+      <div class="org-body">
+        <p class="org-row"><b class="org-name">{% include t.html v=e.school %}</b><span class="org-date">{{ e.period }}</span></p>
+        <p class="org-summary">{% include t.html v=e.degree %}</p>
+      </div>
+    </article>
+    {%- endfor -%}
+  </section>
+
+  <!-- ── Talks & awards ───────────────────────────────── -->
+  <section id="more" class="more" aria-label="Talks and awards">
+    <div>
+      <h2><span class="l-en">Talks</span><span class="l-ko">발표</span></h2>
+      <ul class="plain">
+        {%- for t in cv.talks -%}
+        <li><time>{{ t.year }}</time><div><a href="{{ t.url }}" target="_blank" rel="noopener">{% include t.html v=t.title %}</a><span class="sub">{{ t.event }}</span></div></li>
+        {%- endfor -%}
+      </ul>
+    </div>
+    <div>
+      <h2><span class="l-en">Awards</span><span class="l-ko">수상</span></h2>
+      <ul class="plain">
+        {%- for a in cv.awards -%}
+        <li><time>{{ a.year }}</time><div><strong>{% include t.html v=a.title %}</strong><span class="sub">{{ a.org }}. {% include t.html v=a.detail %}</span></div></li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>
+    © {{ site.time | date: "%Y" }} {{ p.name }} ·
+    <span class="l-en">Last updated {{ site.time | date: "%B %Y" }}</span><span class="l-ko">최종 업데이트 {{ site.time | date: "%Y년 %-m월" }}</span>
+  </p>
+</footer>

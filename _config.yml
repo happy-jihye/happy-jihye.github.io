@@ -1,0 +1,20 @@
+title: "Jihye Back | AI Research Engineer"
+description: "Jihye Back (백지혜) is an AI research engineer at Tether AI Research working on LLM post-training, agentic small language models and multilingual machine translation. Previously NAVER Search and NAVER WEBTOON."
+url: "https://happy-jihye.github.io"
+baseurl: ""
+lang: en
+timezone: Asia/Seoul
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  smart_quotes: ["apos", "apos", "quot", "quot"]
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .bundle
+  - .jekyll-cache
+  - .sass-cache
